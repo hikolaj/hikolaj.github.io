@@ -1,257 +1,256 @@
 html
 {
   scroll-behavior: smooth;
-  font: 60px "Trebuchet Ms", monospace;
+  font: 15px "Trebuchet Ms", monospace;
 }
 
 body
 {
-  background-color: rgb(0,0,0);
-  width: 100%;
   padding: 0;
-  margin: 0;
-  color: rgb(250, 250, 250);
+  margin: auto;
+  color: black;
+  background-color: rgb(252, 252, 252);
+  background-color: rgb(237, 232, 213);
+  text-align: center;
 }
 
+header
+{
+  height: 100vh;
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+}
+
+nav{
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 50px;
+  color:white;
+  background-color: rgb(45, 44, 40);
+  z-index: 10;
+  box-shadow: 0px 5px 12px rgba(45, 44, 40,0.2);
+}
+
+nav p{
+  display: inline;
+  font-weight: 900;
+  font-size: 38px;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  color: black;
+}
+
+nav .btn .off{
+
+  color: rgba(80,80,87,0.6);
+}
 
 main
 {
-  width: 100%;
+  width: 80%;
+  max-width: 600px;
+  margin:auto;
+  min-height: 100vh;
   margin-top:0px;
-  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    width: 90%;
+    margin-left: 10px;
+  }
 }
 
 footer
 {
-  width: 100%;
-  margin-top: 300px;
-  padding-top: 150px;
-  padding-bottom: 10px;
-  background-image: url('../img/muhmorMarbl2K.png');
-  background-size: 1920px 1080px;
-  background-attachment: fixed;
-  background-position: center;
-  font-size: 15px;
+    color: white;
+    bottom: 0;
+    text-align: left;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: rgba(0,0,0,0.9);
 }
 
-footer b
+/*  */
+
+h1
 {
-  padding-left: 15px;
-  padding-bottom: 10px;
+  font-size: 34px;
+  text-align: left;
 }
 
-.LandingPage
+h2
 {
-  width: 100%;
-  height: 100vh;
-  text-align: center;
-  user-select: none;
-  overflow: hidden;
-  z-index: 0;
+  font-size: 38px;
+  text-align: left;
+  padding-bottom: 20px;
+  padding-top: 50px;
+  border-bottom: 1px solid rgb(160,160,160);
 }
 
-.LandingPage .iconbox
-{
-  bottom: 45px;
-  width: 100%;
-  position: absolute;
-  text-align: center;
-}
-
-.LandingPage .iconbox img
-{
-  height: 40px;
-  width: 40px;
-}
-
-@keyframes wave {
-  0%   {   transform: translate(0px, 0px);  }
-  50%   {    transform: translate(0px, -6px);  }
-  100%   {    transform: translate(0px, 0px);   }
-}
-
-.LandingPage h1
-{
-  font-size: 70px;
-  font-weight: bolder;
-}
-.LandingPage h2
-{
-  font-size: 35px;
-}
-.LandingPage h3
-{
-  font-size: 16px;
-  margin-bottom: -8px;
-}
-
-.LogoShaderContainer
-{
-  width: 100%;
-  height: 50%;
-}
-
-.LogoShader
+p
 {
   margin: 0;
-  z-index: 10;
 }
 
-.ProjectsPage
-{
-  width: 100%;
-  background-color: rgb(210, 210, 195);
-  color: black;
-  padding-bottom: 100px;
 
-}
+/*  */
 
-.projectgroup-title
+hr
 {
-  width: 100%;
-  text-align: left;
-  margin: auto;
-  pointer-events:none;
-}
-.projectgroup-title h1
-{
-  font: 60px "Trebuchet Ms", monospace;
-  width: 83%;
-  max-width: 920px;
-  margin: auto;
-  padding-bottom: 10px;
-  color:  white;
-  font-weight: bold;
-  text-shadow: 0 4px 0px rgb(80,80,80), 0 5px 0px black, 1px 0 0px black, -1px 0 0px black, 0 3px 5px black;
-}
-
-.projectgroup
-{
-  width: 100%;
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  background-image: linear-gradient(rgb(210, 210, 195), rgb(200, 200, 190));
-  #border-top: solid 1px rgb(170, 170, 170);
-  overflow: hidden;
-  #height: 80px;
-}
-
-.projectgroup-container
-{
+  margin-top: 40px;
+  margin-bottom: 40px;
   width: 80%;
-  max-width: 920px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin: auto;
+  border: none;
+  border-top: 1px solid rgb(160,160,160);
 }
 
-.projectbox
-{
-  display: inline-table;
-  margin: 1%;
-  margin-bottom: 2%;
+/* main container */
+
+.container{
+  width: 80%;
+  padding-bottom: 30px;
+  margin-bottom: 50px;
+  display:inline-block;
+  border-bottom: 1px solid rgb(160,160,160);
+}
+header .container{
+
+  width: 80%;
+  padding-top: 50%;
+  padding-bottom: 10%;
+}
+
+
+/* LogoShader */
+.LogoShader{
+  position: absolute;
+  padding-top: 5vh;
+  left:50%;
+  transform: translate(-50%,0);
+}
+
+/* projectbox */
+
+.projectbox{
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: left;
+  cursor: pointer;
+  background-color: rgb(225,220,202);
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+}
+
+.projectbox::before{
+  content:"";
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  transition: background 0.25s;
+}
+
+.projectbox:hover::before{
+  background: rgba(255,255,255,0.25);
+}
+
+.projectbox:active::before{
+  transition: background 0.1s;
+  background: rgba(255,244,160,0.25);
+}
+
+.projectbox .banner{
+  width: 100%;
+  height: 60px;
+  background: rgb(45, 44, 40);
   background-size: cover;
   background-position: center;
-  overflow: hidden;
-  box-shadow: 0px 7px 15px grey;
-  opacity: 1;
-  transition: transform 0.2s, opacity 0.2s;
 }
 
 .projectbox h1{
-  position: absolute;
-  font: 46px "Trebuchet Ms", monospace;
-  max-width: 400px;
-  padding-left: 15px;
-  margin-top: 70px;
-  color:  white;
-  font-weight: bold;
-  text-shadow: 0 4px 0px rgb(80,80,80), 0 5px 0px black, 1px 0 0px black, -1px 0 0px black, 0 3px 5px black;
-  pointer-events:none;
-}
-
-.projectbox h2{
-  position: absolute;
-  max-width: 400px;
-  padding-left: 17px;
-  margin-top: 120px;
-  color: rgb(210,210,210);
-  font: 20px "Trebuchet Ms", monospace;
-  font-weight:lighter;
-  text-shadow: 0 1px 0px rgb(80,80,80), 0 2px 0px black, 0 1px 2px black, 0 0 2px black;
-  pointer-events:none;
-}
-
-.bigbox
-{
-  height: 150px;
-  width: 96.5%;
-  max-width: 856px;
-  display: inline-table;
-}
-
-.mediumbox
-{
-  height: 150px;
-  width: 47%;
-  max-width: 428px;
-  display: inline-table;
-}
-
-.smallbox
-{
-  height: 150px;
-  width: 22.25%;
-  max-width: 428px;
-  display: inline-table;
-}
-
-.projectbox .iconbox{
-  height: 40px;
-  padding-right: 10px;
-  float: right;
-  pointer-events:none;
-}
-
-.projectbox .iconbox img{
-  height: 45px;
-  width: 45px;
-}
-
-.projectbox .highlightbanner
-{
-  width: 100%;
-  height: 150px;
-  background-color: rgba(255,255,255,0);
-  transition: background-color 0.2s;
-}
-
-.projectbox .highlightbanner:hover
-{
-  background-color: rgba(255,255,255,0.2);
-}
-
-.projectbox .highlightbanner:active
-{
-  background-color: rgba(255,208,0,0.2);
-}
-
-.arrow {
-  position: absolute;
+  font-size: 22px;
   display: inline-block;
-  margin: auto;
-  bottom: 25px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  padding: 6px;
-  transform: rotate(45deg);
-  animation: bottomarrowanim 3s infinite;
-  transition: transform 0.5s;
+  vertical-align: middle;
+  padding-top: 4px;
+  padding-left: 15px;
+  color: white;
+  text-shadow: 0px 0px 8px rgba(0,0,0,0.7), 2px 2px 1px black;
 }
 
-@keyframes bottomarrowanim {
-  0%   {   bottom: 15px;  }
-  50%   {   bottom: 25px; }
-  100%   {   bottom: 15px;  }
+.projectbox p{
+  font-size: 14px;
+  margin-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: rgb(0,0,0, 0.65);
+}
+
+/* icons */
+
+.icon--skill{
+  height: 35px;
+  width: 35px;
+  background-size: cover;
+  margin-left: 6px;
+  margin-right: 6px;
+  display: inline-block;
+}
+.icon--skill p{
+  padding-top: 37px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.icon--banner{
+  height: 27px;
+  width: 27px;
+  background-size: cover;
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.icon--small{
+  height: 25px;
+  width: 25px;
+  background-size: cover;
+}
+
+.icon-unity{
+  background-image: url(../img/icons/unity.png);
+}
+
+.icon-unreal{
+  background-image: url(../img/icons/unreal.png);
+}
+
+.icon-blender{
+  background-image: url(../img/icons/blender.png);
+}
+
+.icon-photoshop{
+  background-image: url(../img/icons/photoshop.png);
+}
+
+.icon-glsl{
+  background-image: url(../img/icons/glsl.png);
+}
+
+.icon-cplusplus{
+  background-image: url(../img/icons/cplusplus.png);
+}
+
+.icon-csharp{
+  background-image: url(../img/icons/csharp.png);
 }

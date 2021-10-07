@@ -5,23 +5,6 @@ const yOffsetDivider = 10;
 const xOffsetDivider = 5;
 const projectBanners = document.getElementsByClassName("projectbox");
 
-function HandleProjectBannersOpacity(scrollPos) {
-  const changeDis = window.innerHeight/changeDisDivider;
-  const yOffset = window.innerHeight/yOffsetDivider;
-  const firstXPos =  GetElementPosition(projectBanners[0]).x;
-  for(var i = 0; i < projectBanners.length; i++)
-  {
-    var dis = GetElementPosition(projectBanners[i]);
-    var opacity = dis.y - window.innerHeight;
-    var xOffset = (dis.x - firstXPos) / xOffsetDivider;
-    opacity = -Math.min(opacity + yOffset + xOffset, 0);
-    opacity = opacity /changeDis;
-    opacity = Math.min(opacity, 1);
-    projectBanners[i].style.opacity = opacity;
-    projectBanners[i].style.transform = "translate(0,"+ (moveBannerAmount - moveBannerAmount * opacity)+"px)";
-  }
-}
-
 let lastKnownScrollPosition = 0;
 let ticking = false;
 
@@ -37,6 +20,27 @@ document.addEventListener('scroll', function(e) {
     ticking = true;
   }
 });
+
+function HandleProjectBannersOpacity(scrollPos) {
+  const changeDis = window.innerHeight/changeDisDivider;
+  const yOffset = window.innerHeight/yOffsetDivider;
+  const firstXPos =  GetElementPosition(projectBanners[0]).x;
+  for(var i = 0; i < projectBanners.length; i++)
+  {
+    var dis = GetElementPosition(projectBanners[i]);
+    var xOffset = (dis.x - firstXPos) / xOffsetDivider;
+
+    var opacity = dis.y - window.innerHeight;
+    opacity = -Math.min(opacity + yOffset + xOffset, 0);
+    opacity = opacity /changeDis;
+    opacity = Math.min(opacity, 1);
+
+    projectBanners[i].style.opacity = opacity;
+    projectBanners[i].style.transform = "translate(0,"+ (moveBannerAmount - moveBannerAmount * opacity)+"px)";
+  }
+}
+
+
 
 function GetElementPosition(el) {
   var xPos = 0;

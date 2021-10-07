@@ -98,7 +98,7 @@ void main(){
 
 
 // Canvas
-const canvas = document.querySelector('canvas.ProjectBackdrop')
+const canvas = document.querySelector('canvas.Backdrop')
 
 // Scene
 const scene = new THREE.Scene()
