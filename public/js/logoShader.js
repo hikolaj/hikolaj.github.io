@@ -2,8 +2,8 @@ import * as THREE from 'https://threejs.org/build/three.module.js';
 
 const _icoVS = `
 varying vec3 v_Normal;
-void main(){
 
+void main(){
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     v_Normal = normalize(normalMatrix * normal);
 }
@@ -12,13 +12,16 @@ void main(){
 const _icoFS = `
 varying vec3 v_Normal;
 
+uniform sampler2D envMap;
+uniform float resolution;
+
 void main(void)
 {
     float backlight =  dot(v_Normal, normalize(vec3(0, 0, 1.0)));
     backlight = 1.0-max(backlight, 0.0);
     backlight = pow(backlight, 2.0);
 
-    gl_FragColor = vec4(vec3(backlight), 1.0);
+    gl_FragColor = vec4(vec3(backlight), backlight);
 }
 `;
 
@@ -27,6 +30,7 @@ const _particleVS = `
 
 varying vec3 v_Normal;
 varying vec2 Uv;
+varying float state;
 
 uniform float Time;
 uniform float TimeOffset;
@@ -66,8 +70,9 @@ void main(){
     float t = mod((Time+TimeOffset)*Speed,1.0);
     float reverseT = 1.0 - t;
 
-    vec3 posOffset = angledPosition(reverseT*160.0, reverseT*4.0);
+    vec3 posOffset = angledPosition(reverseT*60.0, reverseT*5.0);
     float scaleOffset = max(sin(pow(t,1.3)*Pi*1.5)/3.0, 0.0);
+    state = scaleOffset;
     vec3 shape = normalize(position);
 
 
@@ -79,6 +84,7 @@ void main(){
 const _particleFS = `
 varying vec3 v_Normal;
 varying vec2 Uv;
+varying float state;
 
 uniform float Time;
 uniform vec3 Color1;
@@ -86,7 +92,7 @@ uniform vec3 Color1;
 void main(void)
 {
 
-    gl_FragColor = vec4(Color1, 1.0);
+    gl_FragColor = vec4(Color1, state*2.0);
 }
 `;
 
@@ -118,6 +124,8 @@ const particleMat = new THREE.ShaderMaterial({
     vertexShader: _particleVS,
     fragmentShader: _particleFS,
 })
+particleMat.transparent = true;
+
 const icoMat = new THREE.ShaderMaterial({
     uniforms: {
         Time: {
@@ -127,10 +135,11 @@ const icoMat = new THREE.ShaderMaterial({
     vertexShader: _icoVS,
     fragmentShader: _icoFS,
 })
+icoMat.transparent = true;
 
 // Objects
 const particleCubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1, 24, 24, 24);
-const icoSphereGeometry = new THREE.IcosahedronBufferGeometry(1);
+const icoSphereGeometry = new THREE.IcosahedronBufferGeometry(3.5);
 
 // Mesh
 const icoSphere = new THREE.Mesh(icoSphereGeometry, icoMat);
@@ -138,9 +147,9 @@ const particleCube1 = new THREE.Mesh(particleCubeGeometry, particleMat);
 const particleCube2 = new THREE.Mesh(particleCubeGeometry, particleMat.clone());
 const particleCube3 = new THREE.Mesh(particleCubeGeometry, particleMat.clone());
 
-scene.add(particleCube1);
-scene.add(particleCube2);
-scene.add(particleCube3);
+//scene.add(particleCube1);
+//scene.add(particleCube2);
+//scene.add(particleCube3);
 scene.add(icoSphere);
 
 //setup
