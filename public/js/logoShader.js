@@ -1,23 +1,33 @@
 import * as THREE from 'https://threejs.org/build/three.module.js';
 
 const _icoVS = `
-varying vec3 v_Normal;
+varying vec3 eyeVector;
+varying vec3 worldNormal;
 
 void main(){
+    vec4 worldPosition = modelMatrix * vec4( position, 1.0);
+    eyeVector = normalize(worldPosition.xyz - cameraPosition);
+    worldNormal = normalize(normalMatrix * normal);
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    v_Normal = normalize(normalMatrix * normal);
 }
 `;
 
 const _icoFS = `
-varying vec3 v_Normal;
+varying vec3 worldNormal;
+varying vec3 eyeVector;
 
 uniform sampler2D envMap;
 uniform float resolution;
 
+
 void main(void)
 {
-    float backlight =  dot(v_Normal, normalize(vec3(0, 0, 1.0)));
+    vec2 uv = gl_FragCoord.xy / resolution;
+
+    vec3 refracted = refract(eyeVector, worldNormal, 1.0);
+	  uv += refracted.xy;
+
+    float backlight =  dot(worldNormal, normalize(vec3(0, 0, 1.0)));
     backlight = 1.0-max(backlight, 0.0);
     backlight = pow(backlight, 2.0);
 
@@ -70,8 +80,8 @@ void main(){
     float t = mod((Time+TimeOffset)*Speed,1.0);
     float reverseT = 1.0 - t;
 
-    vec3 posOffset = angledPosition(reverseT*60.0, reverseT*5.0);
-    float scaleOffset = max(sin(pow(t,1.3)*Pi*1.5)/3.0, 0.0);
+    vec3 posOffset = angledPosition(reverseT*60.0, reverseT*2.0);
+    float scaleOffset = max(sin(pow(t,1.3)*Pi*1.5)/8.0, 0.0);
     state = scaleOffset;
     vec3 shape = normalize(position);
 
@@ -92,10 +102,55 @@ uniform vec3 Color1;
 void main(void)
 {
 
-    gl_FragColor = vec4(Color1, state*2.0);
+    gl_FragColor = vec4(Color1, state*10.0);
 }
 `;
 
+const _irisVS = `
+varying vec2 Uv;
+uniform float Time;
+
+void main(){
+    Uv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+const _irisFS = `
+varying vec2 Uv;
+uniform float Time;
+
+void main(void)
+{
+
+    float iris = distance(vec2(0.5, 0.5), Uv);
+    iris = 1.0 - iris*2.0;
+    iris *= 1.0;
+    iris = clamp(iris, 0.0, 1.0);
+    iris = pow(iris,2.0);
+
+    float iniris = distance(vec2(0.5, 0.5), Uv);
+    iniris = 1.0 - iniris * 12.0;
+    iniris *= 12.0;
+
+    vec3 irisCol = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), iniris);
+
+    vec2 uv = Uv;
+
+    float beam =  Uv.y - 0.5;
+    beam = clamp(abs(beam * 5.0), 0.0, 1.0);
+    beam = 1.0 - beam;
+
+    float beamClamper =  Uv.x - 0.5;
+    beamClamper = clamp(abs(beamClamper * 2.0), 0.0, 1.0);
+    beamClamper = 1.0 - beamClamper;
+
+    beam *= beamClamper;
+    beam = pow(beam * 1.2, ((sin(Time*2.0)/2.0)+4.0));
+
+    gl_FragColor = vec4(irisCol, iris + beam);
+}
+`;
 
 const canvas = document.querySelector('canvas.LogoShader')
 const scene = new THREE.Scene()
@@ -137,20 +192,38 @@ const icoMat = new THREE.ShaderMaterial({
 })
 icoMat.transparent = true;
 
-// Objects
-const particleCubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1, 24, 24, 24);
-const icoSphereGeometry = new THREE.IcosahedronBufferGeometry(3.5);
+const irisMat = new THREE.ShaderMaterial({
+    uniforms: {
+        Time: {
+            value: 0.0
+        },
+    },
+    vertexShader: _irisVS,
+    fragmentShader: _irisFS,
+})
+irisMat.transparent = true;
 
-// Mesh
+
+// Object geometries
+const particleCubeGeometry = new THREE.BoxBufferGeometry(1, 1, 1, 24, 24, 24);
+const icoSphereGeometry = new THREE.IcosahedronBufferGeometry(4);
+const irisPlaneGeometry = new THREE.PlaneGeometry(8, 8, 1);
+
+// Meshes
 const icoSphere = new THREE.Mesh(icoSphereGeometry, icoMat);
 const particleCube1 = new THREE.Mesh(particleCubeGeometry, particleMat);
 const particleCube2 = new THREE.Mesh(particleCubeGeometry, particleMat.clone());
 const particleCube3 = new THREE.Mesh(particleCubeGeometry, particleMat.clone());
+const irisPlane = new THREE.Mesh(irisPlaneGeometry, irisMat);
+irisPlane.position.z = -5.0;
 
-//scene.add(particleCube1);
-//scene.add(particleCube2);
-//scene.add(particleCube3);
 scene.add(icoSphere);
+scene.add(irisPlane);
+
+/*
+scene.add(particleCube1);
+scene.add(particleCube2);
+scene.add(particleCube3);
 
 //setup
 particleCube2.rotation.z = Math.PI / 1.5;
@@ -161,12 +234,21 @@ particleCube1.material.uniforms.Color1.value = new THREE.Vector3(0,0,1);
 particleCube2.material.uniforms.Color1.value = new THREE.Vector3(0,1,0);
 particleCube3.material.uniforms.Color1.value = new THREE.Vector3(1,0,0);
 
-//camera
+particleCube1.renderOrder=1;
+particleCube2.renderOrder=1;
+particleCube3.renderOrder=1;
+*/
+
+irisPlane.renderOrder=2;
+icoSphere.renderOrder=3;
+
+//cameras
 const camera = new THREE.PerspectiveCamera(10, sizes.width / sizes.height, 0.1, 100000)
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 50;
 scene.add(camera);
+
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -205,10 +287,19 @@ const tick = () =>
     // Time
     const elapsedTime = clock.getElapsedTime()
 
-    icoSphere.rotation.x = .2 * elapsedTime;
-    icoSphere.rotation.y = .5 * elapsedTime;
-    icoSphere.rotation.z = .2 * elapsedTime;
+    var icoRotSpeed = 0.5;
 
+    icoSphere.rotation.x = .2 * elapsedTime * icoRotSpeed;
+    icoSphere.rotation.y = .5 * elapsedTime * icoRotSpeed;
+    icoSphere.rotation.z = .2 * elapsedTime * icoRotSpeed;
+
+    icoSphere.material.uniforms.Time.value = elapsedTime;
+    irisPlane.material.uniforms.Time.value = elapsedTime;
+    /*
+
+    starsMesh.rotation.x = .2 * elapsedTime * icoRotSpeed;
+    starsMesh.rotation.y = .5 * elapsedTime * icoRotSpeed;
+    starsMesh.rotation.z = .2 * elapsedTime * icoRotSpeed;
     var particleSpeed = 0.5;
 
     particleCube1.material.uniforms.Time.value = elapsedTime*particleSpeed;
@@ -225,6 +316,7 @@ const tick = () =>
     particleCube1.rotation.y = particleRot/2;
     particleCube2.rotation.y = particleRot/2 +  Math.PI / 1.5;
     particleCube3.rotation.y = particleRot/2 +  Math.PI / -1.5;
+    */
 
     // Render
     renderer.render(scene, camera);
