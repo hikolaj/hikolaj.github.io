@@ -56,18 +56,18 @@ h1{
 }
 
 h2{
-  font-size: 35px;
+  font-size: 30px;
   padding: 0;
   margin: 0;
 }
 
 h3{
-  font-size: 26px;
+  font-size: 22px;
   margin-bottom: 10px;
 }
 
 h4{
-  font-size: 23px;
+  font-size: 16px;
   padding: 0;
   margin: 0;
   opacity: 0.6;
@@ -240,7 +240,6 @@ header .icons .icon{
 
 header h3{
   color: grey;
-  font-size: 22px;
 }
 header h3::before{
   content: "/*";
@@ -259,20 +258,7 @@ header .LogoShader{
 }
 
 
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  header .container{
-    flex-direction: column;
-    justify-content: center;
-  }
-  header .container .left{
-    order:2;
-  }
-  header .container .right{
-    order:1;
-    width: 100%;
-  }
-}
+
 
 /* ############################### MAIN */
 
@@ -290,7 +276,7 @@ main h1{
   border-bottom: solid 1px grey;
   box-shadow: 0px 7px 10px -7px rgba(100,100,100, 0.5);
 }
-
+/*
 main h1::after{
   content: "_";
   color: lightgrey;
@@ -304,6 +290,7 @@ main h1::after{
   50%  {content: "";}
   100% {content: "";}
 }
+*/
 
 main .nav-link{
 
@@ -367,7 +354,7 @@ main .container{
 }
 
 .card{
-  height: 200px;
+  min-height: 200px;
   width: 300px;
   margin: 20px;
   margin-top: 30px;
@@ -429,14 +416,20 @@ main .projects{
   box-shadow: 0px 4px 26px rgba(100,100,100,0.6);
   overflow: hidden;
 }
-
+.project .image img{
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 .project .image iframe{
   width: 100%;
 }
 
 .project .description{
   width: 560px;
-  max-height: 315px;
+  /*max-height: 315px;*/
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 30px;
@@ -470,4 +463,99 @@ main .projects{
 
 .project .description .btn{
   margin-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  h1{
+    font-size: 38px;
+  }
+  h2{
+    font-size: 30px;
+  }
+  h3{
+    font-size: 22px;
+  }
+  h4{
+    font-size: 16px;
+  }
+
+  header .container{
+    flex-direction: column;
+    justify-content: center;
+  }
+  header .container .left{
+    order:2;
+  }
+  header .container .right{
+    order:1;
+    width: 100%;
+  }
+  .project .image{
+    height: 43vw;
+  }
+  .project .image iframe{
+    height: 43vw;
+  }
+  .card{
+    width: 100%;
+    min-height: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  /* For mobile phones: */
+  h1{
+    font-size: 35px;
+  }
+  h2{
+    font-size: 27px;
+  }
+  h3{
+    font-size: 20px;
+  }
+  h4{
+    font-size: 14px;
+  }
+
+  header h3{
+    font-size: 18px;
+  }
+  header .container .left{
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  header .container .right{
+
+  }
+
+  main .container{
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  .job-project{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+
+@media only screen and (max-width: 360px) {
+  /* For mobile phones: */
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 22px;
+  }
+  h3{
+    font-size: 18px;
+  }
+  h4{
+    font-size: 14px;
+  }
+
+  header h3{
+    font-size: 12px;
+  }
+
 }
