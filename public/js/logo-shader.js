@@ -124,14 +124,15 @@ void main(void)
 {
 
     float iris = distance(vec2(0.5, 0.5), Uv);
-    iris = 1.0 - iris*2.0;
-    iris *= 1.0;
+    iris = 1.0 - iris * 2.0;
+    iris *= 0.1;
     iris = clamp(iris, 0.0, 1.0);
-    iris = pow(iris,2.0);
+    iris = pow(iris,1.5);
 
     float iniris = distance(vec2(0.5, 0.5), Uv);
     iniris = 1.0 - iniris * 12.0;
-    iniris *= 12.0;
+    iniris *= 100.0;
+
 
     vec3 irisCol = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), iniris);
 
@@ -152,12 +153,13 @@ void main(void)
 }
 `;
 
-const canvas = document.querySelector('canvas.LogoShader')
+const canvas = document.querySelector('canvas.bigIcosphereLogo')
 const scene = new THREE.Scene()
-const canvasScalar = 0.4;
+const canvasScalar = 1;
+const canvasScalarAtMediumScreen = 0.8;
 const sizes = {
-    width: Math.min(window.innerHeight*canvasScalar, document.body.clientWidth),
-    height: Math.min(window.innerHeight*canvasScalar, document.body.clientWidth)
+    width: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar,
+    height: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar
 }
 
 // Materials
@@ -267,8 +269,15 @@ window.addEventListener('resize', () =>
 function ResizeCameraAndRenderer()
 {
   // Update sizes
-  sizes.width = Math.min(window.innerHeight*canvasScalar, document.body.clientWidth);
-  sizes.height = Math.min(window.innerHeight*canvasScalar, document.body.clientWidth);
+  var canvasSize;
+  if(document.body.clientWidth > 768){
+    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar;
+  }else{
+    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarAtMediumScreen;
+  }
+
+  sizes.width = canvasSize;
+  sizes.height = canvasSize;
 
   // Update camera
   camera.aspect = sizes.width / sizes.height;

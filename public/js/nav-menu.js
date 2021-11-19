@@ -1,5 +1,5 @@
 const yOffset = -50;
-const yScrollOffsetDivider = 2.5;
+const yScrollOffsetDivider = 2;
 const buttons = document.getElementsByClassName("nav-link-btn");
 const subpages = document.getElementsByClassName("nav-link");
 
