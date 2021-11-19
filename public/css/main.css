@@ -108,33 +108,38 @@ nav{
   */
 }
 
-nav .logo-container{
+nav .nav-logo-container{
   position: relative;
   display: inline-block;
-  height: 100%;
-  font-family: WorkB;
-  font-size: 40px;
+  height: 50px;
   text-align: center;
   float:left;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-left: 20px;
   margin-right: 40px;
   user-select: none;
   cursor: default;
   transition: background 0.3s;
 }
+nav .nav-logo-container h1{
+  font-family: WorkB;
+  font-size: 36px;
+  padding-top: 4px;
+}
 
-nav .logo-container:hover
+nav .nav-logo-container:hover
 {
   background: rgba(255,255,255,0.2);
 }
-nav .logo-container:active
+nav .nav-logo-container:active
 {
   transition: background 0.1s;
   background: rgba(0,0,0,0.2);
 }
 
 nav .nav-btn{
-  height: 100%;
+  height: 50px;
   min-width: 100px;
   position: relative;
   display: inline-block;
@@ -174,6 +179,87 @@ nav .active::after{
   background: white;
   animation: activate-nav-btn 0.2s normal forwards linear;
 }
+
+nav .nav-button-container{
+  height: 100%;
+  display: inline-block;
+}
+nav .nav-socialmedia-container{
+  height: 100%;
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
+}
+
+nav .nav-btn--burger{
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  opacity: 0.5;
+}
+
+nav .nav-btn--socialmedia{
+  height: 50px;
+  width: 50px;
+
+}
+
+nav .nav-menu{
+  min-height: 50px;
+  width: 100%;
+
+}
+
+.nav-open{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(44,44,44,1);
+}
+.nav-open .nav-menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80%;
+  max-width: 250px;
+  margin: auto;
+}
+
+.nav-open .nav-logo-container
+{
+  width: 100%;
+  padding: 0;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.nav-open .nav-button-container
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+}
+.nav-open .nav-btn{
+  height: 50px;
+  width: 100%;
+  margin: auto;
+}
+
+.nav-open .nav-socialmedia-container
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30px;
+  margin-right: 0;
+}
+
+
 
 @keyframes activate-nav-btn {
   0%
@@ -476,6 +562,27 @@ main .projects{
     padding-left: 50px;
   }
 }
+
+
+@media only screen and (min-width: 920px) {
+  nav .nav-btn--burger{
+    display: none;
+  }
+}
+@media only screen and (max-width: 920px) {
+  nav .nav-button-container{
+      display: none;
+  }
+  nav .nav-socialmedia-container{
+      display: none;
+  }
+  nav .nav-btn--burger{
+      display: block;
+  }
+
+}
+
+
 @media only screen and (max-width: 768px) {
   h1{
     font-size: 38px;
@@ -511,6 +618,7 @@ main .projects{
     width: 100%;
     min-height: 0;
   }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -546,6 +654,9 @@ main .projects{
   .job-project{
     margin-left: 10px;
     margin-right: 10px;
+  }
+  nav .nav-logo-container{
+    margin-left: 10px;
   }
 }
 

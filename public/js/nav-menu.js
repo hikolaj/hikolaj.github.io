@@ -2,6 +2,8 @@ const yOffset = -50;
 const yScrollOffsetDivider = 2;
 const buttons = document.getElementsByClassName("nav-link-btn");
 const subpages = document.getElementsByClassName("nav-link");
+const burgerBtn = document.getElementsByClassName("nav-btn--burger")[0];
+const navigationBar = document.getElementsByClassName("navigation")[0];
 
 var lastActive = 0;
 
@@ -9,6 +11,7 @@ const scrollingTimer = 1000;
 var scrollingTo = false;
 var scrollResetInterval;
 
+var menuIsOpen = false;
 
 initializeNavButtons();
 function initializeNavButtons(){
@@ -21,6 +24,9 @@ function initializeNavButtons(){
   }
   buttons[0].classList.add("active");
 
+
+  burgerBtn.addEventListener("click", toggleMenu);
+
   document.addEventListener('scroll', handleNavByScrolling);
 }
 
@@ -28,12 +34,32 @@ function navButtonAction(id){
   scrollToSubpage(id);
   activateNavButton(id);
 
+  closeMenu();
+
   if(scrollResetInterval != null){
     clearInterval(scrollResetInterval);
   }
   scrollResetInterval = setInterval(function(){resetScrollActivation()}, scrollingTimer);
   scrollingTo = true;
 }
+
+function toggleMenu(){
+  if(!menuIsOpen){
+    openMenu();
+  }else{
+    closeMenu();
+  }
+}
+
+function openMenu(){
+  navigationBar.classList.add("nav-open");
+  menuIsOpen = true;
+}
+function closeMenu(){
+  navigationBar.classList.remove("nav-open");
+  menuIsOpen = false;
+}
+
 
 function handleNavByScrolling(){
   if(!scrollingTo){
