@@ -1,18 +1,21 @@
-const yOffset = -50;
-const yScrollOffsetDivider = 2;
+
+const scrollToOffset = -50;// offset of scroll
+const scrollDetectionHeightDivider = 2;// when nav detects change of supbage
 const buttons = document.getElementsByClassName("nav-link-btn");
 const subpages = document.getElementsByClassName("nav-link");
 const burgerBtn = document.getElementsByClassName("nav-btn--burger")[0];
 const navigationBar = document.getElementsByClassName("navigation")[0];
 
-var lastActive = 0;
+var lastActiveSubpage = 0;
 
-const scrollingTimer = 1000;
-var scrollingTo = false;
-var scrollResetInterval;
+const scrollAnimationTimer = 1000;
+var scrollAnimationIsActive = false;
+var scrollAnimationResetInterval;
 
 var menuIsOpen = false;
 
+
+//  Initialization
 initializeNavButtons();
 function initializeNavButtons(){
   for(var i=0; i<buttons.length; i++){
@@ -24,25 +27,27 @@ function initializeNavButtons(){
   }
   buttons[0].classList.add("active");
 
-
   burgerBtn.addEventListener("click", toggleMenu);
 
   document.addEventListener('scroll', handleNavByScrolling);
 }
 
+
+//  Scroll to supbage/nav-link of a button
 function navButtonAction(id){
   scrollToSubpage(id);
   activateNavButton(id);
 
   closeMenu();
 
-  if(scrollResetInterval != null){
-    clearInterval(scrollResetInterval);
+  if(scrollAnimationResetInterval != null){
+    clearInterval(scrollAnimationResetInterval);
   }
-  scrollResetInterval = setInterval(function(){resetScrollActivation()}, scrollingTimer);
-  scrollingTo = true;
+  scrollAnimationResetInterval = setInterval(function(){resetScrollActivation()}, scrollAnimationTimer);
+  scrollAnimationIsActive = true;
 }
 
+//  Handle opening and closing menu
 function toggleMenu(){
   if(!menuIsOpen){
     openMenu();
@@ -60,10 +65,10 @@ function closeMenu(){
   menuIsOpen = false;
 }
 
-
+//  Auto detection of active subpage
 function handleNavByScrolling(){
-  if(!scrollingTo){
-    var yScrollOffset = -window.innerHeight/yScrollOffsetDivider;
+  if(!scrollAnimationIsActive){
+    var yScrollOffset = -window.innerHeight/scrollDetectionHeightDivider;
     var y = window.scrollY;
     for(var i = 0; i < subpages.length; i++){
       var subpage = subpages[i];
@@ -76,23 +81,25 @@ function handleNavByScrolling(){
   }
 }
 
+//  ScrollTo subpage
 function scrollToSubpage(id){
   var yPos = getSubpageOffset(subpages[id]).top;
-  if(yPos > -yOffset){
-    yPos += yOffset;
+  if(yPos > -scrollToOffset){
+    yPos += scrollToOffset;
   }
   window.scrollTo(0, yPos);
 }
 
+//  Handle activation and deactivation of nav buttons
 function activateNavButton(id){
-  var lastActiveBtn = buttons[lastActive];
+  var lastActiveSubpageBtn = buttons[lastActiveSubpage];
   var btnToActivate = buttons[id];
 
   //>>> More optimized version
-  if(lastActive != id){
+  if(lastActiveSubpage != id){
     //deactivate last button
-    if(lastActiveBtn.classList.contains("active")){
-        lastActiveBtn.classList.remove("active");
+    if(lastActiveSubpageBtn.classList.contains("active")){
+        lastActiveSubpageBtn.classList.remove("active");
     }
     //activate new active
     btnToActivate.classList.add("active");
@@ -109,16 +116,17 @@ function activateNavButton(id){
   btnToActivate.classList.add("active");
   */
 
-  lastActive = id;
+  lastActiveSubpage = id;
 }
 
+//  Interval that resets scrolling animation to prevent bug. (auto scrolling is detected as user scroll and buttons can flicker)
 function resetScrollActivation(){
-  scrollingTo = false;
-  clearInterval(scrollResetInterval);
-  scrollResetInterval = null;
+  scrollAnimationIsActive = false;
+  clearInterval(scrollAnimationResetInterval);
+  scrollAnimationResetInterval = null;
 }
 
-
+//  Calculate position in  body of an given element
 function getSubpageOffset(el) {
     var _x = 0;
     var _y = 0;

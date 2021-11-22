@@ -91,6 +91,14 @@
   background-image: url(../img/icons/twitchtv.png);
 }
 
+.icon-linkedin{
+  background: url(../img/icons/linkedin.png);
+}
+
+.icon-github{
+  background: url(../img/icons/github.png);
+}
+
 /* NAV-Icon */
 
 #nav-icon {
