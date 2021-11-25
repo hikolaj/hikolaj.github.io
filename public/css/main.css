@@ -17,10 +17,11 @@
 
 /* VARS */
 :root {
-  --color-accent: rgba(14, 166, 14,1);
+  --color-accent: rgba(14, 176, 14,1);
   --color-accent-highlight: rgba(14, 186, 14, 1);
   --color-accent-darken: rgba(45,164,50,0.5);
   --color-nav: rgba(44,44,44,1);
+  --color-nav: black;
 }
 
 /* HTML */
@@ -105,10 +106,10 @@ button{
 /* ############################### Footer */
 footer{
   padding: 10px;
-  padding-top: 80px;
+  padding-left: 20px;
+  padding-top: 40px;
   color: lightgrey;
-  background: url("../img/BlackPaper.png");
-  background-position: center;
+  background: black;
 }
 
 /* ############################### NAV */
@@ -119,6 +120,7 @@ nav{
   z-index: 10;
   background: var(--color-nav);
   font-family: Work;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.35);
 }
 
 nav .nav-logo-container{
@@ -169,7 +171,7 @@ nav .nav-btn{
 
 nav .nav-btn:hover
 {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.3);
 }
 nav .nav-btn:active
 {
@@ -189,7 +191,7 @@ nav .active::after{
   height: 2px;
   width: 100%;
   left: 0;
-  bottom: 1px;
+  bottom: 0px;
   margin: auto;
   background: white;
   animation: activate-underline 0.2s normal forwards linear;
@@ -227,7 +229,6 @@ nav .nav-menu{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgba(44,44,44,1);
 }
 
 .nav-open .nav-menu{
@@ -317,7 +318,7 @@ nav .btn--socialmedia{
 /* ############################### HEADER */
 header{
   height: 100vh;
-  background: linear-gradient(to bottom, rgb(24, 24, 24) 40%, black);
+  background: linear-gradient(to bottom, rgb(34, 34, 34) 40%, black);
 }
 
 header .container{
@@ -407,7 +408,7 @@ main h1{
   margin-bottom: 30px;
   border-bottom: solid 1px rgb(14, 196, 14);
   border-bottom: solid 1px grey;
-  box-shadow: 0px 7px 10px -7px rgba(100,100,100, 0.5);
+  box-shadow: 0px 7px 10px -10px rgba(0,0,0, 0.5);
 }
 /*
 main h1::after{
@@ -474,13 +475,12 @@ main .container{
 /* icon  */
 
 .btn--icon{
-  height: 34px;
-  width: 34px;
-  margin-top: 8px;
+  height: 28px;
+  width: 28px;
+  margin-top: 11px;
   margin-left: 5px;
   padding: 0;
   border: none;
-  border-radius: 6px;
   background: none;
   outline: 0;
   transition: background 0.3s, opacity 0.2s;
@@ -497,7 +497,7 @@ main .container{
 }
 
 .btn--icon:hover{
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.6);
 }
 
 .btn--icon:active{
@@ -536,6 +536,7 @@ main .container{
 
 
 /* >>>>>>>>>>>>>>>>> CARD */
+
 .card-container{
   width: 100%;
   margin: auto;
@@ -553,11 +554,8 @@ main .container{
   width: 300px;
   margin: 20px;
   margin-top: 30px;
-  /*background: rgb(235,235,235);*/
   border-top: solid 2px var(--color-accent);
-  /*border: solid 1px grey;*/
-  /*box-shadow: inset 0 7px 12px -7px rgba(0,0,0,0.4);*/
-  box-shadow: 0px 5px 15px rgba(50,50,50,0.3);
+  box-shadow: 0px 5px 15px rgba(50,50,50,0.13);
 }
 
 
@@ -615,7 +613,8 @@ main .projects{
   margin-right: 20px;
   margin-bottom: 15px;
   background: black;
-  box-shadow: 0px 4px 26px rgba(100,100,100,0.6);
+  /*box-shadow: 0px 5px 20px rgba(50,50,50,0.3);*/
+  box-shadow: 0px 5px 15px rgba(50,50,50,0.2);
   overflow: hidden;
 }
 .project .image img{
@@ -631,15 +630,9 @@ main .projects{
 
 .project .description{
   width: 560px;
-  /*max-height: 315px;*/
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 30px;
-  /*
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  */
 }
 
 .project .description h2{
@@ -651,10 +644,6 @@ main .projects{
 .project .description p{
   margin-top: 15px;
   padding-bottom: 10px;
-  /*
-  padding-bottom: 20px;
-  border-bottom: solid 1px black;
-  */
 }
 
 .project .description .icon{
@@ -755,8 +744,7 @@ main .projects{
     padding-right: 25px;
   }
   header .container .logo{
-    left: 25%;
-    width: 75%;
+
   }
 
   main .container{
