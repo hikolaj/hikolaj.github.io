@@ -17,9 +17,10 @@
 
 /* VARS */
 :root {
-  --color-prim: rgb(255, 180, 0);
-  --color-prim: rgb(255, 180, 0);
-  --color-sec: rgb(14, 196, 14);
+  --color-accent: rgba(14, 166, 14,1);
+  --color-accent-highlight: rgba(14, 186, 14, 1);
+  --color-accent-darken: rgba(45,164,50,0.5);
+  --color-nav: rgba(44,44,44,1);
 }
 
 /* HTML */
@@ -97,6 +98,10 @@ li{
 
 }
 
+button{
+  cursor: pointer;
+}
+
 /* ############################### Footer */
 footer{
   padding: 10px;
@@ -112,13 +117,8 @@ nav{
   height: 50px;
   width: 100%;
   z-index: 10;
-  background: rgba(44,44,44,0.93);
-  backdrop-filter: blur(5px);
+  background: var(--color-nav);
   font-family: Work;
-  /*
-  display: flex;
-  flex-direction: row;
-  */
 }
 
 nav .nav-logo-container{
@@ -127,20 +127,20 @@ nav .nav-logo-container{
   height: 50px;
   text-align: center;
   float:left;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   margin-left: 20px;
   margin-right: 40px;
   user-select: none;
-  cursor: default;
+  cursor: pointer;
   transition: background 0.3s;
 }
 nav .nav-logo-container h1{
   font-family: WorkB;
   font-size: 36px;
-  padding-top: 4px;
+  padding-top: 5px;
 }
-
+/*
 nav .nav-logo-container:hover
 {
   background: rgba(255,255,255,0.2);
@@ -150,6 +150,7 @@ nav .nav-logo-container:active
   transition: background 0.1s;
   background: rgba(0,0,0,0.2);
 }
+*/
 
 nav .nav-btn{
   height: 50px;
@@ -161,7 +162,7 @@ nav .nav-btn{
   border: none;
   font-family: Work;
   font-size: 16px;
-  color: white;
+  color: rgba(220,220,220,1.0);
   background: none;
   transition: background 0.3s;
 }
@@ -178,9 +179,9 @@ nav .nav-btn:active
 
 nav .active{
   /*box-shadow: inset 0px -2px 0px -1px white;*/
-  color:var(--color-prim);
-
+  color:white;
 }
+
 nav .active::after{
   content: "";
   display: block;
@@ -191,7 +192,7 @@ nav .active::after{
   bottom: 1px;
   margin: auto;
   background: white;
-  animation: activate-nav-btn 0.2s normal forwards linear;
+  animation: activate-underline 0.2s normal forwards linear;
 }
 
 nav .nav-button-container{
@@ -206,12 +207,13 @@ nav .nav-socialmedia-container{
 }
 
 nav .nav-btn--burger{
-  height: 50px;
-  width: 50px;
+  background: none;
+  border: none;
   position: absolute;
   right: 10px;
   top: 0;
-  opacity: 0.5;
+  height: 50px;
+  width: 50px;
 }
 
 nav .nav-menu{
@@ -219,7 +221,7 @@ nav .nav-menu{
   width: 100%;
 
 }
-/* opened navigation (for mobiles) */
+/* open navigation (for mobiles) */
 .nav-open{
   height: 100vh;
   display: flex;
@@ -271,10 +273,15 @@ nav .nav-menu{
 .nav-open .btn--socialmedia{
   margin-left: 8px;
   margin-right: 8px;
+  animation: none;
 }
+/*
+nav .btn--socialmedia{
+  animation: socialmedia-hop 3s infinite;
+}
+*/
 
-
-@keyframes activate-nav-btn {
+@keyframes activate-underline {
   0%
     {
       width: 0%;
@@ -284,6 +291,26 @@ nav .nav-menu{
     {
       width: 100%;
       left: 0;
+    }
+}
+
+
+@keyframes socialmedia-hop {
+  0%
+    {
+      margin-top: 5px;
+    }
+  90%
+    {
+      margin-top: 5px;
+    }
+  95%
+    {
+      margin-top: 2px;
+    }
+  100%
+    {
+      margin-top: 5px;
     }
 }
 
@@ -310,14 +337,20 @@ header .container .title{
   justify-content: center;
   padding-left: 100px;
   padding-right: 50px;
+  width: 50%;
+  z-index: 3;
 }
 
 header .container .logo{
+  position: absolute;
   width: 50%;
+  left: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  z-index: 2;
 }
 
 header .icons{
@@ -350,15 +383,13 @@ header h3::after{
 
 header b{
   font-family: WorkBl;
-  color: var(--color-sec);
+  color: var(--color-accent);
 }
 
 header .bigIcosphereLogo{
   margin: auto;
 
 }
-
-
 
 
 /* ############################### MAIN */
@@ -425,28 +456,27 @@ main .container{
   border-radius: 4px;
   font-family: WorkB;
   color: rgb(240,240,240);
-  background: rgba(52, 191, 50,1);
-  box-shadow:
-      inset 0px 15px 16px -15px rgba(255,255,255, 0.3),
-      0px 3px 7px rgba(0,0,0,0.2);
+  background: var(--color-accent);
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
   transition: background 0.3s, box-shadow 0.2s;
 }
 
 .btn:hover{
-  background: rgba(14, 196, 14,1);
-  box-shadow: inset 0px 15px 16px -15px rgba(255,255,255, 0);
+  background: var(--color-accent-highlight);
 }
 
 .btn:active{
   transition: background 0.1s, box-shadow 0.1s;
-  background: rgba(45,164,50,0.5);
+  background: var(--color-accent-darken);
   box-shadow: none;
 }
 
-.btn--socialmedia{
-  height: 40px;
-  width: 40px;
-  margin-top: 5px;
+/* icon  */
+
+.btn--icon{
+  height: 34px;
+  width: 34px;
+  margin-top: 8px;
   margin-left: 5px;
   padding: 0;
   border: none;
@@ -456,22 +486,52 @@ main .container{
   transition: background 0.3s, opacity 0.2s;
   overflow: hidden;
 }
-.btn--socialmedia img{
-  height: 40px;
-  width: 40px;
+
+.btn--icon img{
+  height: 100%;
+  width: 100%;
   margin: auto;
   padding: 0;
   background-position: center;
   background-size: cover;
 }
 
-.btn--socialmedia:hover{
+.btn--icon:hover{
   background: rgba(255,255,255,0.4);
 }
 
-.btn--socialmedia:active{
+.btn--icon:active{
   background: rgba(255,255,255,0.0);
   opacity: 0.6;
+}
+
+/* burger  */
+
+.btn--burger {
+  background: none;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+}
+
+.btn--burger .bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 3px;
+  background: white;
+  margin: 8px 0;
+  transition: 0.2s;
+}
+
+.btn--burger-toggle .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.btn--burger-toggle .bar2 {opacity: 0;}
+
+.btn--burger-toggle .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
 }
 
 
@@ -488,16 +548,18 @@ main .container{
 }
 
 .card{
+  position: relative;
   min-height: 200px;
   width: 300px;
   margin: 20px;
   margin-top: 30px;
   /*background: rgb(235,235,235);*/
-  border-top: solid 2px var(--color-sec);
+  border-top: solid 2px var(--color-accent);
   /*border: solid 1px grey;*/
   /*box-shadow: inset 0 7px 12px -7px rgba(0,0,0,0.4);*/
   box-shadow: 0px 5px 15px rgba(50,50,50,0.3);
 }
+
 
 .card-icon-container{
   margin: auto;
@@ -507,9 +569,15 @@ main .container{
   margin-top: -40px;
 }
 
+.card-icon-container .icon{
+  z-index: 2;
+}
+
 .card p{
   padding: 20px;
 }
+
+
 
 /* >>>>>>>>>>>>>>>>> WORK */
 
@@ -645,11 +713,11 @@ main .projects{
     justify-content: center;
   }
   header .container .title{
-    order:2;
+    width: 70%;
   }
   header .container .logo{
-    order:1;
-    width: 100%;
+    left: 40%;
+    width: 60%;
   }
   .project .image{
     height: 43vw;
@@ -687,7 +755,8 @@ main .projects{
     padding-right: 25px;
   }
   header .container .logo{
-
+    left: 25%;
+    width: 75%;
   }
 
   main .container{

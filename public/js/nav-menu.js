@@ -1,6 +1,8 @@
 
-const scrollToOffset = -50;// offset of scroll
-const scrollDetectionHeightDivider = 2;// when nav detects change of supbage
+const underlineLogo = false;
+const scrollToOffset = -50;// offset of scrollTo function
+const scrollDetectionHeightDivider = 1.8;// nav detects change of supbage at position > wh/Divider;
+
 const buttons = document.getElementsByClassName("nav-link-btn");
 const subpages = document.getElementsByClassName("nav-link");
 const burgerBtn = document.getElementsByClassName("nav-btn--burger")[0];
@@ -15,6 +17,7 @@ var scrollAnimationResetInterval;
 var menuIsOpen = false;
 
 
+
 //  Initialization
 initializeNavButtons();
 function initializeNavButtons(){
@@ -25,10 +28,10 @@ function initializeNavButtons(){
         btn.classList.remove("active");
     }
   }
-  buttons[0].classList.add("active");
-
+  if(underlineLogo){
+    buttons[0].classList.add("active");
+  }
   burgerBtn.addEventListener("click", toggleMenu);
-
   document.addEventListener('scroll', handleNavByScrolling);
 }
 
@@ -37,9 +40,7 @@ function initializeNavButtons(){
 function navButtonAction(id){
   scrollToSubpage(id);
   activateNavButton(id);
-
   closeMenu();
-
   if(scrollAnimationResetInterval != null){
     clearInterval(scrollAnimationResetInterval);
   }
@@ -58,10 +59,12 @@ function toggleMenu(){
 
 function openMenu(){
   navigationBar.classList.add("nav-open");
+  burgerBtn.classList.add("btn--burger-toggle");
   menuIsOpen = true;
 }
 function closeMenu(){
   navigationBar.classList.remove("nav-open");
+  burgerBtn.classList.remove("btn--burger-toggle");
   menuIsOpen = false;
 }
 
@@ -95,26 +98,21 @@ function activateNavButton(id){
   var lastActiveSubpageBtn = buttons[lastActiveSubpage];
   var btnToActivate = buttons[id];
 
-  //>>> More optimized version
   if(lastActiveSubpage != id){
     //deactivate last button
     if(lastActiveSubpageBtn.classList.contains("active")){
         lastActiveSubpageBtn.classList.remove("active");
     }
-    //activate new active
-    btnToActivate.classList.add("active");
-  }
 
-  /*
-  //>>> Safer but slower version
-  for(var i=0; i<buttons.length; i++){
-    var btn = buttons[i];
-    if(btn.classList.contains("active")){
-        btn.classList.remove("active");
+    //activate new active
+    if(id > 0){
+      btnToActivate.classList.add("active");
+    }else{
+      if(underlineLogo){
+        btnToActivate.classList.add("active");
+      }
     }
   }
-  btnToActivate.classList.add("active");
-  */
 
   lastActiveSubpage = id;
 }
@@ -126,7 +124,7 @@ function resetScrollActivation(){
   scrollAnimationResetInterval = null;
 }
 
-//  Calculate position in  body of an given element
+//  Calculate position in the body of an given element
 function getSubpageOffset(el) {
     var _x = 0;
     var _y = 0;

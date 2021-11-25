@@ -156,7 +156,8 @@ void main(void)
 const canvas = document.querySelector('canvas.bigIcosphereLogo')
 const scene = new THREE.Scene()
 const canvasScalar = 1;
-const canvasScalarAtMediumScreen = 0.8;
+const canvasScalarAtMediumScreen = 1;
+const canvasScalarAtSmallScreen = 1;
 const sizes = {
     width: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar,
     height: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar
@@ -270,10 +271,12 @@ function ResizeCameraAndRenderer()
 {
   // Update sizes
   var canvasSize;
-  if(document.body.clientWidth > 768){
+  if(document.body.clientWidth >= 465){
     canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar;
-  }else{
+  }else if(document.body.clientWidth > 360){
     canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarAtMediumScreen;
+  }else{
+    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarAtSmallScreen;
   }
 
   sizes.width = canvasSize;
