@@ -155,7 +155,7 @@ void main(void)
 
 const canvas = document.querySelector('canvas.bigIcosphereLogo')
 const scene = new THREE.Scene()
-const canvasScalar = 1;
+const canvasScalar = 0.8;
 const canvasScalarAtMediumScreen = 1;
 const canvasScalarAtSmallScreen = 1;
 const sizes = {

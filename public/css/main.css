@@ -9,9 +9,25 @@
     font-family: 'WorkB';
     src: url("../fonts/WorkSans-Bold.ttf");
 }
+
 @font-face {
     font-family: 'Work';
     src: url("../fonts/WorkSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Denton';
+    src: url("../fonts/DentonExtraBold.otf");
+}
+
+@font-face {
+    font-family: 'Ampersand';
+    src: url("../fonts/ampersand.ttf");
+}
+
+@font-face {
+    font-family: 'Edosz';
+    src: url("../fonts/edosz.ttf");
 }
 
 
@@ -55,20 +71,21 @@ hr
 }
 
 h1{
-  font-size: 44px;
+  font-size: 40px;
   padding: 0;
   margin: 0;
-  font-family: WorkBl;
+  font-family: Denton;
 }
 
 h2{
   font-size: 30px;
   padding: 0;
   margin: 0;
+  font-family: WorkB;
 }
 
 h3{
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
@@ -81,13 +98,13 @@ h4{
 
 p{
   padding: 0;
-  margin: 0;
+
   font-family: Work;
   opacity: 0.9;
 }
 
 b{
-  font-family: WorkB;
+  font-family: Work;
 }
 
 ul{
@@ -106,10 +123,18 @@ button{
 /* ############################### Footer */
 footer{
   padding: 10px;
-  padding-left: 20px;
+  padding-left: 30px;
   padding-top: 40px;
   color: lightgrey;
   background: black;
+}
+
+footer b{
+    font-family: Ampersand;
+    margin-bottom: 0;
+}
+footer p{
+    margin-top: 0;
 }
 
 /* ############################### NAV */
@@ -119,8 +144,9 @@ nav{
   width: 100%;
   z-index: 10;
   background: var(--color-nav);
-  font-family: Work;
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.35);
+  box-shadow:
+  0 0 4px black,
+  inset 0 -1px 0 rgba(255,255,255,0.35);
 }
 
 nav .nav-logo-container{
@@ -138,9 +164,9 @@ nav .nav-logo-container{
   transition: background 0.3s;
 }
 nav .nav-logo-container h1{
-  font-family: WorkB;
   font-size: 36px;
   padding-top: 5px;
+  font-family: Ampersand;
 }
 /*
 nav .nav-logo-container:hover
@@ -381,9 +407,12 @@ header h3::before{
 header h3::after{
   content: "*/";
 }
+header h1{
+  /*font-family: WorkB;*/
+}
 
 header b{
-  font-family: WorkBl;
+  font-family: Edosz;
   color: var(--color-accent);
 }
 
@@ -404,12 +433,14 @@ main{
 }
 
 main h1{
+
   padding-bottom: 5px;
   margin-bottom: 30px;
   border-bottom: solid 1px rgb(14, 196, 14);
   border-bottom: solid 1px grey;
   box-shadow: 0px 7px 10px -10px rgba(0,0,0, 0.5);
 }
+
 /*
 main h1::after{
   content: "_";
@@ -444,6 +475,8 @@ main .container{
   color: white;
   */
 }
+
+
 
 /* >>>>>>>>>>>>>>>>> Buttons */
 
@@ -550,7 +583,6 @@ main .container{
 
 .card{
   position: relative;
-  min-height: 200px;
   width: 300px;
   margin: 20px;
   margin-top: 30px;
@@ -572,7 +604,9 @@ main .container{
 }
 
 .card p{
-  padding: 20px;
+  margin-top: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 
@@ -657,12 +691,35 @@ main .projects{
 }
 
 /* ################################ vertical */
+@media only screen and (min-width: 1920px) {
+  header .container .title{
+    padding-left: 10%;
+  }
+  header h1{
+    font-size: 500%;
+  }
+  header h3{
+    font-size: 150%;
+  }
+}
+@media only screen and (max-width: 1920px) {
+  header .container .title{
+    padding-left: 100px;
+  }
+  header h1{
+    font-size: 400%;
+  }
+}
+
 @media only screen and (max-width: 1600px) {
   header .container .title{
     padding-left: 50px;
   }
-}
+  header h1{
+      font-size: 400%;
+  }
 
+}
 
 @media only screen and (min-width: 920px) {
   nav .nav-btn--burger{
@@ -670,6 +727,9 @@ main .projects{
   }
 }
 @media only screen and (max-width: 920px) {
+  header h1{
+      font-size: 40px;
+  }
   nav .nav-button-container{
       display: none;
   }
