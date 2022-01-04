@@ -1,324 +1,374 @@
- <!DOCTYPE html>
- <html>
+<!DOCTYPE html>
+<html>
 
-	<head>
-		<title>MH portfolio</title>
-		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1" >
-		<link rel="stylesheet" href="./public/css/main.css" type="text/css">
-    <link rel="stylesheet" href="./public/css/icons.css" type="text/css">
-    <script type="module" src="./public/js/nav-menu.js"></script>
-    <script type="module" src="./public/js/logo-shader.js"></script>
-    <!--<script src="./public/js/projectBannersScroll.js"></script>-->
-	</head>
+ <head>
+   <title>MH portfolio</title>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1" >
+   <link rel="stylesheet" href="./public/css/main.css" type="text/css">
+   <link rel="stylesheet" href="./public/css/icons.css" type="text/css">
+   <script type="module" src="./public/js/nav-menu.js"></script>
+   <script type="module" src="./public/js/galleries.js"></script>
+   <script type="module" src="./public/js/logo-shader.js"></script>
+ </head>
 
-	<body>
+ <body>
 
-    <nav class="navigation">
-      <div class="nav-menu">
-        <div class="nav-logo-container nav-link-btn">
-          <h1>Mihanslik</h1>
-        </div>
-        <div class="nav-button-container">
-          <button class="nav-btn nav-link-btn">O mnie</button>
-          <button class="nav-btn nav-link-btn">Praca</button>
-          <button class="nav-btn nav-link-btn">Projekty</button>
-          <button class="nav-btn nav-link-btn">Kontakt</button>
-        </div>
-        <div class="nav-socialmedia-container">
-          <button class="btn--icon" onclick="window.open('https://www.linkedin.com/in/mikolaj-hanslik/')">
-            <img class="icon-linkedin">
-          </button>
-          <button class="btn--icon" onclick="window.open('https://github.com/mihanslik')">
-            <img class="icon-github">
-          </button>
-        </div>
-      </div>
-      <button class="nav-btn--burger btn--burger">
-        <div class="bar1"></div><div class="bar2"></div><div class="bar3"></div>
-      </button>
-    </nav>
+   <nav class="navigation">
+     <div class="nav-menu">
+       <div class="nav-logo-container nav-link-btn">
+         <h1>MH</h1>
+       </div>
+       <div class="nav-button-container">
+         <button class="nav-btn nav-link-btn">O mnie</button>
+         <button class="nav-btn nav-link-btn">Projekty</button>
+         <button class="nav-btn nav-link-btn">Doświadczenie</button>
+         <button class="nav-btn nav-link-btn">Kontakt</button>
+       </div>
+       <div class="nav-socialmedia-container">
+         <button class="btn--icon" onclick="window.open('https://www.linkedin.com/in/mikolaj-hanslik/')">
+           <img class="icon-linkedin">
+         </button>
+         <button class="btn--icon" onclick="window.open('https://github.com/mihanslik')">
+           <img class="icon-github">
+         </button>
+       </div>
+     </div>
+     <button class="nav-btn--burger btn--burger">
+       <div class="bar1"></div><div class="bar2"></div><div class="bar3"></div>
+     </button>
+   </nav>
 
-    <header class="nav-link">
-      <div class="container">
-        <div class="title">
-          <h1>
-            Czesc!<br>
-            Nazywam sie Mikołaj Hanslik.<br>
-            Jestem <b>Game Developerem</b>.
-          </h1>
-          <h3>
-            Programista / Artysta Techniczny
-          </h3>
-        </div>
-        <div class="logo">
-          <canvas id="bigIcosphereLogo" class="bigIcosphereLogo" width="300" height="300"></canvas>
-        </div>
-      </div>
-      <div class="icons">
-        <div class="icon icon--medium icon-unity-inverse"></div>
-        <div class="icon icon--medium icon-unreal-inverse"></div>
-        <div class="icon icon--medium icon-blender-inverse"></div>
-        <div class="icon icon--medium icon-photoshop-inverse"></div>
-        <div class="icon icon--medium icon-csharp-inverse"></div>
-        <div class="icon icon--medium icon-cplusplus-inverse"></div>
-        <div class="icon icon--medium icon-glsl-inverse"></div>
-      </div>
-    </header>
+   <header class="header nav-link">
+     <div class="logo">
+       <canvas id="icosphere" class="icosphere" width="300" height="300"></canvas>
+     </div>
+     <div class="title">
+       <h1>Game Dev Porftolio</h1>
+       <h3>Designer / Programista / Artysta Techniczny</h3>
+     </div>
+     <div class="scroll">
+       <div class="scroll-icon"></div>
+     </div>
+   </header>
 
-    <main>
-        <div class="container nav-link about">
-          <h1>O mnie</h1>
-          <p>
-            Nazywam się Mikołaj Hanslik i zajmuję się tworzeniem gier. Najbardziej interesuje się proceduralną generacją i shaderami. Dążę do czystych i optymalnych rozwiązań.
-          </p>
-          <p>
-            Nazywam się Mikołaj Hanslik i zajmuję się tworzeniem gier. Najbardziej interesuje się proceduralną generacją i shaderami. Dążę do czystych i optymalnych rozwiązań.
-          </p>
-          <div class="card-container">
-            <div class="card">
-              <div class="card-icon-container">
-                <div class="icon icon--big icon-graduate"></div>
-              </div>
-              <p>
-                Ukończyłem uczelnie wyższą <b>Collegium Da Vinci w Poznaniu</b> z tytułem <b>inżyniera</b>. Studiowałem informatykę o specjalizacji <b>Game Design</b>.
-              </p>
-            </div>
-            <div class="card">
-              <div class="card-icon-container">
-                <div class="icon icon--big icon-mic"></div>
-              </div>
-              <p>
-                Przez rok prowadziłem koło naukowę, gdzie dzieliłem się swoją wiedzą na temat tworzeniem gier i wspólnie z uczestnikami pracowaliśmy nad różnymi projektami.
-              </p>
-            </div>
-            <div class="card">
-              <div class="card-icon-container">
-                <div class="icon icon--big icon-twitchtv"></div>
-              </div>
-              <p>
-                Nabywałem wiedzę oglądając proces tworzenia gier oraz pomagałem mniejszym twórcom tworzący gry i streamujących na platformie Twitch.tv. Sam również streamowałem.
-              </p>
-            </div>
-          </div>
-        </div>
+   <main>
 
-        <div class="container nav-link work">
-          <h1>Praca profesionalna</h1>
+       <div class="container nav-link about">
+         <div class="innerbox">
+           <h1 data-text:"O mnie">Cześć!</h1>
+           <p>
+             Nazywam się <b>Mikołaj Hanslik</b> i jestem <b>Game Developerem</b>.
+             Przez lata stworzyłem wiele róznych prototypów gier, parę małych gier na urządzenia mobilne i pracowałem jako <b>programista</b>/<b>artysta techniczny</b> w indie studiu.
+             Ukończyłem informatykę o specjalizacji <b>Game Design</b> z tytułem <b>inżyniera</b>.
+             Lubię proste i czyste rozwiązania programistyczne.
+             Najbardziej interesuje mnie designowanie rozgrywki, proceduralna generacja oraz tworzenie shaderów.
+           </p>
+           <div class="icons">
+             <div class="icon icon--medium icon-unity-inverse"></div>
+             <div class="icon icon--medium icon-unreal-inverse"></div>
+             <div class="icon icon--medium icon-blender-inverse"></div>
+             <div class="icon icon--medium icon-photoshop-inverse"></div>
+             <div class="icon icon--medium icon-csharp-inverse"></div>
+             <div class="icon icon--medium icon-cplusplus-inverse"></div>
+             <div class="icon icon--medium icon-glsl-inverse"></div>
+           </div>
+         </div>
+       </div>
 
-          <div class="job">
-            <h2>Marching Bits</h2>
-            <h4>2019-2020</h4>
+       <div class="container nav-link projects">
+         <div class="innerbox">
+           <h1>Moje projekty</h1>
 
-            <div class="job-project">
-              <h3>World Tree</h3>
-              <p>
-                Trójwymiarowa strategia czasu rzeczywistego w świecie fantasy.
-                Projekt tworzony był na silniku <b>Unity</b> w systemie <b>ECS</b>.
-                Pracowałem nad tą grą w małym, niezależnym zespole, w którym miałem spory zakres obowiązków.
-                Głównie zajmowałem się programowaniem różnych systemów, ale pisaniem również shadery i pomagałem przy łączeniu wszystkich elementów w całość.
-                (Niestety z powodu problemów finansowych firmy projekt nie został ukończony)
-              </p>
-              <p>Co zrobiłem:</p>
-              <ul>
-                <li>System znoszenia surowców do magazynu, na place budowy i do miejsc pracy.</li>
-                <li>System przydzielania prac osadnikom.</li>
-                <li>System stawiania budynków/placów konstrukcji na siatce mapy ze sprawdzaniem wolnych komórek.</li>
-                <li>System rozwoju budynków i dostawiania do nich rozszerzeń.</li>
-                <li>System grupowania jednostek i przypisywania do nich skrótu klawisza.</li>
-                <li>Shader siatki konstrukcji budynków z możliwością wyświetlania miejsc zajętych.</li>
-                <li>Shader minimapy.</li>
-                <li>Shader oznaczenia jednostek, budynków i przeciwników.</li>
-                <li>Shader i animacja strzałki akcji.</li>
-                <li>I wiele więcej.</li>
-              </ul>
-            </div>
+           <!--           INTERACTIVE SNOW              -->
+           <div class="project">
+             <div class="image">
+               <iframe width="560" height="315" src="https://www.youtube.com/embed/zOLS8w1JqL4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             </div>
+             <div class="description">
+               <h2>
+                 Interaktywny śnieg
+                 <div class="icon icon--medium icon-unity-inverse"></div>
+               </h2>
+               <p>
+                 Shader imitujący śnieg oraz compute shader głębi wychwytywanej przez kamerę umieszczoną pod fragmentem mapy.
+                 Śnieg oddziałuje na dowolny kształt wchowdzący z nim w interakcję i z czasem regeneruje się do pierwotnego stanu.
+               </p>
+               <button class="btn">GitHub</button>
+             </div>
+           </div>
 
-          </div>
-        </div>
+           <!--           Bad Call           -->
+           <div class="project">
+             <div class="image gallery">
+               <img src="./public/img/projects/badcall/badcall_0.png" alt="">
+               <img src="./public/img/projects/badcall/badcall_1.png" alt="">
+               <img src="./public/img/projects/badcall/badcall_2.png" alt="">
+               <img src="./public/img/projects/badcall/badcall_3.png" alt="">
+               <img src="./public/img/projects/badcall/badcall_4.png" alt="">
+               <img src="./public/img/projects/badcall/badcall_5.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Bad Call
+                 <div class="icon icon--medium icon-unity-inverse"></div>
+               </h2>
+               <p>
+                 Córka detektywa zostaje porwana i na stół powróciło stare zlecenie.
+                 Wciel się w skórę głównego bohatera, rozwiązuj zagadki i uratuj córkę.
+                 <br><br>
+                 Projekt uczelniany stworzony w ograniczonym czasie w spółpracy z grafikiem oraz aktorem głosowym.
+                 <br><br>
+                 Co zrobiłem: Fabuła, wszystkie skrypty (np. ekwipunek, interakcje, wyświetlanie ikon interakcji itp.), pomoc przy modelach, głos złoczyńcy, poskładanie wszystkiego w całość.
+               </p>
+               <button class="btn">Pobierz Demo.exe</button>
+             </div>
+           </div>
 
-        <div class="container nav-link projects">
-          <h1>Moje projekty</h1>
-
-          <!--           INTERACTIVE SNOW              -->
-          <div class="project">
-            <div class="image">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/zOLS8w1JqL4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="description">
-              <h2>
-                Interaktywny śnieg
-                <div class="icon icon--medium icon-unity"></div>
-              </h2>
-              <p>
-                Shader imitujący śnieg oraz compute shader głębi wychwytywanej przez kamerę umieszczoną pod fragmentem mapy.
-                Śnieg oddziałuje na dowolny kształt wchowdzący z nim w interakcję i z czasem regeneruje się do pierwotnego stanu.
-              </p>
-              <button class="btn">GitHub</button>
-            </div>
-          </div>
-
-          <!--           MAIL-MAN             -->
-          <div class="project">
-            <div class="image">
-                <img src="./public/img/projects/mailman/mailman_2.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Mail-Man
-                <div class="icon icon--medium icon-unreal"></div>
-              </h2>
-              <p>
-                Trójwymiarowa gra zręcznościowa typu arcade.
-                <br>
-                Miasto potrzebuje Super-Listonosza, który za zadanie ma roznieść jak najwięcej
-                paczek zanim skończy się jego zmiana.
-                Do dyspozycji ma specialny pistolet,
-                którego super mocą są dwie elektromagnetyczne sprężyny,
-                pozwalające na przyciągnięcie do siebie paczki oraz pozwalające na podróżowanie przez miasto niczym spider-man.
-                <br>
-                <br>
-                Projekt ten został stworzony z przyjacielem w 48h na GMTK Game-Jam.
-              </p>
-              <button class="btn">itch.io</button>
-              <button class="btn">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--           Bad Call           -->
-          <div class="project">
-            <div class="image"></div>
-            <div class="description">
-              <h2>
-                Bad Call
-                <div class="icon icon--medium icon-unity"></div>
-              </h2>
-              <p>
-
-                <br>
-                <br>
-                Projekt uczelniany.
-              </p>
-              <button class="btn">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--           Cubye           -->
-          <div class="project">
-            <div class="image"></div>
-            <div class="description">
-              <h2>
-                Cubye
-                <div class="icon icon--medium icon-unity"></div>
-              </h2>
-              <p>
-
-              </p>
-              <button class="btn">Pobierz .apk</button>
-            </div>
-          </div>
-
-          <!--           Benny          -->
-          <div class="project">
-            <div class="image"></div>
-            <div class="description">
-              <h2>
-                Benny
-                <div class="icon icon--medium icon-unity"></div>
-              </h2>
-              <p>
-                Prototyp prostej gry przygodowej, w której prowadzimy ciekawskiego królika przez zaczarowany las. Gracz do dyspozycji ma jedynie kursor, za którym królik stara się podążać.
-              </p>
-              <button class="btn">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--           GALACTIC CONFLICT              -->
-          <div class="project">
-            <div class="image">
-              <img src="./public/img/projects/galaxywars/galaxywars_3.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Galactic Conflict
-                <div class="icon icon--medium icon-cplusplus"></div>
-              </h2>
-              <p>
-                Dostosuj swój statek, przemierzaj proceturalnie generowany kosmos i walcz z wrogimi statkami.
-                Na swojej drodze napotkasz sklepy, wrogie bazy oraz planety, których to mieszkańców możesz bronić przed najazdami.
-                Walka polega na zużywaniu co turę punktów energii,
-                które przeznaczyć możesz na zasilenie jednej z trzech tarcz, naprawę, bądź też doładowanie jednej z trzech broni.
-                <br>
-                <br>
-                Sterowanie:
-                <b>WASD:</b> poruszanie się/zmiana opcji.
-                <b>ENTER:</b> akceptacja wyboru.
-              </p>
-              <button class="btn">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--           Noise Editor           -->
-          <div class="project">
-            <div class="image">
-                <img src="./public/img/projects/perlinnoisegenerator/perlinnoisegenerator_1.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Edytor Szumu Perlina
-                <div class="icon icon--medium icon-csharp"></div>
-              </h2>
-              <p>
-                Wielowarstwowy edytor i generator szumu Perlina.
-              </p>
-              <button class="btn">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--          Zwięrzęta dla Frinlet          -->
-          <div class="project">
-            <div class="image">
-              <img src="./public/img/projects/frinlet/frinlet_1.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Zwięrzęta dla Frinlet
-                <div class="icon icon--medium icon-blender"></div>
-              </h2>
-              <p>
-                Tworzyłem swojego czasu modele zwierząt w stylu low-poly do projektu gry przeglądarkowej "Frinlet".
-                <br>
-                <br>
-                Gra sama w sobie jest inspirowana Animal Crossing oraz Minecraft-
-                Proceduralnie generowany świat z bogatymi w faunę i florę biomami oraz miasta pełne sklepów i NPC.
-                Głównym celem gry jest zwiedzanie świata i odkrywanie nowych gatunków zwierząt oraz roślinności.
-                Przez pewien okres aplikacja działała jako narzędzie dla dzieci do nauki języka angielskiego.
-              </p>
-              <button class="btn">Zagraj Online</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="container nav-link contact">
-          <h1>Kontakt</h1>
-          <p>
-            <b>E-mail: </b> mikolaj.hanslik@gmail.com
-          </p>
-          <br>
-        </div>
+           <!--           MAIL-MAN             -->
+           <div class="project">
+             <div class="image gallery">
+               <img src="./public/img/projects/mailman/mailman_1.png" alt="">
+               <img src="./public/img/projects/mailman/mailman_2.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Mail-Man
+                 <div class="icon icon--medium icon-unreal-inverse"></div>
+               </h2>
+               <p>
+                 Trójwymiarowa gra zręcznościowa typu arcade.
+                 <br>
+                 Miasto potrzebuje Super-Listonosza, który za zadanie ma roznieść jak najwięcej
+                 paczek zanim skończy się jego zmiana.
+                 Do dyspozycji ma specialny pistolet,
+                 którego super mocą są dwie elektromagnetyczne sprężyny,
+                 pozwalające na przyciągnięcie do siebie paczki oraz pozwalające na podróżowanie przez miasto niczym spider-man.
+                 <br>
+                 <br>
+                 Projekt ten został stworzony z przyjacielem w 48h na GMTK Game-Jam.
+               </p>
+               <button class="btn">itch.io</button>
+               <button class="btn">Pobierz .exe</button>
+             </div>
+           </div>
 
 
-        <br>
-    </main>
 
-    <footer>
-      <b>
-        Designed and created by Mikolaj Hanslik.
-      </b>
-      <p>
-        Copyright © 2019 Mikołaj Hanslik. All Rights Reserved.
-      </p>
-    </footer>
+           <!--           Bunny          -->
+           <div class="project">
+             <div class="image">
+               <img src="./public/img/projects/bunny/bunny_1.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Bunny
+                 <div class="icon icon--medium icon-unity-inverse"></div>
+               </h2>
+               <p>
+                 Prototyp prostej gry logiczno-przygodowej, w której prowadzimy ciekawskiego królika przez zaczarowany las. Gracz do dyspozycji ma jedynie kursor (świetlik), za którym królik stara się podążać.
+               </p>
+               <button class="btn">Pobierz Demo.exe</button>
+             </div>
+           </div>
 
-	</body>
+           <!--           GALACTIC CONFLICT              -->
+           <div class="project">
+             <div class="image gallery">
+               <img src="./public/img/projects/galaxywars/galaxywars_1.png" alt="">
+               <img src="./public/img/projects/galaxywars/galaxywars_2.png" alt="">
+               <img src="./public/img/projects/galaxywars/galaxywars_3.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Galactic Conflict
+                 <div class="icon icon--medium icon-cplusplus-inverse"></div>
+               </h2>
+               <p>
+                 Gra działająca w konsoli systemu Windows.
+                 <br><br>
+                 Dostosuj swój statek, przemierzaj proceturalnie generowany kosmos i walcz z wrogimi statkami.
+                 Na swojej drodze napotkasz sklepy, wrogie bazy oraz planety, których to mieszkańców możesz bronić przed najazdami.
+                 Walka polega na zużywaniu co turę punktów energii,
+                 które przeznaczyć możesz na zasilenie jednej z trzech tarcz, naprawę, bądź też doładowanie jednej z trzech broni.
+                 <br><br>
+                 Sterowanie:
+                 <b>WASD:</b> poruszanie się/zmiana opcji.
+                 <b>ENTER:</b> akceptacja wyboru.
+               </p>
+               <button class="btn">Pobierz .exe</button>
+             </div>
+           </div>
+
+           <!--           Cubye           -->
+           <div class="project">
+             <div class="image">
+               <img src="./public/img/projects/cubye/cubye_1.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Cubye
+                 <div class="icon icon--medium icon-unity-inverse"></div>
+               </h2>
+               <p>
+                 Prosta gra na urządzenia mobilne służąca do trenowania pamięci krótkotrwałej.
+                 Na początku rozgrywki wyświetlany jest losowo generowany wzór, który później trzeba odnaleźć na kostce, którą użytkownik może dowolnie obracać ruchem palca. Z każdym znalezionym wzorem użytkownik jest nagradzany i zwiększny jest poziom trudności.
+               </p>
+               <button class="btn">Pobierz .apk</button>
+             </div>
+           </div>
+
+           <!--           Noise Editor           -->
+           <div class="project">
+             <div class="image">
+                 <img src="./public/img/projects/perlinnoisegenerator/perlinnoisegenerator_1.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Edytor Szumu Perlina
+                 <div class="icon icon--medium icon-csharp-inverse"></div>
+               </h2>
+               <p>
+                 Wielowarstwowy edytor i generator szumu Perlina.
+               </p>
+               <button class="btn">Pobierz .exe</button>
+             </div>
+           </div>
+
+           <!--          Zwięrzęta dla Frinlet          -->
+           <div class="project">
+             <div class="image">
+               <img src="./public/img/projects/frinlet/frinlet_1.png" alt="">
+             </div>
+             <div class="description">
+               <h2>
+                 Zwięrzęta dla Frinlet
+                 <div class="icon icon--medium icon-blender-inverse"></div>
+               </h2>
+               <p>
+                 Tworzyłem swojego czasu modele zwierząt w stylu low-poly do projektu gry przeglądarkowej "Frinlet".
+                 <br>
+                 <br>
+                 Gra sama w sobie jest inspirowana Animal Crossing oraz Minecraft-
+                 Proceduralnie generowany świat z bogatymi w faunę i florę biomami oraz miasta pełne sklepów i NPC.
+                 Głównym celem gry jest zwiedzanie świata i odkrywanie nowych gatunków zwierząt oraz roślinności.
+                 Przez pewien okres aplikacja działała jako narzędzie dla dzieci do nauki języka angielskiego.
+               </p>
+               <button class="btn">Zagraj Online</button>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+       <div class="container nav-link work">
+         <div class="innerbox">
+           <h1>Doświadczenie</h1>
+
+           <div class="job">
+             <h2>Marching Bits</h2>
+             <h4>2019-2020</h4>
+             <div class="job-project">
+               <h3>World Tree</h3>
+               <p>
+                 Trójwymiarowa strategia czasu rzeczywistego w świecie fantasy.
+                 Projekt tworzony był na silniku <b>Unity</b> w systemie <b>ECS</b>.
+                 Pracowałem nad tą grą w małym, niezależnym zespole, w którym miałem spory zakres obowiązków.
+                 Głównie zajmowałem się programowaniem różnych systemów, ale pisaniem również shadery i pomagałem przy łączeniu wszystkich elementów w całość.
+               </p>
+               <p>Co zrobiłem:</p>
+               <ul>
+                 <li>System znoszenia surowców do magazynu, na place budowy i do miejsc pracy.</li>
+                 <li>System przydzielania prac osadnikom.</li>
+                 <li>System stawiania budynków/placów konstrukcji na siatce mapy ze sprawdzaniem wolnych komórek.</li>
+                 <li>System rozwoju budynków i dostawiania do nich rozszerzeń.</li>
+                 <li>System grupowania jednostek i przypisywania do nich skrótu klawisza.</li>
+                 <li>Shader siatki konstrukcji budynków z możliwością wyświetlania miejsc zajętych.</li>
+                 <li>Shader minimapy.</li>
+                 <li>Shader oznaczenia jednostek, budynków i przeciwników.</li>
+                 <li>Shader i animacja strzałki akcji.</li>
+                 <li>I wiele więcej.</li>
+               </ul>
+             </div>
+           </div>
+
+           <div class="job">
+             <h2>Uczelnia Collegium Da Vinci w Poznaniu</h2>
+             <h4>2016-2019</h4>
+             <div class="job-project">
+               <h3>Informatyka o specjalizacji "Game Desing"</h3>
+               <p>
+                 Ukończenie uczelni wyższej z tytułem Inżynier.
+               </p>
+             </div>
+             <div class="job-project">
+               <h3>Koło naukowe</h3>
+               <p>
+                 Prowadziłem przez rok koło naukowe, gdzie wspólnie z uczestnikami tworzyliśmy projekty i dzieliłem się swoją wiedzą na temat tworzenia gier.
+               </p>
+             </div>
+           </div>
+
+           <div class="job">
+             <h2>Początki</h2>
+             <h4>2008-2016</h4>
+             <div class="job-project">
+               <h3>Wydanie swojej pierwszej gry Cubye</h3>
+               <p>
+                 Stworzyłem i wydałem grę na platformie Google Play.
+               </p>
+             </div>
+             <div class="job-project">
+               <h3>Twitch.tv</h3>
+               <p>
+                 Pomagałem za darmo jak i za małe dotacje różnym twórcom gier, których znajdywałem na platformie Twitch.tv w dziale "Creative".
+               </p>
+             </div>
+             <div class="job-project">
+               <h3>Prototypowanie</h3>
+               <p>
+                 Nabywałem wiedzę programistyczną poprzez prototypowanie swoich pomysłów na silniku Unity.
+               </p>
+             </div>
+             <div class="job-project">
+               <h3>Start</h3>
+               <p>
+                 Zacząłem swoją przygodę z tworzeniem gier pod koniec podstawówki. Tworzyłem modele i prostą logikę w programie Blender, bawiłem się różnymi silnikami jak na przykład RPG maker oraz tworzyłem mody do gry Postal.
+               </p>
+             </div>
+           </div>
+
+           <div class="dots">
+           </div>
+
+         </div>
+       </div>
+
+
+       <div class="container nav-link contact">
+         <div class="innerbox">
+           <h1>Kontakt</h1>
+           <p>
+             <b>E-mail: </b> mikolaj.hanslik@gmail.com
+           </p>
+           <br>
+         </div>
+       </div>
+   </main>
+
+   <footer>
+     <div class="links">
+
+     </div>
+     <div class="copyright">
+       <b>
+         Designed and created by Mikolaj Hanslik.
+       </b>
+       <p>
+         Copyright © 2019 Mikołaj Hanslik. All Rights Reserved.
+       </p>
+     </div>
+   </footer>
+
+ </body>
 </html>

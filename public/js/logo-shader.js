@@ -153,11 +153,58 @@ void main(void)
 }
 `;
 
-const canvas = document.querySelector('canvas.bigIcosphereLogo')
+const _cloudVS = `
+varying vec2 Uv;
+uniform float Time;
+
+void main(){
+    Uv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+const _cloudFS = `
+varying vec2 Uv;
+uniform float Time;
+
+void main(void)
+{
+
+    float iris = distance(vec2(0.5, 0.5), Uv);
+    iris = 1.0 - iris * 2.0;
+    iris *= 0.1;
+    iris = clamp(iris, 0.0, 1.0);
+    iris = pow(iris,1.5);
+
+    float iniris = distance(vec2(0.5, 0.5), Uv);
+    iniris = 1.0 - iniris * 12.0;
+    iniris *= 100.0;
+
+
+    vec3 irisCol = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), iniris);
+
+    vec2 uv = Uv;
+
+    float beam =  Uv.y - 0.5;
+    beam = clamp(abs(beam * 5.0), 0.0, 1.0);
+    beam = 1.0 - beam;
+
+    float beamClamper =  Uv.x - 0.5;
+    beamClamper = clamp(abs(beamClamper * 2.0), 0.0, 1.0);
+    beamClamper = 1.0 - beamClamper;
+
+    beam *= beamClamper;
+    beam = pow(beam * 1.2, ((sin(Time*2.0)/2.0)+4.0));
+
+    gl_FragColor = vec4(irisCol, iris + beam);
+}
+`;
+
+const canvas = document.querySelector('canvas.icosphere')
 const scene = new THREE.Scene()
-const canvasScalar = 0.8;
-const canvasScalarAtMediumScreen = 1;
-const canvasScalarAtSmallScreen = 1;
+const canvasScalar = 0.55;
+const canvasScalarMobile = 1;
+
 const sizes = {
     width: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar,
     height: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar
@@ -271,16 +318,14 @@ function ResizeCameraAndRenderer()
 {
   // Update sizes
   var canvasSize;
-  if(document.body.clientWidth >= 465){
-    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar;
-  }else if(document.body.clientWidth > 360){
-    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarAtMediumScreen;
+  if(window.innerHeight <= document.body.clientWidth){
+    canvasSize =  Math.max(window.innerHeight, document.body.clientWidth)*canvasScalar;
   }else{
-    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarAtSmallScreen;
+    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarMobile;
   }
-
-  sizes.width = canvasSize;
-  sizes.height = canvasSize;
+  sizes.height = sizes.width = canvasSize;
+  //sizes.width = window.innerHeight * canvasScalar;
+  //sizes.height = window.innerHeight * canvasScalar;
 
   // Update camera
   camera.aspect = sizes.width / sizes.height;
