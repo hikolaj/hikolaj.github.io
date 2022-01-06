@@ -76,6 +76,7 @@ body
 {
   width: 100%;
   padding: 0;
+  margin: 0;
   margin: auto;
   text-align: left;
   background-color: rgb(24, 24, 24);
@@ -142,23 +143,34 @@ button{
   cursor: pointer;
 }
 
+a{
+  color: white;
+  font-family: Work;
+  display: block;
+  padding-bottom: 15px;
+}
+
+a:hover{
+  color: lightblue;
+
+}
+
 /* ############################### Footer */
 footer{
+  margin: 0;
   padding: 10px;
-  padding-left: 30px;
-  padding-top: 40px;
+  text-align: center;
   color: lightgrey;
   background: black;
-  height: 300px;
-  background: rgb(20,20,20);
+  background: rgb(10,10,10);
 }
 
 footer b{
     font-family: Ampersand;
-    margin-bottom: 0;
+    margin: 0;
 }
 footer p{
-    margin-top: 0;
+    margin: 0;
 }
 
 /* ############################### NAV */
@@ -505,7 +517,11 @@ main .icons .icon{
 
 
 .contact{
-
+  margin: 0;
+  padding: 0;
+  padding-bottom: 100px;
+  padding-top: 20px;
+  background: rgb(20,20,20);
 }
 
 .work{
@@ -576,7 +592,7 @@ main .icons .icon{
 }
 
 .job-project{
-  margin-left: 10px;
+  margin-left: 15px;
   padding-left: 8px;
   border-left: solid 1px var(--work-timeline-color--inactive);
   transition: border-left 0.3s, background 0.3s;
@@ -799,19 +815,14 @@ main .icons .icon{
   width: 50px;
   top: 0;
   z-index: 1;
-  background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
-  background-repeat: no-repeat;
-  background-position: -50px 0;
-  transition: background-position 0.3s, opacity 0.3s;
+  background: rgba(0,0,0,0.3);
+  transition: opacity 0.3s;
   opacity: 0;
 }
 
 .gallery-btn--right
 {
   right: 0;
-  background: linear-gradient(to left, rgba(0,0,0,0.4), transparent);
-  background-repeat: no-repeat;
-  background-position: 50px 0;
 }
 
 .gallery:hover .gallery-btn--left, .gallery:hover .gallery-btn--right{

@@ -1,7 +1,7 @@
 
 const underlineLogo = false;
-const scrollToOffset = -50;// offset of scrollTo function
-const scrollDetectionHeightDivider = 1.8;// nav detects change of supbage at position > wh/Divider;
+const scrollToOffset = -80;// offset of scrollTo function
+const scrollDetectionHeightDivider = 1.8;// nav detects change of supbage at position > wh/Divider; -window.innerHeight/scrollDetectionHeightDivider;
 
 const buttons = document.getElementsByClassName("nav-link-btn");
 const subpages = document.getElementsByClassName("nav-link");
