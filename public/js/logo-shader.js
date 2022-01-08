@@ -203,7 +203,7 @@ void main(void)
 const canvas = document.querySelector('canvas.icosphere')
 const scene = new THREE.Scene()
 const canvasScalar = 0.55;
-const canvasScalarMobile = 1;
+const canvasScalarMobile = 0.7;
 
 const sizes = {
     width: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar,
@@ -318,9 +318,11 @@ function ResizeCameraAndRenderer()
 {
   // Update sizes
   var canvasSize;
-  if(window.innerHeight <= document.body.clientWidth){
-    canvasSize =  Math.max(window.innerHeight, document.body.clientWidth)*canvasScalar;
-  }else{
+  if(window.innerHeight <= document.body.clientWidth)//wide
+  {
+    canvasSize =  Math.max(window.innerHeight, Math.min(document.body.clientWidth,2000))*canvasScalar;
+  }else// verticall
+  {
     canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarMobile;
   }
   sizes.height = sizes.width = canvasSize;

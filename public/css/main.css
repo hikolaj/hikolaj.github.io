@@ -432,7 +432,17 @@ header .logo{
 
 header h1{
   text-shadow: 0 4px 0 black, 0 0px 5px black;
+  position: relative;
 }
+header h1::before{
+  content: "Game Dev Portfolio";
+  position: absolute;
+  background: -webkit-linear-gradient(#eee 20%, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
 header h3{
   margin: 0;
   color: rgb(200,200,200);
