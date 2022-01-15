@@ -234,7 +234,7 @@ const tick = () =>
     icoSphere.rotation.y = .5 * elapsedTime * icoRotSpeed;
     icoSphere.rotation.z = .2 * elapsedTime * icoRotSpeed;
 
-    var blackIcoRotSpeed = 8;
+    var blackIcoRotSpeed = 4;
 
     blackIcoSphere1.rotation.x = .2 * elapsedTime * blackIcoRotSpeed;
     blackIcoSphere1.rotation.y = .5 * elapsedTime * blackIcoRotSpeed;
