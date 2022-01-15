@@ -146,7 +146,7 @@ button{
 a{
   color: white;
   font-family: Work;
-  display: block;
+
   padding-bottom: 15px;
 }
 
@@ -483,7 +483,9 @@ main{
 }
 
 main h1{
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+  border-bottom: solid 1px grey;
 }
 
 main .nav-link{
@@ -543,32 +545,27 @@ main .icons .icon{
   width: 100%;
   position: relative;
 }
-.work .dots::before{
-  content: "⋮";
-  margin-left: 8.5px;
-  color: var(--work-timeline-color--inactive);
-}
 
 .job{
   position: relative;
   padding-left: 5px;
+  padding-top: 15px;
   padding-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-top: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
   transition: background 0.5s;
 }
 
 .job:hover{
-  background: rgba(255,255,255,0.1);
+  //background: rgba(255,255,255,0.1);
 }
 
 .job::before{
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0px;
+  top: 25px;
+  bottom: 25px;
+  left: 1px;
   width: 2px;
   background: var(--work-timeline-color--inactive);
   transition: background 0.3s;
@@ -579,13 +576,16 @@ main .icons .icon{
 }
 
 .job::after{
-  content: "◆";
+  content: "◇";
   position: absolute;
   font-size: 30px;
   top:-18px;
   left: -9px;
   color: var(--work-timeline-color--inactive);
   transition: color 0.3s;
+}
+.job--active::after{
+  content: "◆";
 }
 
 .job:hover::after{
@@ -606,11 +606,6 @@ main .icons .icon{
   padding-left: 8px;
   border-left: solid 1px var(--work-timeline-color--inactive);
   transition: border-left 0.3s, background 0.3s;
-}
-
-.job-project:hover{
-  border-left: solid 1px var(--work-timeline-color--active);
-
 }
 
 .projects{
@@ -903,47 +898,12 @@ main .icons .icon{
   display: none;
 }
 
-/* >>>>>>>>>>>>>>>>> CARD */
 
-.card-container{
-  width: 100%;
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+/* ################################ color sheme */
+.color-sheme--light{
+  background: rgb(240,240,240);
+  color: black;
 }
-
-.card{
-  position: relative;
-  width: 300px;
-  margin: 20px;
-  margin-top: 30px;
-  border-top: solid 2px var(--color-accent);
-  box-shadow: 0px 5px 15px rgba(50,50,50,0.13);
-}
-
-
-.card-icon-container{
-  margin: auto;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  margin-top: -40px;
-}
-
-.card-icon-container .icon{
-  z-index: 2;
-}
-
-.card p{
-  margin-top: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 
 
 /* ################################ vertical */

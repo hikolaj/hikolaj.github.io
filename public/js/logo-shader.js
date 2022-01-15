@@ -24,14 +24,11 @@ void main(void)
 {
     vec2 uv = gl_FragCoord.xy / resolution;
 
-    vec3 refracted = refract(eyeVector, worldNormal, 1.0);
-	  uv += refracted.xy;
-
     float backlight =  dot(worldNormal, normalize(vec3(0, 0, 1.0)));
     backlight = 1.0-max(backlight, 0.0);
-    backlight = pow(backlight, 2.0);
+    backlight = pow(backlight, 5.0);
 
-    gl_FragColor = vec4(vec3(backlight), backlight);
+    gl_FragColor = vec4(vec3(1.0), backlight);
 }
 `;
 
