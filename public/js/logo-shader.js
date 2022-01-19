@@ -139,7 +139,7 @@ const icoMat = new THREE.ShaderMaterial({
               value: 1000.0
           },
           iorValue: {
-              value: 1.033
+              value: 1.06
           },
     },
     vertexShader: _icoVS,
