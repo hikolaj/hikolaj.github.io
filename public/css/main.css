@@ -431,13 +431,18 @@ header .logo{
 }
 
 header h1{
-  text-shadow: 0 4px 0 black, 0 0px 5px black;
+  text-shadow:
+    -1px 0px 0 black,
+    1px 0px 0 black,
+    0px -1px 0 black,
+    0px 4px 0 black,
+    0 0px 10px black;
   position: relative;
 }
 header h1::before{
   content: "Game Dev Portfolio";
   position: absolute;
-  background: -webkit-linear-gradient(#eee 20%, #333);
+  background: -webkit-linear-gradient(#eee 40%, #333);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: none;
@@ -446,7 +451,12 @@ header h1::before{
 header h3{
   margin: 0;
   color: rgb(200,200,200);
-  text-shadow: 0 0px 5px black;
+  text-shadow:
+    -1px 0px 0 black,
+    1px 0px 0 black,
+    0px -1px 0 black,
+    0px 1px 0 black,
+    0 0px 6px black;
 }
 
 @keyframes arrow-scroll
@@ -485,7 +495,7 @@ main{
 main h1{
   margin-bottom: 40px;
   padding-bottom: 10px;
-  border-bottom: solid 1px grey;
+  border-bottom: solid 1px rgb(50,50,50);
 }
 
 main .nav-link{
@@ -654,7 +664,7 @@ main .icons .icon{
 }
 
 .project .description h2{
-  border-bottom: solid 1px rgba(255,255,255,0.6);
+  border-bottom: solid 1px rgb(50,50,50);
   padding-bottom: 2px;
 }
 
