@@ -374,7 +374,7 @@ header{
 
 header .title{
   position: absolute;
-  top:50%;
+  top:80%;
   width: 100%;
   transform: translate(0, -50%);
   text-align: center;

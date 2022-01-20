@@ -118,7 +118,7 @@ void main(void)
 const canvas = document.querySelector('canvas.icosphere')
 const scene = new THREE.Scene()
 const canvasScalar = 0.55;
-const canvasScalarMobile = 0.7;
+const canvasScalarMobile = 0.9;
 
 const sizes = {
   width: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar,
