@@ -41,6 +41,7 @@ function navButtonAction(id){
   scrollToSubpage(id);
   activateNavButton(id);
   closeMenu();
+
   if(scrollAnimationResetInterval != null){
     clearInterval(scrollAnimationResetInterval);
   }
@@ -69,18 +70,34 @@ function closeMenu(){
 }
 
 //  Auto detection of active subpage
-function handleNavByScrolling(){
-  if(!scrollAnimationIsActive){
+function handleNavByScrolling()
+{
+  if(!scrollAnimationIsActive)
+  {
     var yScrollOffset = -window.innerHeight/scrollDetectionHeightDivider;
     var y = window.scrollY;
-    for(var i = 0; i < subpages.length; i++){
-      var subpage = subpages[i];
-      //console.log("id: " + i + " /top: " + getSubpageOffset(subpage).top + " /height: " + subpage.offsetHeight + " /sum with offset:" + getSubpageOffset(subpage).top + subpage.offsetHeight + yScrollOffset);
-      if(getSubpageOffset(subpage).top + subpage.offsetHeight + yScrollOffset > y){
-        activateNavButton(i);
-        return;
+
+    if(y == 0)//home
+    {
+      activateNavButton(0);
+    }
+    else if(y >= document.body.clientHeight - window.innerHeight)//end
+    {
+      activateNavButton(subpages.length - 1);
+    }
+    else//between
+    {
+      for(var i = 0; i < subpages.length; i++)
+      {
+        var subpage = subpages[i];
+        if(getSubpageOffset(subpage).top + subpage.offsetHeight + yScrollOffset > y)
+        {
+          activateNavButton(i);
+          return;
+        }
       }
     }
+
   }
 }
 

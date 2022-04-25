@@ -9,7 +9,7 @@
    <link rel="stylesheet" href="./public/css/icons.css" type="text/css">
    <script type="module" src="./public/js/nav-menu.js"></script>
    <script type="module" src="./public/js/galleries.js"></script>
-   <script type="module" src="./public/js/logo-shader.js"></script>
+      <script type="module" src="./public/js/background-shader.js"></script>
  </head>
 
  <body >
@@ -39,18 +39,12 @@
      </button>
    </nav>
 
-   <header class="header nav-link">
-     <div class="logo">
-       <canvas id="icosphere" class="icosphere" width="300" height="300"></canvas>
-     </div>
-     <div class="title">
-       <h1>Game Dev Portfolio</h1>
-       <h3>Programista / Artysta Techniczny</h3>
-     </div>
-     <div class="scroll">
-       <div class="scroll-icon"></div>
-     </div>
+   <canvas id="bgshader" class="bgshader"></canvas>
+
+   <header class="nav-link">
+     <h1>Game Dev Portfolio</h1>
    </header>
+
 
    <main>
        <div class="container nav-link about">
@@ -61,12 +55,12 @@
            </p>
            <!--
            <div class="icons">
-             <div class="icon icon--medium icon-unity-inverse"></div>
-             <div class="icon icon--medium icon-unreal-inverse"></div>
-             <div class="icon icon--medium icon-csharp-inverse"></div>
-             <div class="icon icon--medium icon-cplusplus-inverse"></div>
-             <div class="icon icon--medium icon-glsl-inverse"></div>
-             <div class="icon icon--medium icon-blender-inverse"></div>
+             <div class="icon icon--medium icon-unity"></div>
+             <div class="icon icon--medium icon-unreal"></div>
+             <div class="icon icon--medium icon-csharp"></div>
+             <div class="icon icon--medium icon-cplusplus"></div>
+             <div class="icon icon--medium icon-glsl"></div>
+             <div class="icon icon--medium icon-blender"></div>
            </div>
            -->
          </div>
@@ -84,7 +78,7 @@
              <div class="description">
                <h2>
                  Interaktywny śnieg
-                 <div class="icon icon--medium icon-unity-inverse"></div>
+                 <div class="icon icon--medium icon-unity"></div>
                </h2>
                <p>
                  Shader imitujący śnieg oraz compute shader głębi wychwytywanej przez kamerę umieszczoną pod fragmentem mapy.
@@ -102,8 +96,8 @@
              <div class="description">
                <h2>
                  Auto Road
-                 <div class="icon icon--medium icon-csharp-inverse"></div>
-                 <div class="icon icon--medium icon-unity-inverse"></div>
+                 <div class="icon icon--medium icon-csharp"></div>
+                 <div class="icon icon--medium icon-unity"></div>
                </h2>
                <p>
                  Zoptymalizowany algorytm generujący drogę do gry typu endless runner.
@@ -125,7 +119,7 @@
              <div class="description">
                <h2>
                  Bad Call
-                 <div class="icon icon--medium icon-unity-inverse"></div>
+                 <div class="icon icon--medium icon-unity"></div>
                </h2>
                <p>
                  Córka detektywa zostaje porwana i na stół powróciło stare zlecenie.
@@ -148,7 +142,7 @@
              <div class="description">
                <h2>
                  Mail-Man
-                 <div class="icon icon--medium icon-unreal-inverse"></div>
+                 <div class="icon icon--medium icon-unreal"></div>
                </h2>
                <p>
                  Trójwymiarowa gra zręcznościowa typu arcade.
@@ -175,7 +169,7 @@
              <div class="description">
                <h2>
                  Bunny
-                 <div class="icon icon--medium icon-unity-inverse"></div>
+                 <div class="icon icon--medium icon-unity"></div>
                </h2>
                <p>
                  Prototyp prostej gry logiczno-przygodowej, w której prowadzimy ciekawskiego królika przez zaczarowany las. Gracz do dyspozycji ma jedynie kursor (świetlik), za którym królik stara się podążać.
@@ -194,7 +188,7 @@
              <div class="description">
                <h2>
                  Galactic War
-                 <div class="icon icon--medium icon-cplusplus-inverse"></div>
+                 <div class="icon icon--medium icon-cplusplus"></div>
                </h2>
                <p>
                  Gra działająca w konsoli systemu Windows.
@@ -220,7 +214,7 @@
              <div class="description">
                <h2>
                  Cubye
-                 <div class="icon icon--medium icon-unity-inverse"></div>
+                 <div class="icon icon--medium icon-unity"></div>
                </h2>
                <p>
                  Prosta gra na urządzenia mobilne służąca do trenowania pamięci krótkotrwałej.
@@ -238,7 +232,7 @@
              <div class="description">
                <h2>
                  Edytor Szumu Perlina
-                 <div class="icon icon--medium icon-csharp-inverse"></div>
+                 <div class="icon icon--medium icon-csharp"></div>
                </h2>
                <p>
                  Wielowarstwowy edytor i generator szumu Perlina.
@@ -255,7 +249,7 @@
              <div class="description">
                <h2>
                  Zwięrzęta dla Frinlet
-                 <div class="icon icon--medium icon-blender-inverse"></div>
+                 <div class="icon icon--medium icon-blender"></div>
                </h2>
                <p>
                  Tworzyłem swojego czasu modele zwierząt w stylu low-poly do projektu gry przeglądarkowej "Frinlet".
@@ -406,6 +400,7 @@
        </div>
 
    </main>
+
 
    <footer>
      <p>
