@@ -180,7 +180,7 @@ void main(void)
 
     color.a *= clamp(0.0, 1.0, Uv.y * 2.0); //bottom cutoff
     color.a += Uv.y / 10.; //black bg
-
+    //color.a = round(color.a*5.0)/5.0;
 
     gl_FragColor = color;
 }

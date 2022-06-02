@@ -1,308 +1,285 @@
-import * as THREE from 'https://threejs.org/build/three.module.js';
+import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 
-const _icoVS = `
-varying vec3 worldNormal;
-varying vec3 eyeVector;
+//////////////////////////////////////// unlit symbol
+const _unlitSymbolVS = `
+varying vec2 vUv;
+varying vec3 vNormal;
+
+uniform vec3 Color;
 
 void main(){
-    vec4 worldPosition = modelMatrix * vec4( position, 1.0);
-    eyeVector = normalize(worldPosition.xyz - cameraPosition);
-    worldNormal = normalize(normalMatrix * normal);
+    vUv = uv;
+    vNormal = normalize(normal);
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
-const _icoFS = `
-uniform sampler2D envMap;
-uniform float resolution;
-uniform float iorValue;
+const _unlitSymbolFS = `
+varying vec2 vUv;
+varying vec3 vNormal;
 
-varying vec3 eyeVector;
-varying vec3 worldNormal;
+uniform vec3 Color;
 
 void main(void)
 {
-    vec2 uv = gl_FragCoord.xy / resolution;
-
-    float backlight =  dot(worldNormal, normalize(vec3(0, 0, 1.0)));
-    backlight = 1.0-max(backlight, 0.0);
-    backlight = pow(backlight, 5.0);
-
-    //gl_FragColor = vec4(vec3(1.0), backlight);
-
-  	vec3 refracted = refract(eyeVector, worldNormal, 1.0/iorValue);
-  	uv += refracted.xy;
-
-    vec4 tex = texture2D(envMap, uv);
-
-    vec3 color = tex.rgb+backlight;
-
-  	gl_FragColor = vec4(color, tex.a + backlight);
+    float dotOfNormal = abs(dot(vNormal, vec3(0.0, 0.0, 1.0)));
+    vec3 color = mix(Color * 0.8, Color, dotOfNormal);
+    gl_FragColor = vec4(color, 1.0);
 }
 `;
+//////////////////////////////////// raymarched cloud
 
-const _blackIcoVS = `
+const _raymarchCloudVS = `
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vPos;
 
-varying vec3 worldNormal;
-
-void main(){
-    vec4 worldPosition = modelMatrix * vec4( position, 1.0);
-    worldNormal = normalize(normalMatrix * normal);
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-`;
-const _blackIcoFS = `
-varying vec3 worldNormal;
-uniform float resolution;
-
-void main(void)
-{
-    vec2 uv = gl_FragCoord.xy / resolution;
-
-    float backlight =  dot(worldNormal, normalize(vec3(0, 0, 1.0)));
-    backlight = 1.0-max(backlight, 0.0);
-    backlight = pow(backlight, 5.0);
-
-    vec3 icoColor = mix(vec3(0.0), vec3(1.0), backlight);
-
-    gl_FragColor = vec4(icoColor, 1.0);
-}
-`;
-
-const _irisVS = `
-varying vec2 Uv;
 uniform float Time;
 
 void main(){
-    Uv = uv;
+    vUv = uv;
+    vNormal = normalize(normal);
+    vPos = (projectionMatrix * modelViewMatrix * vec4(position, 1.0)).rgb;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
-const _irisFS = `
-varying vec2 Uv;
+
+const _raymarchCloudFS = `
+#define PI 3.1415926538
+
+varying vec2 vUv;
+varying vec3 vPos;
+
 uniform float Time;
+
+//	Simplex 3D Noise 
+//	by Ian McEwan, Ashima Arts
+vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+
+float snoise(vec3 v)
+{ 
+  const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+  const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+
+  // First corner
+  vec3 i  = floor(v + dot(v, C.yyy) );
+  vec3 x0 =   v - i + dot(i, C.xxx) ;
+
+  // Other corners
+  vec3 g = step(x0.yzx, x0.xyz);
+  vec3 l = 1.0 - g;
+  vec3 i1 = min( g.xyz, l.zxy );
+  vec3 i2 = max( g.xyz, l.zxy );
+
+  //  x0 = x0 - 0. + 0.0 * C 
+  vec3 x1 = x0 - i1 + 1.0 * C.xxx;
+  vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+  vec3 x3 = x0 - 1. + 3.0 * C.xxx;
+
+  // Permutations
+  i = mod(i, 289.0 ); 
+  vec4 p = permute( permute( permute( 
+             i.z + vec4(0.0, i1.z, i2.z, 1.0 ))
+           + i.y + vec4(0.0, i1.y, i2.y, 1.0 )) 
+           + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+
+  // Gradients
+  // ( N*N points uniformly over a square, mapped onto an octahedron.)
+  float n_ = 1.0/7.0; // N=7
+  vec3  ns = n_ * D.wyz - D.xzx;
+
+  vec4 j = p - 49.0 * floor(p * ns.z *ns.z);  //  mod(p,N*N)
+
+  vec4 x_ = floor(j * ns.z);
+  vec4 y_ = floor(j - 7.0 * x_ );    // mod(j,N)
+
+  vec4 x = x_ *ns.x + ns.yyyy;
+  vec4 y = y_ *ns.x + ns.yyyy;
+  vec4 h = 1.0 - abs(x) - abs(y);
+
+  vec4 b0 = vec4( x.xy, y.xy );
+  vec4 b1 = vec4( x.zw, y.zw );
+
+  vec4 s0 = floor(b0)*2.0 + 1.0;
+  vec4 s1 = floor(b1)*2.0 + 1.0;
+  vec4 sh = -step(h, vec4(0.0));
+
+  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+  vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+
+  vec3 p0 = vec3(a0.xy,h.x);
+  vec3 p1 = vec3(a0.zw,h.y);
+  vec3 p2 = vec3(a1.xy,h.z);
+  vec3 p3 = vec3(a1.zw,h.w);
+
+  //Normalise gradients
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+  p0 *= norm.x;
+  p1 *= norm.y;
+  p2 *= norm.z;
+  p3 *= norm.w;
+
+  // Mix final noise value
+  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+  m = m * m;
+  return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
+}
 
 void main(void)
 {
-
-    float iris = distance(vec2(0.5, 0.5), Uv);
-    iris = 1.0 - iris * 2.0;
-    iris *= 0.1;
-    iris = clamp(iris, 0.0, 1.0);
-    iris = pow(iris,1.5);
-
-    float iniris = distance(vec2(0.5, 0.5), Uv);
-    iniris = 1.0 - iniris * 12.0;
-    iniris *= 100.0;
-
-
-    vec3 irisCol = mix(vec3(1.0, 1.0, 1.0), vec3(0.0, 0.0, 0.0), iniris);
-
-    vec2 uv = Uv;
-
-    float beam =  Uv.y - 0.5;
-    beam = clamp(abs(beam * 5.0), 0.0, 1.0);
-    beam = 1.0 - beam;
-
-    float beamClamper =  Uv.x - 0.5;
-    beamClamper = clamp(abs(beamClamper * 2.0), 0.0, 1.0);
-    beamClamper = 1.0 - beamClamper;
-
-    beam *= beamClamper;
-    beam = pow(beam * 1.2, ((sin(Time*2.0)/2.0)+4.0));
-
-    gl_FragColor = vec4(irisCol, iris + beam);
+    gl_FragColor = vec4(vUv, 1.0, 1.0);
+    gl_FragColor = vec4(vec3(snoise(vPos)), 1.0);
 }
 `;
 
-const canvas = document.querySelector('canvas.icosphere')
+///////////////////////////////////////
+// Const
+///////////////////////////////////////
+
+const canvas = document.querySelector('canvas.logo-shader')
 const scene = new THREE.Scene()
-const canvasScalar = 0.55;
-const canvasScalarMobile = 0.9;
+const loader = new GLTFLoader();
 
 const sizes = {
-  width: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar,
-  height: Math.min(window.innerHeight, document.body.clientWidth)*canvasScalar
+  width: 400,
+  height: 400
 }
 CalculateSizes();
 
-var envFBO = new THREE.WebGLRenderTarget(sizes.width, sizes.height, { format: THREE.RGBAFormat });
 
+///////////////////////////////////////
 // Materials
-const icoMat = new THREE.ShaderMaterial({
-    uniforms: {
-          Time: {
-              value: 0.0
-          },
-          envMap: envFBO,
-          resolution: {
-              value: 1000.0
-          },
-          iorValue: {
-              value: 1.06
-          },
-    },
-    vertexShader: _icoVS,
-    fragmentShader: _icoFS,
+///////////////////////////////////////
+const raymarchCloudMat = new THREE.ShaderMaterial({
+  uniforms: {
+      Time: {
+        value: 0.0
+      }
+  },
+  vertexShader: _raymarchCloudVS,
+  fragmentShader: _raymarchCloudFS,
 })
-icoMat.transparent = true;
-icoMat.side = THREE.DoubleSide;
 
-const blackIcoMat = new THREE.ShaderMaterial({
-    uniforms: {
-        Time: {
-            value: 0.0
-        },
-    },
-    vertexShader: _blackIcoVS,
-    fragmentShader: _blackIcoFS,
+const redMat = new THREE.ShaderMaterial({
+  uniforms: {
+      Color: { type: "c", value: new THREE.Color("rgb(255, 0, 0)") }
+  },
+  vertexShader: _unlitSymbolVS,
+  fragmentShader: _unlitSymbolFS,
 })
-icoMat.transparent = true;
 
-const irisMat = new THREE.ShaderMaterial({
-    uniforms: {
-        Time: {
-            value: 0.0
-        },
-    },
-    vertexShader: _irisVS,
-    fragmentShader: _irisFS,
+const greenMat = new THREE.ShaderMaterial({
+  uniforms: {
+      Color: { type: "c", value: new THREE.Color("rgb(0, 255, 0)") }
+  },
+  vertexShader: _unlitSymbolVS,
+  fragmentShader: _unlitSymbolFS,
 })
-irisMat.transparent = true;
 
+const blueMat = new THREE.ShaderMaterial({
+  uniforms: {
+      Color: { type: "c", value: new THREE.Color("rgb(0, 0, 255)") }
+  },
+  vertexShader: _unlitSymbolVS,
+  fragmentShader: _unlitSymbolFS,
+})
+///////////////////////////////////////
+// Geometries
+///////////////////////////////////////
+const boxGeometry = new THREE.BoxGeometry( 300, 300, 300 );
 
-// Object geometries
-const icoSphereGeometry = new THREE.IcosahedronBufferGeometry(4);
-const smallIcoSphereGeometry = new THREE.IcosahedronBufferGeometry(1.6);
-const irisPlaneGeometry = new THREE.PlaneGeometry(18, 18, 1);
-
+///////////////////////////////////////
 // Meshes
-const irisPlane = new THREE.Mesh(irisPlaneGeometry, irisMat);
-irisPlane.position.z = -5.0;
-irisPlane.renderOrder=2;
-irisPlane.layers.set(1);
+///////////////////////////////////////
 
-const icoSphere = new THREE.Mesh(icoSphereGeometry, icoMat);
-icoSphere.renderOrder=3;
+const raymarchCloud = new THREE.Mesh( boxGeometry, raymarchCloudMat );
+scene.add( raymarchCloud );
 
-const blackIcoSphere1 = new THREE.Mesh(smallIcoSphereGeometry, blackIcoMat);
-blackIcoSphere1.layers.set(1);
-const blackIcoSphere2 = new THREE.Mesh(smallIcoSphereGeometry, blackIcoMat);
-blackIcoSphere2.layers.set(1);
+var square;
+loader.load( './public/models/SquareSymbol.glb', function ( gltf ) {
+  square = gltf.scene;
+  square.traverse((o) => {
+    if (o.isMesh) o.material = redMat;
+  });
+  square.scale.set(150, 150, 150);
+  //scene.add(square);
+} );
 
 
-scene.add(irisPlane);
-scene.add(icoSphere);
-scene.add(blackIcoSphere1);
-scene.add(blackIcoSphere2);
 
-//cameras
-const camera = new THREE.PerspectiveCamera(10, sizes.width / sizes.height, 0.1, 100)
+///////////////////////////////////////
+// Cameras
+///////////////////////////////////////
+
+//const camera = new THREE.PerspectiveCamera(10, sizes.width / sizes.height, 0.1, 10000)
+const camera = new THREE.OrthographicCamera( sizes.width / - 2, sizes.width / 2, sizes.height / 2, sizes.height / - 2, 1, 1000 );
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 50;
+camera.position.z = 500;
 //scene.add(camera);
 
-const envCamera = new THREE.PerspectiveCamera(10, sizes.width / sizes.height, 0.1, 100)
-envCamera.position.x = 0;
-envCamera.position.y = 0;
-envCamera.position.z = 50;
-envCamera.layers.set(1);
-//scene.add(envCamera);
-
+///////////////////////////////////////
 // Renderer
+///////////////////////////////////////
+
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     alpha: true
 })
-
+renderer.antialias = true;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.autoClear = false;
 
-RefreshEnvFBOSizes();
+///////////////////////////////////////
+// Update loop
+///////////////////////////////////////
 
-// Tick
 const clock = new THREE.Clock()
 const tick = () =>
 {
-    /* ANIMATING and Material setup */
-    // Time
-    const elapsedTime = clock.getElapsedTime()
+    if(window.scrollY <= window.innerHeight)//update if in view
+    {
+      // Time
+      const elapsedTime = clock.getElapsedTime();
 
-    icoSphere.material.uniforms.Time.value = elapsedTime;
-    irisPlane.material.uniforms.Time.value = elapsedTime;
+      if(square != null){
+        square.rotation.y = elapsedTime;
+        square.rotation.z = elapsedTime;
+        //square.rotation.x = elapsedTime;
+      }
 
-    var icoRotSpeed = 0.5;
+      raymarchCloud.rotation.y = elapsedTime/ 4;
+      raymarchCloud.rotation.z = elapsedTime/ 4;
 
-    icoSphere.rotation.x = .2 * elapsedTime * icoRotSpeed;
-    icoSphere.rotation.y = .5 * elapsedTime * icoRotSpeed;
-    icoSphere.rotation.z = .2 * elapsedTime * icoRotSpeed;
+      /* RENDERING */
+      renderer.render(scene, camera);
+    }
 
-    var blackIcoRotSpeed = 2;
-
-    blackIcoSphere1.rotation.x = .2 * elapsedTime * blackIcoRotSpeed;
-    blackIcoSphere1.rotation.y = .5 * elapsedTime * blackIcoRotSpeed;
-    blackIcoSphere1.rotation.z = .2 * elapsedTime * blackIcoRotSpeed;
-
-    blackIcoRotSpeed *= -1;
-
-    blackIcoSphere2.rotation.x = -.2 * elapsedTime * blackIcoRotSpeed;
-    blackIcoSphere2.rotation.y = .5 * elapsedTime * blackIcoRotSpeed;
-    blackIcoSphere2.rotation.z = .2 * elapsedTime * blackIcoRotSpeed;
-
-    /* RENDERING */
-    //envFBO = new THREE.WebGLRenderTarget(sizes.width, sizes.height, { format: THREE.RGBAFormat });
-
-    // render background to fbo
-    renderer.setRenderTarget(envFBO);
-    renderer.clear();
-    renderer.render( scene, envCamera );
-
-    // render background to screen
-    renderer.setRenderTarget(null);
-    //renderer.render( scene, envCamera );
-    renderer.clearDepth();
-
-    // Render
-    renderer.render(scene, camera);
-
-    // Call tick again on the next frame
     window.requestAnimationFrame(tick);
 }
-tick()
+tick();
 
-
+///////////////////////////////////////
 // Resize canvas
+///////////////////////////////////////
+
 window.addEventListener('resize', () =>
 {
     ResizeCameraAndRenderer();
 })
 
 function CalculateSizes(){
-  var canvasSize;
-  if(window.innerHeight <= document.body.clientWidth)//wide
-  {
-    canvasSize =  Math.max(window.innerHeight, Math.min(document.body.clientWidth,2000))*canvasScalar;
-  }else// verticall
-  {
-    canvasSize =  Math.min(window.innerHeight, document.body.clientWidth)*canvasScalarMobile;
-  }
-  sizes.height = sizes.width = canvasSize;
-}
-
-function RefreshEnvFBOSizes(){
-  envFBO = new THREE.WebGLRenderTarget(sizes.width, sizes.height, { format: THREE.RGBAFormat });
-  icoSphere.material.uniforms.resolution.value = renderer.context.drawingBufferWidth;
-  icoSphere.material.uniforms.envMap.value = envFBO;
+  sizes.height = 600;
+  sizes.width = 500;
 }
 
 function ResizeCameraAndRenderer()
 {
   // Update sizes
   CalculateSizes();
-
-  RefreshEnvFBOSizes();
 
   // Update camera
   camera.aspect = sizes.width / sizes.height;
