@@ -20,6 +20,8 @@ padding: 0;
 
 html {
   scroll-behavior: smooth;
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
 }
 
 body{
