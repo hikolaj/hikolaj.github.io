@@ -388,13 +388,13 @@ nav .links{
 .tab{
   position: absolute;
   overflow: hidden;
-  opacity: 1;
+  opacity: 0;
   transition: max-height 1s, min-height 1s, top 1s, opacity 1s, padding-top 1s, padding-bottom 1s;
 }
 
 .tab-open{
   max-height: 5000px;
-  min-height: 50vh;
+  min-height: 65vh;
   padding-top: 100px;
   padding-bottom: 100px;
   top: 10vh;
@@ -683,11 +683,41 @@ main{
 #################################
 */
 .contact{
-  background: url("../img/BlackPaper.png") repeat center;
-  background-size: 1024px;
+  position: relative;
 
 }
+.contact .container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translate(-50%, -50%);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 
+.contact .text{
+  font-size: 20px;
+  display: block;
+}
+
+.contact .text b{
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.contact .links{
+  margin-top: 50px;
+  display: block;
+}
+.contact .links .btn-socialmedia{
+  height: 48px;
+  width: 48px;
+}
 /*
 #################################
               Footer
