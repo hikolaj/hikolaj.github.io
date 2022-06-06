@@ -21,6 +21,7 @@ varying vec3 vNormal;
 
 uniform vec3 Color;
 
+
 void main(void)
 {
     float dotOfNormal = abs(dot(vNormal, vec3(0.0, 0.0, 1.0)));
@@ -35,21 +36,34 @@ varying vec2 vUv;
 varying vec3 vNormal;
 varying vec3 vPos;
 
+varying vec3 rayOrigin;
+varying vec3 hitPos;
+
 uniform float Time;
+uniform vec3 RayOrigin;
 
 void main(){
     vUv = uv;
     vNormal = normalize(normal);
     vPos = (projectionMatrix * modelViewMatrix * vec4(position, 1.0)).rgb;
+
+    rayOrigin = vec3(0.0, 0.0, -5.0);
+    hitPos = (projectionMatrix * modelViewMatrix * vec4(position, 1.0)).rgb;
+
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
 const _raymarchCloudFS = `
 #define PI 3.1415926538
+#define MAX_STEPS 1000.0
+#define MAX_DIST 5.0
+#define SURF_DIST 0.01
 
 varying vec2 vUv;
 varying vec3 vPos;
+varying vec3 rayOrigin;
+varying vec3 hitPos;
 
 uniform float Time;
 
@@ -127,10 +141,88 @@ float snoise(vec3 v)
   return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
 }
 
+float AngleToRadians(float angle){
+  return angle * PI/180.0;
+}
+
+mat2 Rot(float a)
+{
+    float s = sin(a);
+    float c = cos(a);
+    return mat2(c, -s, s, c);
+}
+
+mat4 Rot3D(vec3 axis, float angle) {
+  axis = normalize(axis);
+  float s = sin(angle);
+  float c = cos(angle);
+  float oc = 1.0 - c;
+
+  return mat4(
+		oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+    oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+    oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+		0.0,                                0.0,                                0.0,                                1.0
+	);
+}
+
+float GetDist(vec3 p){
+  float d = length(p) - 2.5;
+  d = clamp(d, 0.0,1.0);
+  //d = pow(d, 2.0);
+  //d = clamp(1.0-d, 0.0, 1.0);
+  //d *= 10.0;
+  float nd = snoise(p);
+  return d;
+}
+
+vec3 GetNormal(vec3 p){
+  vec2 e = vec2(0.001, 0.0);
+  vec3 n = GetDist(p) - vec3(GetDist(p - e.xyy), GetDist(p - e.yxy), GetDist(p - e.yyx));
+  return normalize(n);
+}
+
+float Raymarch(vec3 ro, vec3 rd){
+  float dO = 0.0;
+  float dS = 0.0;
+  for(float i = 0.0; i < MAX_DIST; i++)
+  {
+    vec3 p = ro + dO * rd;
+    dS = GetDist(p);
+    dO += dS;
+    if(dS < SURF_DIST || dO > MAX_DIST) 
+    {
+      break;
+    }  
+  }
+
+  return dO;
+}
+
 void main(void)
 {
-    gl_FragColor = vec4(vUv, 1.0, 1.0);
-    gl_FragColor = vec4(vec3(snoise(vPos)), 1.0);
+    //gl_FragColor = vec4(vUv, 1.0, 1.0);
+    
+    
+    vec2 uv = vUv - 0.5;
+    vec3 ro = rayOrigin;
+    vec3 rd = normalize(hitPos - ro);
+    
+    float d = Raymarch(ro, rd);
+    
+    vec4 color = vec4(0.0);
+    if(d < MAX_DIST)
+    {
+      vec3 p = ro + rd * d;
+      color.rgb = vec3(p);
+      //color.a =+ (1.0-d);
+      //float cd = clamp(max(0.0, 1.0 - d/5.0), 0.0, 1.0);
+      //color.rgb = vec3(cd);
+      //color.a = cd*2.0;
+    }
+    
+    gl_FragColor = color;
+    gl_FragColor = vec4(vec3(snoise(vPos/500.0 + vec3(0.0, 1.0, 0.0) * 3.0)), 1.0);
 }
 `;
 
@@ -161,6 +253,7 @@ const raymarchCloudMat = new THREE.ShaderMaterial({
   vertexShader: _raymarchCloudVS,
   fragmentShader: _raymarchCloudFS,
 })
+raymarchCloudMat.transparent = true;
 
 const redMat = new THREE.ShaderMaterial({
   uniforms: {
@@ -195,6 +288,7 @@ const boxGeometry = new THREE.BoxGeometry( 300, 300, 300 );
 ///////////////////////////////////////
 
 const raymarchCloud = new THREE.Mesh( boxGeometry, raymarchCloudMat );
+
 scene.add( raymarchCloud );
 
 var square;
@@ -213,8 +307,8 @@ loader.load( './public/models/SquareSymbol.glb', function ( gltf ) {
 // Cameras
 ///////////////////////////////////////
 
-//const camera = new THREE.PerspectiveCamera(10, sizes.width / sizes.height, 0.1, 10000)
-const camera = new THREE.OrthographicCamera( sizes.width / - 2, sizes.width / 2, sizes.height / 2, sizes.height / - 2, 1, 1000 );
+const camera = new THREE.PerspectiveCamera(70, sizes.width / sizes.height, 0.1, 10000)
+//const camera = new THREE.OrthographicCamera( sizes.width / - 2, sizes.width / 2, sizes.height / 2, sizes.height / - 2, 1, 1000 );
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 500;
@@ -252,7 +346,7 @@ const tick = () =>
       }
 
       raymarchCloud.rotation.y = elapsedTime/ 4;
-      raymarchCloud.rotation.z = elapsedTime/ 4;
+      //raymarchCloud.rotation.z = elapsedTime/ 4;
 
       /* RENDERING */
       renderer.render(scene, camera);
@@ -272,8 +366,15 @@ window.addEventListener('resize', () =>
 })
 
 function CalculateSizes(){
-  sizes.height = 600;
-  sizes.width = 500;
+  if(window.innerWidth > 768)
+  {
+    sizes.height = 600;
+    sizes.width = 500;
+  }else
+  {
+    sizes.height = window.innerWidth * 0.8;
+    sizes.width = window.innerWidth * 0.8;
+  }
 }
 
 function ResizeCameraAndRenderer()

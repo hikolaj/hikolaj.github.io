@@ -208,9 +208,9 @@ scene.add( land );
 const camera = new THREE.PerspectiveCamera(10, sizes.width / sizes.height, 0.1, 10000)
 //const camera = new THREE.OrthographicCamera( sizes.width / - 2, sizes.width / 2, sizes.height / 2, sizes.height / - 2, 1, 100000 );
 camera.position.x = 0;
-camera.position.y = 160;
+camera.position.y = 130;
 camera.position.z = 500;
-camera.rotation.x = Math.PI / 360 * -10;
+camera.rotation.x = Math.PI / 360 * -5;
 
 //scene.add(camera);
 

@@ -8,37 +8,40 @@
     <link rel="stylesheet" href="./public/css/main.css" type="text/css">
     <link rel="stylesheet" href="./public/css/icons.css" type="text/css">
     <link rel="stylesheet" href="./public/css/galleries.css" type="text/css">
-    <!--<script type="module" src="./public/js/nav-menu.js"></script>-->
-    <script type="module" src="./public/js/galleries.js"></script>
     <script type="module" src="./public/js/land-shader.js"></script>
     <script type="module" src="./public/js/logo-shader.js"></script>
+    <!--<script type="module" src="./public/js/nav-menu.js"></script>-->
+    <script type="module" src="./public/js/hider-nav-menu.js"></script>
+    <script type="module" src="./public/js/galleries.js"></script>
+    <script type="module" src="./public/js/icons-wrapper.js"></script>
   </head>
 
-  <body >
+  <body>
 
-    <nav>
+    <nav id="navigation">
       <div class="wrapper">
-        <div class="logo">
+        <div class="logo silver nav-link-btn">
           MH
         </div>
         <div class="tabs">
-          <button class="btn-nav nav-link">O mnie</button>
-          <button class="btn-nav nav-link">Projekty</button>
-          <button class="btn-nav nav-link">Kontakt</button>
+          <button class="btn-nav nav-link-btn">O mnie</button>
+          <button class="btn-nav nav-link-btn">Projekty</button>
+          <button class="btn-nav nav-link-btn">Kontakt</button>
         </div>
         <div class="links">
           <button class="btn-socialmedia" onclick="window.open('https://www.linkedin.com/in/mikolaj-hanslik/')"><img class="icon-linkedin"/></button>
           <button class="btn-socialmedia" onclick="window.open('https://github.com/mihanslik')"><img class="icon-github"/></button>
         </div>
+        <button class="btn-burger"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></button>
       </div>
     </nav>
 
-    <header id="header">
+    <header id="header" class="nav-link">
       <canvas id="land-shader" class="land-shader" width="500" height="500"></canvas>
       <div class="wrapper">
         <div class="container">
           <div class="title">
-            <h1>Mikołaj Hanslik</h1>
+            <h1 class="silver">Mikołaj Hanslik</h1>
             <h3>Programista / Artysta techniczny</h3>
           </div>
           <div class="logo">
@@ -49,23 +52,24 @@
     </header>
 
     <main>
-      <!--
-      #########################
-                ABOUT
-      #########################
-      -->
-      <div class="wrapper about">
+      <!--######## ABOUT -->
+      <div class="tab wrapper about nav-link">
         <div class="container">
+          <div class="icons-wrapper">
+            <div class="icon icon--big icon-unity"></div>
+            <div class="icon icon--big icon-unreal"></div>
+            <div class="icon icon--big icon-blender"></div>
+            <div class="icon icon--big icon-photoshop"></div>
+            <div class="icon icon--big icon-csharp"></div>
+            <div class="icon icon--big icon-cplusplus"></div>
+            <div class="icon icon--big icon-glsl"></div>
+          </div>
 
         </div>
       </div>
 
-      <!--
-      #########################
-                PROJECTS
-      #########################
-      -->
-      <div class="wrapper projects">
+      <!--######## PROJECTS -->
+      <div class="tab wrapper projects nav-link">
         <div class="container">
 
            <!--           INTERACTIVE SNOW              -->
@@ -77,7 +81,7 @@
               <h2>
                 Interaktywny śnieg
                 <div class="icon icon--medium icon-unity"></div>
-              </h2>                  
+              </h2>   
               <p>
                 Shader imitujący śnieg oraz compute shader głębi wychwytywanej przez kamerę umieszczoną pod fragmentem mapy.
                 Śnieg oddziałuje na dowolny kształt wchowdzący z nim w interakcję i z czasem regeneruje się do pierwotnego stanu.
@@ -269,7 +273,7 @@
                 CONTACT
       #########################
       -->
-      <div class="wrapper contact">
+      <div class="tab wrapper contact nav-link">
         <div class="container">
 
         </div>

@@ -3,9 +3,9 @@ const underlineLogo = false;
 const scrollToOffset = -80;// offset of scrollTo function
 const scrollDetectionHeightDivider = 1.8;// nav detects change of supbage at position > wh/Divider; -window.innerHeight/scrollDetectionHeightDivider;
 
-const buttons = document.getElementsByClassName("nav-link-btn");
+const buttons = document.getElementsByClassName("btn-nav-link");
 const subpages = document.getElementsByClassName("nav-link");
-const burgerBtn = document.getElementsByClassName("nav-btn--burger")[0];
+const burgerBtn = document.getElementsByClassName("btn-burger")[0];
 const navigationBar = document.getElementsByClassName("navigation")[0];
 
 var lastActiveSubpage = 0;
@@ -60,12 +60,12 @@ function toggleMenu(){
 
 function openMenu(){
   navigationBar.classList.add("nav-open");
-  burgerBtn.classList.add("btn--burger-toggle");
+  burgerBtn.classList.add("btn-burger-toggle");
   menuIsOpen = true;
 }
 function closeMenu(){
   navigationBar.classList.remove("nav-open");
-  burgerBtn.classList.remove("btn--burger-toggle");
+  burgerBtn.classList.remove("btn-burger-toggle");
   menuIsOpen = false;
 }
 

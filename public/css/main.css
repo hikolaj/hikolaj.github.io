@@ -1,6 +1,6 @@
 :root {
     --bg-color: rgb(34,34,34);
-    --main-color: #06c;
+    --accent-color: rgb(223, 12, 12);
 }
 
 @font-face {
@@ -18,11 +18,15 @@ margin: 0;
 padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   width: 100%;
   text-align: left;
   font-family: Basic;
-  
+  overflow: hidden;
   background: black;
   color: white;
 }
@@ -35,6 +39,7 @@ body{
 
 h1{
   font-size: 80px;
+  color: white;
 }
 h2{
   font-size: 40px;
@@ -56,6 +61,239 @@ button{
   color: white;
   font-size: 20px;
 }
+
+.btn{
+  font-weight: bold;
+  padding: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  background: rgba(255,255,255,0.2);
+  transition: background 0.2s;
+}
+
+.btn:hover{
+  background: rgba(255,255,255,0.3);
+}
+
+
+
+
+/*
+#################################
+              Layout containers
+#################################
+*/
+
+.wrapper{
+  margin: auto;
+  width: 100%;
+}
+
+.container{
+  margin: auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+/*
+#################################
+              Header
+#################################
+*/
+
+header{
+  position: absolute;
+  height: 100vh;
+  top: 0vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: top 1s;
+}
+
+.header-open{
+  top: 0vh;
+}
+.header-closed{
+  top: -80vh;
+}
+
+header .container{
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.header-closed .container{
+  opacity: 0;
+}
+
+
+.title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.land-shader{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.logo-shader{
+
+}
+
+.silver{
+  background: -webkit-linear-gradient(#eee 45%, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/*
+#################################
+              Nav
+#################################
+*/
+/*normal nav*/
+nav{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 60px;
+
+  z-index: 5;
+  
+  transition: height 0.5s;
+}
+
+nav .wrapper{
+  position: relative;
+  height: 100%;
+  margin: auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav .logo{
+  font-size: 50px;
+  margin-top: -12px;
+  font-family: Manners;
+  display: flex;
+  align-items: center;
+}
+nav .tabs{
+  display: flex;
+  align-items:center;
+  height: 100%;
+}
+
+nav .links{
+  display: flex;
+  align-items: center;
+}
+
+/*nav open*/
+.nav-open{
+  height: 100%;
+
+  justify-content: center;
+}
+
+.nav-open .wrapper{
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.nav-open .logo{
+  margin: auto;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.nav-open .tabs{
+  height: auto;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.nav-open .tabs button{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.nav-open .links{
+  display: flex;
+  justify-content: center;
+}
+.nav-open .links button{
+
+}
+
+/*side nav
+.side-nav nav{
+  width: 350px;
+  height: 100%;
+  border-bottom: none;
+  border-right: solid 1px rgb(30,30,30);;
+}
+.side-nav nav .wrapper{
+  flex-direction: column;
+}
+.side-nav nav .logo{
+  padding-left: 30px;
+  padding-top: 10px;
+}
+.side-nav nav .tabs{
+  width: 100%;
+  margin: 0;
+  flex-direction: column;
+  align-items:flex-start;
+  height: auto;
+}
+.side-nav nav .links{
+  width: 100%;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}
+.side-nav nav .btn-nav{
+  position: relative;
+  margin: 0;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 20px;
+  width: 100%;
+  font-size: 25px;
+  text-align: left;
+}
+
+.side-nav nav button:hover{
+  background: rgba(255,255,255,0.3);
+}
+
+.side-nav nav .tabs .active::after{
+  content: "▸";
+  position: absolute;
+  right: -14px;
+  font-size: 30px;
+  top: 6px;
+  color:rgb(255, 230, 0);
+}
+*/
+/*nav buttons*/
 
 .btn-nav{
   margin-left: 20px;
@@ -90,99 +328,61 @@ button{
   opacity: 0.6;
 }
 
-
-/*
-#################################
-              Layout containers
-#################################
-*/
-
-.wrapper{
-  margin: auto;
-  width: 100%;
-}
-
-.container{
-  margin: auto;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-/*
-#################################
-              Header
-#################################
-*/
-
-header{
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.title{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.land-shader{
+.btn-burger {
   position: absolute;
-  top: 16%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
+  display: block;
+  right: 0;
+  top: 10px;
+  background: none;
+  border: none;
+  outline: 0;
+  cursor: pointer;
 }
 
-.logo-shader{
-
+.btn-burger .bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 3px;
+  background: white;
+  margin: 8px 0;
+  transition: 0.2s;
 }
 
+.btn-burger-toggle .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.btn-burger-toggle .bar2 {
+  opacity: 0;
+}
+
+.btn-burger-toggle .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
 
 /*
 #################################
-              Nav
+              Tab
 #################################
 */
-
-nav{
-  width: 100%;
-  height: 60px;
-  background: black;
+.tab{
+  position: absolute;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 1s, top 1s, opacity 1s;
 }
 
-nav .wrapper{
-  max-width: 1200px;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.tab-open{
+  max-height: 5000px;
+  top: 10vh;
+  opacity: 1;
 }
 
-nav .logo{
-  font-size: 50px;
-  margin-top: -12px;
-  font-family: Manners;
-  display: flex;
-  align-items: center;
-}
-nav .tabs{
-  display: flex;
-  align-items: center;
-}
-
-nav .links{
-  display: flex;
-  align-items: center;
+.tab-closed{
+  max-height: 0px;
+  top: 100vh;
+  opacity: 0;
 }
 
 /*
@@ -197,7 +397,6 @@ main{
 
 .about{
 
-
 }
 
 .infobox{
@@ -207,6 +406,29 @@ main{
   margin-top: 50px;
 }
 
+.icons-wrapper{
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(to right, 
+  rgba(255, 255, 255, 0.0), 
+  rgba(255, 255, 255, 1) 30%,
+  rgba(255, 255, 255, 1) 80%, 
+  rgba(255, 255, 255, 0.0));
+}
+
+.icons-wrapper .icon{
+  position: absolute;
+  top: 5px;
+  left: 0px;
+}
+
+
+
+
+
 /*
 #################################
               Projects
@@ -214,25 +436,30 @@ main{
 */
 
 .projects{
-  
 }
 
 .project{
+  margin: auto;
   width: 100%;
   min-height: 315px;
   padding-top: 20px;
   padding-bottom: 50px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.project h2{
+  margin-top: -15px;
+}
+.project .info{
+  width: 100%;
 }
 
 .project .image{
   position: relative;
   width: 504px;
   height: 284px;
-  margin-left: 20px;
-  margin-right: 20px;
   margin-bottom: 15px;
   background: rgb(20,20,20);
   overflow: hidden;
@@ -254,7 +481,7 @@ main{
 
 .project .description{
   width: 504px;
-  margin-left: 20px;
+
   margin-right: 20px;
   margin-bottom: 30px;
   position: relative;
@@ -272,6 +499,7 @@ main{
 .project .description p{
   margin-top: 15px;
   padding-bottom: 10px;
+  color: rgb(212, 212, 212);
 }
 
 .project .description .icon{
@@ -286,13 +514,145 @@ main{
   margin-top: 10px;
 }
 
+
+.roller{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  margin-bottom: 80px;
+}
+
+.roller-btn-container{
+  position: absolute;
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0));
+}
+
+.roller-btn{
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  margin-top: 50px;
+}
+
+.rolled{
+  height: 200px;
+}
+
+.rolled .roller-btn-container{
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,1.0) 70%);
+}
+
 /*###################### contact    */
 .contact{
   background: url("../img/BlackPaper.png") repeat center;
-  min-height: 500px;
+  background-size: 1024px;
+
 }
 
 .footer{
   min-height: 50px;
 }
 
+/*
+#################################
+              Media queries
+#################################
+*/
+
+
+@media screen and (max-width: 1200px) {
+  .container{
+    justify-content: center;
+  }
+  header .container{
+    flex-direction: column;
+    align-content: center;
+    margin-bottom: 50px;
+  }
+  header .title{
+    order: 2;
+  }
+  .project{
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 70px;
+  }
+  .project .img{
+    margin: 0;
+  }
+  .project .description{
+    margin: 0;
+    margin-top: 20px;
+  }
+
+  nav .wrapper{
+    width: 90%;
+  }  
+}
+
+
+@media screen and (max-width: 768px) {
+  nav .tabs{
+    display: none;
+  }
+  .nav-open .tabs{
+    display: flex;
+  }
+  nav .links{
+    display: none;
+  }
+  .nav-open .links{
+    display: flex;
+  }
+
+  h1{
+    font-size: 70px;
+  }
+  h2{
+    font-size: 40px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .btn-burger {
+    display:none;
+  }
+}
+
+
+@media screen and (max-width: 420px) {
+  nav .tabs{
+    display: none;
+  }
+  .nav-open .tabs{
+    display: flex;
+  }
+  nav .links{
+    display: none;
+  }
+  .nav-open .links{
+    display: flex;
+  }
+
+  h1{
+    font-size: 40px;
+  }
+  h2{
+    font-size: 30px;
+  }
+  h3{
+    font-size: 20px;
+  }
+}
