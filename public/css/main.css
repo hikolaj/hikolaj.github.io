@@ -26,7 +26,6 @@ body{
   width: 100%;
   text-align: left;
   font-family: Basic;
-  overflow: hidden;
   background: black;
   color: white;
 }
@@ -384,6 +383,7 @@ nav .links{
   top: 100vh;
   opacity: 0;
 }
+
 
 /*
 #################################

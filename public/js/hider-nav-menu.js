@@ -10,7 +10,7 @@ const tabClosedName = "tab-closed";
 const headerOpenName = "header-open";
 const headerClosedName = "header-closed";
 
-var lastActiveSubpage = 0;
+var lastActiveTab = 0;
 
 var menuIsOpen = false;
 
@@ -56,10 +56,10 @@ function navButtonAction(id)
     closeTab(0);
   }
 
-  if(lastActiveSubpage != id){
+  if(lastActiveTab != id){
     openTab(id);
-    closeTab(lastActiveSubpage);
-    lastActiveSubpage = id;
+    closeTab(lastActiveTab);
+    lastActiveTab = id;
   }
 }
 
@@ -97,14 +97,17 @@ function closeTab(id)
 function toggleMenu()
 {
   if(!menuIsOpen){
+    closeTab(lastActiveTab);
     openMenu();
   }else{
+    openTab(lastActiveTab);
     closeMenu();
   }
 }
 
 function openMenu()
 {
+  
   navigationBar.classList.add("nav-open");
   burgerBtn.classList.add("btn-burger-toggle");
   menuIsOpen = true;
@@ -119,15 +122,15 @@ function closeMenu()
 //  Handle activation and deactivation of nav buttons
 function activateNavButton(id)
 {
-  var lastActiveSubpageBtn = tabButtons[lastActiveSubpage];
+  var lastActiveTabBtn = tabButtons[lastActiveTab];
   var btnToActivate = tabButtons[id];
 
-  if(lastActiveSubpage != id)
+  if(lastActiveTab != id)
   {
     //deactivate last button
-    if(lastActiveSubpageBtn.classList.contains("active"))
+    if(lastActiveTabBtn.classList.contains("active"))
     {
-        lastActiveSubpageBtn.classList.remove("active");
+        lastActiveTabBtn.classList.remove("active");
     }
 
     //activate new active
