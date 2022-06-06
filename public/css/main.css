@@ -37,17 +37,35 @@ body{
               Text
 #################################
 */
+p{
+  color: rgb(220,220,220);
+}
 
 h1{
   font-size: 80px;
   color: white;
 }
+
 h2{
   font-size: 40px;
 }
+
 h3{
   font-size: 25px;
   color: rgb(150,150,150);
+}
+
+h4{
+  font-size: 25px;
+}
+
+h5{
+  font-size: 15px;
+  color: rgb(150,150,150);
+}
+
+h6{
+  font-size: 20px;
 }
 
 /*
@@ -179,7 +197,7 @@ nav{
   transition: height 0.5s;
 }
 
-nav .wrapper{
+nav .nav-wrapper{
   position: relative;
   height: 100%;
   margin: auto;
@@ -371,17 +389,23 @@ nav .links{
   position: absolute;
   overflow: hidden;
   opacity: 1;
-  transition: max-height 1s, top 1s, opacity 1s;
+  transition: max-height 1s, min-height 1s, top 1s, opacity 1s, padding-top 1s, padding-bottom 1s;
 }
 
 .tab-open{
   max-height: 5000px;
+  min-height: 50vh;
+  padding-top: 100px;
+  padding-bottom: 100px;
   top: 10vh;
   opacity: 1;
 }
 
 .tab-closed{
   max-height: 0px;
+  min-height: 0vh;
+  padding-top: 0px;
+  padding-bottom: 0px;
   top: 100vh;
   opacity: 0;
 }
@@ -400,6 +424,104 @@ main{
 .about{
 
 }
+
+.about h2{
+  margin-bottom: 20px;
+  width: 100%;
+}
+.about .skills-list{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.about .skills-list .title{
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.about .skills-list ul{
+  
+}
+.about .skills-list li{
+  margin-left: 15px;
+}
+
+.about .about-box{
+  margin: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 100px;
+}
+
+.job-title{
+  position: relative;
+  margin-left: 30px;
+  margin-right: 30px;
+
+}
+
+.job-title::after{
+  content: "◇";
+  position: absolute;
+  font-size: 30px;
+  top: -5px;
+  left: -30px;
+  color: white;
+  transition: color 0.3s;
+}
+
+.job-title--active::after{
+  content: "◆";
+}
+
+.job-title h4{
+
+}
+
+.job-title h4{
+  
+}
+
+.job{
+  position: relative;
+  padding-left: 5px;
+  padding-bottom: 25px;
+  margin-left: 10px;
+  margin-right: 30px;
+}
+
+.job::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 34px;
+  left: 1px;
+  width: 2px;
+  background: rgb(200,200,200);
+  transition: background 0.3s;
+}
+
+.job h6{
+  margin-bottom: 5px;
+}
+
+
+
+.job-project{
+  margin-left: 15px;
+  padding-left: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-left: solid 1px rgb(150,150,150);
+  transition: border-left 0.3s, background 0.3s;
+}
+
+.job-project ul{
+  color: rgb(200,200,200);
+  padding-left: 15px;
+}
+
 
 .infobox{
   width: 350px;
@@ -555,14 +677,25 @@ main{
   background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,1.0) 70%);
 }
 
-/*###################### contact    */
+/*
+#################################
+              Contact
+#################################
+*/
 .contact{
   background: url("../img/BlackPaper.png") repeat center;
   background-size: 1024px;
 
 }
 
+/*
+#################################
+              Footer
+#################################
+*/
+
 .footer{
+  width: 100%;
   min-height: 50px;
 }
 
