@@ -1,4 +1,4 @@
-import * as THREE from 'https://threejs.org/build/three.module.js';
+//import * as THREE from 'https://threejs.org/build/three.module.js';
 
 const _landVS = `
 attribute vec3 center;
@@ -107,8 +107,6 @@ void main(){
     vec3 movement = vec3(1.0, 0.0, 0.0) * Time * 0.1;
 
     vec3 newPos = position + up * displacement(position, scale, movement);
-
-
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0);
 }

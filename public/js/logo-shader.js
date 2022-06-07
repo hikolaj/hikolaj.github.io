@@ -1,7 +1,9 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+//import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+//import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+//import { EffectComposer } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/postprocessing/EffectComposer.js';
+//import { CopyShader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/shaders/CopyShader.js';
 
-//////////////////////////////////////// unlit symbol
+
 const _unlitSymbolVS = `
 varying vec2 vUv;
 varying vec3 vNormal;
@@ -29,7 +31,6 @@ void main(void)
     gl_FragColor = vec4(color, 1.0);
 }
 `;
-//////////////////////////////////// raymarched cloud
 
 const _raymarchCloudVS = `
 varying vec2 vUv;
@@ -283,13 +284,16 @@ void main(void)
     gl_FragColor = color;
 }   
 `;
-///////////////////////////////////////
-// Const
+
+// Consts
 ///////////////////////////////////////
 
 const canvas = document.querySelector('canvas.logo-shader')
+const header = document.getElementById("header");
+const headerClosedName = "header-closed";
+
 const scene = new THREE.Scene()
-const loader = new GLTFLoader();
+const loader = new THREE.GLTFLoader();
 
 const sizes = {
   width: 400,
@@ -299,9 +303,9 @@ CalculateSizes();
 
 const marbTexture = new THREE.TextureLoader().load( '../public/img/marbS.png' );
 
-///////////////////////////////////////
 // Materials
 ///////////////////////////////////////
+
 const raymarchCloudMat = new THREE.ShaderMaterial({
   uniforms: {
       Time: {
@@ -341,38 +345,19 @@ const redMat = new THREE.ShaderMaterial({
   fragmentShader: _unlitSymbolFS,
 })
 
-const greenMat = new THREE.ShaderMaterial({
-  uniforms: {
-      Color: { type: "c", value: new THREE.Color("rgb(0, 255, 0)") }
-  },
-  vertexShader: _unlitSymbolVS,
-  fragmentShader: _unlitSymbolFS,
-})
 
-const blueMat = new THREE.ShaderMaterial({
-  uniforms: {
-      Color: { type: "c", value: new THREE.Color("rgb(0, 0, 255)") }
-  },
-  vertexShader: _unlitSymbolVS,
-  fragmentShader: _unlitSymbolFS,
-})
-///////////////////////////////////////
 // Geometries
 ///////////////////////////////////////
 const boxGeometry = new THREE.BoxGeometry( 300, 300, 300 );
-const planeGeometry = new THREE.PlaneGeometry( 400, 400 );
 
-///////////////////////////////////////
+
 // Meshes
 ///////////////////////////////////////
 
 const raymarchCloud = new THREE.Mesh( boxGeometry, kaleidoscopeMat );
 scene.add( raymarchCloud );
 
-const kaleidoscopePlane = new THREE.Mesh( planeGeometry, kaleidoscopeMat );
-kaleidoscopePlane.position.z = -500;
-//scene.add( kaleidoscopePlane );
-
+/*
 var square;
 loader.load( './public/models/SquareSymbol.glb', function ( gltf ) {
   square = gltf.scene;
@@ -382,10 +367,8 @@ loader.load( './public/models/SquareSymbol.glb', function ( gltf ) {
   square.scale.set(150, 150, 150);
   //scene.add(square);
 } );
+*/
 
-
-
-///////////////////////////////////////
 // Cameras
 ///////////////////////////////////////
 
@@ -396,7 +379,7 @@ camera.position.y = 0;
 camera.position.z = 500;
 //scene.add(camera);
 
-///////////////////////////////////////
+
 // Renderer
 ///////////////////////////////////////
 
@@ -409,39 +392,51 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.autoClear = false;
 
+
+// PostProcessing
 ///////////////////////////////////////
+
+const composer = new THREE.EffectComposer( renderer );
+composer.addPass( new THREE.RenderPass( scene, camera ) );
+
+const effectBloom = new THREE.BloomPass( 2.2, 15, 8, 256 );//( strength, kernelSize, sigma, resolution )
+composer.addPass( effectBloom );
+
+const effectCopy = new THREE.ShaderPass( THREE.CopyShader );
+composer.addPass( effectCopy );
+
+effectCopy.renderToScreen = true;
+
+
 // Update loop
 ///////////////////////////////////////
 
 const clock = new THREE.Clock()
 const tick = () =>
 {
-    if(window.scrollY <= window.innerHeight)//update if in view
+
+    if(!header.classList.contains(headerClosedName))//update if in view
     {
       // Time
       const elapsedTime = clock.getElapsedTime();
 
-      kaleidoscopePlane.material.uniforms.Time.value = elapsedTime;
+      // Update Materials
+      raymarchCloud.material.uniforms.Time.value = elapsedTime;
 
-      if(square != null){
-        square.rotation.y = elapsedTime;
-        square.rotation.z = elapsedTime;
-        //square.rotation.x = elapsedTime;
-      }
-
+      //Animate
       raymarchCloud.rotation.y = elapsedTime/ 2 ;
       raymarchCloud.rotation.z = elapsedTime/ 4;
       //raymarchCloud.rotation.x = elapsedTime/ 4;
 
-      /* RENDERING */
-      renderer.render(scene, camera);
+      // Render
+      //renderer.render(scene, camera);
+    	composer.render();
     }
 
     window.requestAnimationFrame(tick);
 }
 tick();
 
-///////////////////////////////////////
 // Resize canvas
 ///////////////////////////////////////
 

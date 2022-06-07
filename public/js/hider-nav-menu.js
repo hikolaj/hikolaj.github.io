@@ -27,18 +27,11 @@ function initializeNavButtons()
     btn.classList.remove("active");
   }
 
-  if(!header.classList.contains(headerOpenName))
-  {
-    header.classList.add(headerOpenName);
-  }
+  header.classList.add(headerOpenName);
 
   for(var i=0; i<tabs.length; i++)
   {
-    var tab = tabs[i];
-    if(!tab.classList.contains(tabClosedName))
-    {
-      tab.classList.add(tabClosedName);
-    }
+    tabs[i].classList.add(tabClosedName);
   }
 
   burgerBtn.addEventListener("click", toggleMenu);
