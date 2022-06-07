@@ -44,7 +44,7 @@ uniform vec3 RayOrigin;
 
 void main(){
     vUv = uv;
-    vNormal = normalize(normal);
+    vNormal = normalize(normalMatrix * normal);
     vPos = (projectionMatrix * modelViewMatrix * vec4(position, 1.0)).rgb;
 
     rayOrigin = vec3(0.0, 0.0, -5.0);
@@ -60,6 +60,7 @@ const _raymarchCloudFS = `
 #define MAX_DIST 5.0
 #define SURF_DIST 0.01
 
+varying vec3 vNormal;
 varying vec2 vUv;
 varying vec3 vPos;
 varying vec3 rayOrigin;
@@ -167,13 +168,9 @@ mat4 Rot3D(vec3 axis, float angle) {
 }
 
 float GetDist(vec3 p){
-  float d = length(p) - 2.5;
-  d = clamp(d, 0.0,1.0);
-  //d = pow(d, 2.0);
-  //d = clamp(1.0-d, 0.0, 1.0);
-  //d *= 10.0;
-  float nd = snoise(p);
-  return d;
+  float d = length(p) - 1.0;
+  float nd = snoise(p * 50.0);
+  return nd;
 }
 
 vec3 GetNormal(vec3 p){
@@ -201,9 +198,6 @@ float Raymarch(vec3 ro, vec3 rd){
 
 void main(void)
 {
-    //gl_FragColor = vec4(vUv, 1.0, 1.0);
-    
-    
     vec2 uv = vUv - 0.5;
     vec3 ro = rayOrigin;
     vec3 rd = normalize(hitPos - ro);
@@ -214,18 +208,81 @@ void main(void)
     if(d < MAX_DIST)
     {
       vec3 p = ro + rd * d;
-      color.rgb = vec3(p);
-      //color.a =+ (1.0-d);
-      //float cd = clamp(max(0.0, 1.0 - d/5.0), 0.0, 1.0);
-      //color.rgb = vec3(cd);
-      //color.a = cd*2.0;
+      color.rgb = vec3(d);
+      color.a = d;
     }
-    
+
+    float noiseValue = snoise(vPos * 1.1 + vec3(0.0, 1.0, 0.0) * 3.0) * snoise(vPos * 0.5);
+    color = vec4(vec3(noiseValue), noiseValue * 5.0);
+
+    float glassyShine = dot(vNormal, normalize(vec3(1.0, 0.2, 0.0)));
+    glassyShine = clamp(glassyShine, 0.0, 1.0) / 2.0;
+    //color += glassyShine;
+
     gl_FragColor = color;
-    gl_FragColor = vec4(vec3(snoise(vPos/500.0 + vec3(0.0, 1.0, 0.0) * 3.0)), 1.0);
+}
+`;
+const _kaleidoscopeVS = `
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vPos;
+varying vec3 vEyeDir;
+
+uniform float Time;
+
+void main(){
+    vUv = uv;
+    vNormal = normalize(normalMatrix * normal);
+    vPos = (projectionMatrix * modelViewMatrix * vec4(position, 1.0)).rgb;
+    vEyeDir = normalize(vPos - cameraPosition);
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
+const _kaleidoscopeFS = `
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vPos;
+varying vec3 vEyeDir;
+
+uniform float IOR;
+uniform float Time;
+uniform sampler2D Texture;
+
+void main(void)
+{
+    vec2 uv = (vPos.rg);
+
+    /////////// refract uv
+    vec3 refracted = refract(vEyeDir, vNormal, 1.0/IOR);
+	  uv += refracted.xy;
+
+    /////////// kaleidoscope effect
+    uv = (uv) * 3.2;
+    float r = 1.0;
+    float a = Time*.1;
+    float c = cos(a)*r;
+    float s = sin(a)*r;
+    for (float i = 0.0; i < 32.0; i++)
+    {
+    	uv = abs(uv);
+      uv -= 0.25;
+      uv = uv * c + s * uv.yx * vec2(1.0, -1.0);
+    }
+    
+    vec4 color =  0.5 + 0.5 * sin(Time + vec4(13.0, 17.0, 23.0, 1.0) * texture2D(Texture, uv * vec2(1.0, -1) + 0.5, -1.0 ));
+    color.a = color.r * color.g * color.b;
+    color.a = round(color.a);
+
+    /////////// glass shine effect
+    float glassyShine = dot(vNormal, normalize(vec3(1.0, 0.2, 0.0)));
+    glassyShine = clamp(glassyShine, 0.0, 1.0) / 2.0;
+    //color += glassyShine;
+
+    gl_FragColor = color;
+}   
+`;
 ///////////////////////////////////////
 // Const
 ///////////////////////////////////////
@@ -240,6 +297,7 @@ const sizes = {
 }
 CalculateSizes();
 
+const marbTexture = new THREE.TextureLoader().load( '../public/img/marbS.png' );
 
 ///////////////////////////////////////
 // Materials
@@ -254,6 +312,26 @@ const raymarchCloudMat = new THREE.ShaderMaterial({
   fragmentShader: _raymarchCloudFS,
 })
 raymarchCloudMat.transparent = true;
+raymarchCloudMat.side = THREE.DoubleSide;
+
+const kaleidoscopeMat = new THREE.ShaderMaterial({
+  uniforms: {
+      IOR: {
+        value: 1.2
+      },
+      Time: {
+        value: 0.0
+      },
+      Texture: { 
+        type: "t", 
+        value: marbTexture
+      }
+  },
+  vertexShader: _kaleidoscopeVS,
+  fragmentShader: _kaleidoscopeFS,
+})
+kaleidoscopeMat.transparent = true;
+
 
 const redMat = new THREE.ShaderMaterial({
   uniforms: {
@@ -282,14 +360,18 @@ const blueMat = new THREE.ShaderMaterial({
 // Geometries
 ///////////////////////////////////////
 const boxGeometry = new THREE.BoxGeometry( 300, 300, 300 );
+const planeGeometry = new THREE.PlaneGeometry( 400, 400 );
 
 ///////////////////////////////////////
 // Meshes
 ///////////////////////////////////////
 
-const raymarchCloud = new THREE.Mesh( boxGeometry, raymarchCloudMat );
-
+const raymarchCloud = new THREE.Mesh( boxGeometry, kaleidoscopeMat );
 scene.add( raymarchCloud );
+
+const kaleidoscopePlane = new THREE.Mesh( planeGeometry, kaleidoscopeMat );
+kaleidoscopePlane.position.z = -500;
+//scene.add( kaleidoscopePlane );
 
 var square;
 loader.load( './public/models/SquareSymbol.glb', function ( gltf ) {
@@ -307,8 +389,8 @@ loader.load( './public/models/SquareSymbol.glb', function ( gltf ) {
 // Cameras
 ///////////////////////////////////////
 
-const camera = new THREE.PerspectiveCamera(70, sizes.width / sizes.height, 0.1, 10000)
-//const camera = new THREE.OrthographicCamera( sizes.width / - 2, sizes.width / 2, sizes.height / 2, sizes.height / - 2, 1, 1000 );
+//const camera = new THREE.PerspectiveCamera(70, sizes.width / sizes.height, 0.1, 10000)
+const camera = new THREE.OrthographicCamera( sizes.width / - 2, sizes.width / 2, sizes.height / 2, sizes.height / - 2, 1, 1000 );
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 500;
@@ -339,14 +421,17 @@ const tick = () =>
       // Time
       const elapsedTime = clock.getElapsedTime();
 
+      kaleidoscopePlane.material.uniforms.Time.value = elapsedTime;
+
       if(square != null){
         square.rotation.y = elapsedTime;
         square.rotation.z = elapsedTime;
         //square.rotation.x = elapsedTime;
       }
 
-      raymarchCloud.rotation.y = elapsedTime/ 4;
-      //raymarchCloud.rotation.z = elapsedTime/ 4;
+      raymarchCloud.rotation.y = elapsedTime/ 2 ;
+      raymarchCloud.rotation.z = elapsedTime/ 4;
+      //raymarchCloud.rotation.x = elapsedTime/ 4;
 
       /* RENDERING */
       renderer.render(scene, camera);
