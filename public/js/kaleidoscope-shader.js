@@ -58,6 +58,14 @@ void main(void)
     color.a = color.r * color.g * color.b;
     color.a = round(color.a);
 
+    color.a = max(0.6f, color.a);
+
+    ////////// glass shine effect
+    float shine = dot(vNormal, normalize(vec3(-1.0, 0.0, 1.0)));
+    shine = max(0.0, shine);
+    color.a += shine / 5.0;
+
+
     gl_FragColor = color;
 }   
 `;
@@ -105,13 +113,14 @@ kaleidoscopeMat.transparent = true;
 // Geometries
 ///////////////////////////////////////
 const boxGeometry = new THREE.BoxGeometry( 300, 300, 300 );
-
+const bodGeometry = new THREE.DodecahedronGeometry( 220, 0 );
 
 // Meshes
 ///////////////////////////////////////
 
-const kaleidoscopeCube = new THREE.Mesh( boxGeometry, kaleidoscopeMat );
-scene.add( kaleidoscopeCube );
+const kaleidoscope = new THREE.Mesh( boxGeometry, kaleidoscopeMat );
+scene.add( kaleidoscope );
+
 
 // Cameras
 ///////////////////////////////////////
@@ -164,11 +173,11 @@ const tick = () =>
       const elapsedTime = clock.getElapsedTime();
 
       // Update Materials
-      kaleidoscopeCube.material.uniforms.Time.value = elapsedTime;
+      kaleidoscope.material.uniforms.Time.value = elapsedTime;
 
       //Animate
-      kaleidoscopeCube.rotation.y = elapsedTime/ 2;
-      kaleidoscopeCube.rotation.z = elapsedTime/ 4;
+      kaleidoscope.rotation.y = elapsedTime/ 2;
+      kaleidoscope.rotation.x = elapsedTime/ 4;
 
       // Render
       //renderer.render(scene, camera);
