@@ -57,7 +57,6 @@ void main(void)
     vec4 color =  0.5 + 0.5 * sin(Time + vec4(13.0, 17.0, 23.0, 1.0) * texture2D(Texture, uv * vec2(1.0, -1) + 0.5, -1.0 ));
     color.a = color.r * color.g * color.b;
     color.a = round(color.a);
-
     color.a = max(0.6f, color.a);
 
     ////////// glass shine effect

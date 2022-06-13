@@ -15,8 +15,8 @@ padding: 0;
 
 html {
   scroll-behavior: smooth;
-  overflow: -moz-scrollbars-vertical; 
-  overflow-y: scroll;
+  overflow: scrollbars-vertical; 
+  overflow-y: overlay;
 }
 
 body{
@@ -74,6 +74,7 @@ button{
   background: 0;
   color: white;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .btn{
@@ -202,12 +203,13 @@ nav .nav-wrapper{
 }
 
 nav .logo{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  cursor: pointer;
+  font-family: Manners;
   font-size: 50px;
   margin-top: -12px;
-  font-family: Manners;
-  display: flex;
-  align-items: center;
-  position: absolute;
   top: 0;
   left: 0px;
 }
@@ -239,21 +241,27 @@ nav .links{
 }
 .nav-open .tabs{
   height: auto;
-  flex-direction: column;
+  margin: 0;
   margin-top: 30px;
   margin-bottom: 40px;
-  
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 .nav-open .tabs button{
+  margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 .nav-open .links{
   display: flex;
   justify-content: center;
+  margin:0;
 }
 .nav-open .links button{
-
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 /*nav buttons*/
@@ -681,15 +689,16 @@ main{
     justify-content: center;
   }
   header .container{
-    flex-direction: column;
     align-content: center;
-    margin-bottom: 50px;
   }
   header .title{
     order: 2;
   }
+  nav .links{
+    margin-right: 10px;
+  }
+
   .project{
-    flex-direction: column;
     align-content: center;
     justify-content: center;
     margin-bottom: 70px;
@@ -729,6 +738,7 @@ main{
   }
   .nav-open .links{
     display: flex;
+ 
   }
 
   h1{
@@ -758,6 +768,10 @@ main{
   }
   .nav-open .links{
     display: flex;
+  }
+
+  .project .image{
+    height: 60vw;
   }
 
   h1{
