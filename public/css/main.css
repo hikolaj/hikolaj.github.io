@@ -15,12 +15,11 @@ padding: 0;
 
 html {
   scroll-behavior: smooth;
-  overflow: scrollbars-vertical; 
-  overflow-y: overlay;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 body{
-  width: 100%;
   text-align: left;
   font-family: Basic;
   background: black;
@@ -108,6 +107,7 @@ button{
 .container{
   margin: auto;
   max-width: 1200px;
+  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
