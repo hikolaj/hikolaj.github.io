@@ -1,82 +1,82 @@
 .gallery{
-    position: relative;
-  }
+  position: relative;
+}
   
 .gallery-btn--left, .gallery-btn--right{
-position: absolute;
-height: 100%;
-width: 50px;
-top: 0;
-z-index: 1;
-background: rgba(0,0,0,0.3);
-transition: opacity 0.3s;
-color: white;
-opacity: 0;
+  position: absolute;
+  height: 100%;
+  width: 50px;
+  top: 0;
+  z-index: 1;
+  background: rgba(0,0,0,0.3);
+  transition: opacity 0.3s;
+  color: white;
+  opacity: 0;
 }
 
 .gallery-btn--right
 {
-right: 0;
+  right: 0;
 }
 
 .gallery:hover .gallery-btn--left, .gallery:hover .gallery-btn--right{
-opacity: 1;
+  opacity: 1;
 }
 
 .gallery-btn--left:hover, .gallery-btn--right:hover{
-background-position: 0 0;
+  background-position: 0 0;
 }
 
 .gallery-btn--left::after, .gallery-btn--right::after{
-content: "<";
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-font-size: 45px;
-text-shadow: 0 2px 0 black;
+  content: "<";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 45px;
+  text-shadow: 0 2px 0 black;
 }
 
 .gallery-btn--right::after{
-content:">";
+  content:">";
 }
 
 .gallery-marks{
-position: absolute;
-bottom: 0;
-left: 0;
-right:0;
-display: flex;
-justify-content: center;
-flex-direction: row;
-z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right:0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  z-index: 1;
 }
 
 .gallery-mark{
-display: inline-block;
-padding: 3px;
-padding-bottom: 5px;
-color: white;
-font-size: 18px;
-text-shadow: 0 0 3px black,
-    0 2px 0 black,
-    2px 0 0 black,
-    0 -2px 0 black,
-    -2px 0 0 black;
+  display: inline-block;
+  padding: 3px;
+  padding-bottom: 5px;
+  color: white;
+  font-size: 18px;
+  text-shadow: 0 0 3px black,
+      0 2px 0 black,
+      2px 0 0 black,
+      0 -2px 0 black,
+      -2px 0 0 black;
 }
 
 .gallery-mark::after{
-content: "◇";
+  content: "◇";
 }
 
 .gallery-mark--fill::after{
-content: "◈";
+  content: "◈";
 }
 
 .gallery-img--off{
-display: none;
+  display: none;
 }
 
 .gallery-btn--off{
-display: none;
+  display: none;
 }
