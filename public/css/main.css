@@ -157,6 +157,8 @@ header .container{
   justify-content: center;
 }
 
+
+
 .land-shader{
   position: absolute;
   bottom: 0;
@@ -174,6 +176,7 @@ header .container{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 
 /*
 #################################
@@ -417,7 +420,7 @@ main{
   content: "◇";
   position: absolute;
   font-size: 30px;
-  top: 11px;
+  top: -4px;
   left: -30px;
   color: white;
   transition: color 0.3s;
