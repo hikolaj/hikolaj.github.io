@@ -50,9 +50,12 @@ function navButtonAction(id)
   }
 
   if(lastActiveTab != id){
-    openTab(id);
     closeTab(lastActiveTab);
+    openTab(id);
     lastActiveTab = id;
+  }
+  else{
+    openTab(id);
   }
 }
 
@@ -121,10 +124,7 @@ function activateNavButton(id)
   if(lastActiveTab != id)
   {
     //deactivate last button
-    if(lastActiveTabBtn.classList.contains("active"))
-    {
-        lastActiveTabBtn.classList.remove("active");
-    }
+    lastActiveTabBtn.classList.remove("active");
 
     //activate new active
     if(id > 0){
