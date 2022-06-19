@@ -1,26 +1,23 @@
 /* ICONS */
 
+.icon{
+  background-size: cover;
+  display: inline-block;
+}
+
 .icon--big{
   height: 48px;
   width: 48px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
-  background-position: center;
 }
 
 .icon--medium{
   height: 32px;
   width: 32px;
-  background-size: cover;
-  display: inline-block;
 }
 
 .icon--small{
   height: 16px;
   width: 16px;
-  background-size: cover;
-  display: inline-block;
 }
 
 

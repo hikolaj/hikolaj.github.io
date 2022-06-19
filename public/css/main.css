@@ -503,6 +503,15 @@ main{
   left: 0px;
 }
 
+.icon-wrapped{
+  height: 48px;
+  width: 48px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-position: center;
+}
+
 /*
 #################################
               Projects
@@ -750,6 +759,11 @@ main{
     font-size: 35px;
   }
 
+  .icon-wrapped{
+    height: 28px;
+    width: 28px;
+  }
+
 }
 
 @media screen and (min-width: 768px) {
@@ -774,6 +788,8 @@ main{
     display: flex;
   }
 
+
+
   .project .image{
     height: 50vw;
   }
@@ -793,4 +809,8 @@ main{
   h6{
     font-size: 18px;
   }
+
+
+
+
 }
