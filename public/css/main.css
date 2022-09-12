@@ -1,11 +1,19 @@
 @font-face {
-    font-family: 'Basic';
-    src: url("../fonts/Basic-Regular.ttf");
+  font-family: 'Basic';
+  src: url("../fonts/Basic-Regular.ttf");
+}
+@font-face {
+font-family: 'Archivo';
+src: url("../fonts/ArchivoBlack.otf");
+}
+@font-face {
+font-family: 'Attractive';
+src: url("../fonts/Attractive-Regular.ttf");
 }
 
 @font-face {
-  font-family: 'Manners';
-  src: url("../fonts/Domestic_Manners.ttf");
+font-family: 'Manners';
+src: url("../fonts/Domestic_Manners.ttf");
 }
 
 * {
@@ -14,81 +22,92 @@ padding: 0;
 }
 
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  overflow-y: scroll;
+scroll-behavior: smooth;
+overflow-x: hidden;
+overflow-y: scroll;
 }
 
 body{
-  text-align: left;
-  font-family: Basic;
-  background: black;
-  background: rgb(20,20,20);
-  color: white;
+text-align: left;
+font-family: Archivo;
+background: black;
+background: rgb(20,20,20);
+background: rgb(235, 235, 235);
+color: black;
 }
 
 /*
 #################################
-              Text
+            Text
 #################################
 */
 p{
-  color: rgb(220,220,220);
+color: rgb(17, 17, 17);
+font-size: 18px;
+font-family: Attractive;
 }
 
 h1{
-  font-size: 80px;
-  color: white;
+font-size: 80px;
+color: black;
 }
 
 h2{
-  font-size: 40px;
+font-size: 40px;
+color: black;
 }
 
 h3{
-  font-size: 25px;
-  color: rgb(150,150,150);
+font-size: 25px;
+color: rgb(20, 20, 20);
 }
 
 h4{
-  font-size: 25px;
+font-size: 25px;
 }
 
 h5{
-  font-size: 15px;
-  color: rgb(150,150,150);
+font-size: 15px;
+color:  rgb(20, 20, 20);
 }
 
 h6{
-  font-size: 20px;
+font-size: 20px;
+}
+
+
+li{
+  font-family: Attractive;
+  font-weight: normal;
+  font-size: 18px;
+  color: rgb(20, 20, 20);
 }
 
 /*
 #################################
-              Buttons
+            Buttons
 #################################
 */
 
 button{
-  border: none;
-  background: 0;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
+border: none;
+background: 0;
+font-size: 20px;
+cursor: pointer;
 }
 
 .btn{
-  font-weight: bold;
-  padding: 8px;
-  padding-left: 12px;
-  padding-right: 12px;
+font-weight: bold;
+padding: 8px;
+padding-left: 12px;
+padding-right: 12px;
 
-  background: rgba(255,255,255,0.2);
-  transition: background 0.2s;
+background: rgba(255,255,255,1);
+transition: background 0.2s;
 }
 
 .btn:hover{
-  background: rgba(255,255,255,0.3);
+background: rgba(255,255,255,0.5);
 }
 
 
@@ -96,76 +115,76 @@ button{
 
 /*
 #################################
-              Layout containers
+            Layout containers
 #################################
 */
 
 .wrapper{
-  margin: auto;
-  width: 100vw;
+margin: auto;
+width: 100vw;
 }
 
 .container{
-  margin: auto;
-  max-width: 1200px;
-  
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
+margin: auto;
+max-width: 1200px;
+
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+padding-left: 20px;
+padding-right: 20px;
 }
 
 /*
 #################################
-              Header
+            Header
 #################################
 */
 
 header{
-  position: absolute;
-  height: 100vh;
-  top: 0vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  transition: top 1s;
+position: absolute;
+height: 100vh;
+top: 0vh;
+width: 100%;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+justify-content: center;
+transition: top 1s;
 }
 
 .header-open{
-  top: 0vh;
+top: 0vh;
 }
 .header-closed{
-  top: -80vh;
+top: -80vh;
 }
 
 header .container{
-  opacity: 1;
-  transition: opacity 1s;
+opacity: 1;
+transition: opacity 1s;
 }
 
 .header-closed .container{
-  opacity: 0;
+opacity: 0;
 }
 
 
 .title{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
 }
 
 
 
 .land-shader{
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+z-index: -1;
 }
 
 .kaleidoscope-shader{
@@ -173,208 +192,207 @@ header .container{
 }
 
 .silver{
-  background: -webkit-linear-gradient(#eee 45%, #333);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+background: -webkit-linear-gradient(#eee 45%, #333);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 
 
 /*
 #################################
-              Nav
+            Nav
 #################################
 */
 /*normal nav*/
 nav{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 60px;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 60px;
 
-  z-index: 5;
-  
-  transition: height 0.5s;
+z-index: 5;
+
+transition: height 0.5s;
 }
 
 nav .nav-wrapper{
-  position: relative;
-  height: 100%;
-  margin: auto;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
+position: relative;
+height: 100%;
+margin: auto;
+max-width: 1200px;
+display: flex;
+justify-content: space-between;
 }
 
 nav .logo{
-  display: flex;
-  position: absolute;
-  align-items: center;
-  cursor: pointer;
-  font-family: Manners;
-  font-size: 50px;
-  margin-top: -12px;
-  top: 0;
-  left: 0px;
+display: flex;
+position: absolute;
+align-items: center;
+cursor: pointer;
+font-family: Manners;
+font-size: 50px;
+margin-top: -12px;
+top: 0;
+left: 0px;
 }
 nav .tabs{
-  display: flex;
-  align-items:center;
-  height: 100%;
-  margin-left: 150px;
+display: flex;
+align-items:center;
+height: 100%;
+margin-left: 150px;
 }
 
 nav .links{
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 /*nav open*/
 .nav-open{
-  height: 100%;
-  justify-content: center;
+height: 100%;
+justify-content: center;
 }
 
 .nav-open .nav-wrapper{
-  margin: auto;
-  flex-direction: column;
-  justify-content: center;
+margin: auto;
+flex-direction: column;
+justify-content: center;
 }
 .nav-open .logo{
 
 }
 .nav-open .tabs{
-  height: auto;
-  margin: 0;
-  margin-top: 30px;
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
+height: auto;
+margin: 0;
+margin-top: 30px;
+margin-bottom: 40px;
+display: flex;
+flex-direction: column;
+align-content: center;
+justify-content: center;
 }
 .nav-open .tabs button{
-  margin: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+margin: auto;
+padding-top: 10px;
+padding-bottom: 10px;
 }
 .nav-open .links{
-  display: flex;
-  justify-content: center;
-  margin:0;
+display: flex;
+justify-content: center;
+margin:0;
 }
 .nav-open .links button{
-  margin-left: 5px;
-  margin-right: 5px;
+margin-left: 5px;
+margin-right: 5px;
 }
 
 /*nav buttons*/
 
 .btn-nav{
-  margin-left: 20px;
-  margin-right: 20px;
-  color: rgb(204, 204, 204);
+margin-left: 20px;
+margin-right: 20px;
 }
 
 .btn-socialmedia{
-  background: white;
-  height: 30px;
-  width: 30px;
-  margin-left: 10px;
-  transition: background 0.3s, opacity 0.2s;
-  overflow: hidden;
-  background: rgba(255,255,255,0.0);
+background: white;
+height: 30px;
+width: 30px;
+margin-left: 10px;
+transition: background 0.3s, opacity 0.2s;
+overflow: hidden;
+background: rgba(255,255,255,0.0);
 }
 .btn-socialmedia img{
-  height: 100%;
-  width: 100%;
-  margin: auto;
-  padding: 0;
-  background-position: center;
-  background-size: cover;
+height: 100%;
+width: 100%;
+margin: auto;
+padding: 0;
+background-position: center;
+background-size: cover;
 }
 
 .btn-socialmedia:hover{
-  background: rgba(255,255,255,0.6);
+background: rgba(255,255,255,0.6);
 }
 
 .btn-socialmedia:active{
-  background: rgba(255,255,255,0.0);
-  opacity: 0.6;
+background: rgba(255,255,255,0.0);
+opacity: 0.6;
 }
 
 .btn-burger {
-  position: absolute;
-  display: block;
-  right: 0;
-  top: 10px;
-  background: none;
-  border: none;
-  outline: 0;
-  cursor: pointer;
+position: absolute;
+display: block;
+right: 0;
+top: 10px;
+background: none;
+border: none;
+outline: 0;
+cursor: pointer;
 }
 
 .btn-burger .bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 3px;
-  background: white;
-  margin: 8px 0;
-  transition: 0.2s;
+width: 35px;
+height: 3px;
+background: black;
+margin: 8px 0;
+transition: 0.2s;
 }
 
 .btn-burger-toggle .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-  transform: rotate(-45deg) translate(-9px, 6px);
+-webkit-transform: rotate(-45deg) translate(-9px, 6px);
+transform: rotate(-45deg) translate(-9px, 6px);
 }
 
 .btn-burger-toggle .bar2 {
-  opacity: 0;
+opacity: 0;
 }
 
 .btn-burger-toggle .bar3 {
-  -webkit-transform: rotate(45deg) translate(-8px, -8px);
-  transform: rotate(45deg) translate(-8px, -8px);
+-webkit-transform: rotate(45deg) translate(-8px, -8px);
+transform: rotate(45deg) translate(-8px, -8px);
 }
 
 /*
 #################################
-              Tab
+            Tab
 #################################
 */
 .tab{
-  position: absolute;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 1s, min-height 1s, top 1s, opacity 1s, padding-top 1s, padding-bottom 1s;
+position: absolute;
+overflow: hidden;
+opacity: 0;
+transition: max-height 1s, min-height 1s, top 1s, opacity 1s, padding-top 1s, padding-bottom 1s;
 }
 
 .tab-open{
-  max-height: 5000px;
-  min-height: 65vh;
-  padding-top: 50px;
-  padding-bottom: 100px;
-  top: 10vh;
-  opacity: 1;
+max-height: 5000px;
+min-height: 65vh;
+padding-top: 50px;
+padding-bottom: 100px;
+top: 10vh;
+opacity: 1;
 }
 
 .tab-closed{
-  max-height: 0px;
-  min-height: 0vh;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  top: 100vh;
-  opacity: 0;
+max-height: 0px;
+min-height: 0vh;
+padding-top: 0px;
+padding-bottom: 0px;
+top: 100vh;
+opacity: 0;
 }
 
 
 /*
 #################################
-              Main
+            Main
 #################################
 */
 
 main{
-  width: 100%;
+width: 100%;
 }
 
 .about{
@@ -382,53 +400,53 @@ main{
 }
 
 .about h2{
-  margin-bottom: 20px;
-  width: 100%;
+margin-bottom: 20px;
+width: 100%;
 }
 .about .skills-list{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: left;
+width: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: left;
 }
 .about .skills-list .title{
-  margin-bottom: 10px;
-  font-size: 20px;
+margin-bottom: 10px;
+font-size: 20px;
 }
 .about .skills-list ul{
-  
+
 }
 .about .skills-list li{
-  margin-left: 15px;
+margin-left: 15px;
 }
 
 .about .about-box{
-  margin: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 100px;
+margin: auto;
+padding-left: 10px;
+padding-right: 10px;
+margin-bottom: 100px;
 }
 
 .job-title{
-  position: relative;
-  margin-left: 20px;
-  margin-right: 10px;
-
+position: relative;
+margin-left: 30px;
+margin-right: 10px;
+background: rgb(228, 228, 228);
 }
 
 .job-title::after{
-  content: "◇";
-  position: absolute;
-  font-size: 30px;
-  top: -4px;
-  left: -30px;
-  color: white;
-  transition: color 0.3s;
+content: "◇";
+position: absolute;
+font-size: 45px;
+top: -8px;
+left: -45px;
+
+transition: color 0.3s;
 }
 
 .job-title--active::after{
-  content: "◆";
+content: "◆";
 }
 
 .job-title h4{
@@ -436,86 +454,86 @@ main{
 }
 
 .job-title h4{
-  
+
 }
 
 .job{
-  position: relative;
-  padding-left: 5px;
-  padding-bottom: 25px;
+position: relative;
+padding-left: 15px;
+padding-bottom: 25px;
 
 }
 
 .job::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 34px;
-  left: 1px;
-  width: 2px;
-  background: rgb(200,200,200);
-  transition: background 0.3s;
+content: "";
+position: absolute;
+top: 0;
+bottom: 34px;
+left: 1px;
+width: 4px;
+background: rgb(7, 7, 7);
+transition: background 0.3s;
 }
 
 .job h6{
-  margin-bottom: 5px;
+margin-bottom: 5px;
 }
 
 
 
 .job-project{
-  margin-left: 15px;
-  padding-left: 8px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-left: solid 1px rgb(150,150,150);
-  transition: border-left 0.3s, background 0.3s;
+margin-left: 15px;
+padding-left: 8px;
+margin-top: 10px;
+margin-bottom: 10px;
+border-left: solid 1px rgb(150,150,150);
+transition: border-left 0.3s, background 0.3s;
 }
 
 .job-project ul{
-  color: rgb(200,200,200);
-  padding-left: 15px;
+color: rgb(200,200,200);
+padding-left: 15px;
 }
 
 
 .infobox{
-  width: 350px;
-  height: 300px;
-  background: rgb(10,10,10);
-  margin-top: 50px;
+width: 350px;
+height: 300px;
+background: rgb(10,10,10);
+margin-top: 50px;
 }
 
 .icons-wrapper{
-  position: relative;
-  width: 100%;
-  height: 60px;
-  overflow: hidden;
+position: relative;
+width: 100%;
+height: 60px;
+overflow: hidden;
 
-  -webkit-mask-image: linear-gradient(to right, 
-  rgba(255, 255, 255, 0.0), 
-  rgba(255, 255, 255, 1) 30%,
-  rgba(255, 255, 255, 1) 80%, 
-  rgba(255, 255, 255, 0.0));
+-webkit-mask-image: linear-gradient(to right, 
+rgba(255, 255, 255, 0.0), 
+rgba(255, 255, 255, 1) 30%,
+rgba(255, 255, 255, 1) 80%, 
+rgba(255, 255, 255, 0.0));
 }
 
 .icons-wrapper .icon{
-  position: absolute;
-  top: 5px;
-  left: 0px;
+position: absolute;
+top: 5px;
+left: 0px;
 }
 
 .icon-wrapped{
-  height: 48px;
-  width: 48px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
-  background-position: center;
+height: 48px;
+width: 48px;
+background-size: contain;
+background-repeat: no-repeat;
+display: inline-block;
+background-position: center;
 }
 
 /*
 #################################
-              Projects
+            Projects
 #################################
 */
 
@@ -523,293 +541,293 @@ main{
 }
 
 .project{
-  margin: auto;
-  width: 100%;
-  min-height: 315px;
-  padding-top: 20px;
-  padding-bottom: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+margin: auto;
+width: 100%;
+min-height: 315px;
+padding-top: 20px;
+padding-bottom: 50px;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
 }
 
 .project h2{
-  margin-top: -15px;
+margin-top: -15px;
 }
 .project .info{
-  width: 100%;
+width: 100%;
 }
 
 .project .image{
-  position: relative;
-  width: 504px;
-  height: 284px;
-  margin-bottom: 15px;
-  background: rgb(20,20,20);
-  overflow: hidden;
+position: relative;
+width: 504px;
+height: 284px;
+margin-bottom: 15px;
+background: rgb(20,20,20);
+overflow: hidden;
 }
 
 .project .image img{
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: absolute;
+height: 100%;
+width: 100%;
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+position: absolute;
 }
 
 .project .image iframe{
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
 }
 
 .project .description{
-  width: 504px;
+width: 504px;
 
-  margin-right: 20px;
-  margin-bottom: 30px;
-  position: relative;
+margin-right: 20px;
+margin-bottom: 30px;
+position: relative;
 }
 
 .project .icon{
-  
+
 }
 
 .project .description h2{
-  border-bottom: solid 1px rgb(80,80,80);
-  padding-bottom: 2px;
+border-bottom: solid 1px rgb(80,80,80);
+padding-bottom: 2px;
 }
 
 .project .description p{
-  margin-top: 15px;
-  padding-bottom: 10px;
-  color: rgb(212, 212, 212);
+margin-top: 15px;
+padding-bottom: 10px;
+
 }
 
 .project .description .icon{
-  float: right;
-  margin-left: 7px;
-  margin-top: 5px;
-  right: 0;
-  top: 0;
+float: right;
+margin-left: 7px;
+margin-top: 5px;
+right: 0;
+top: 0;
 }
 
 .project .description .btn{
-  margin-top: 10px;
+margin-top: 10px;
 }
 
 
 .roller{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 2;
-  margin-bottom: 80px;
+position: relative;
+width: 100%;
+height: 100%;
+overflow: hidden;
+z-index: 2;
+margin-bottom: 80px;
 }
 
 .roller-btn-container{
-  position: absolute;
-  width: 100%;
-  height: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0));
+position: absolute;
+width: 100%;
+height: 0;
+bottom: 0;
+left: 0;
+z-index: 2;
+background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0));
 }
 
 .roller-btn{
-  position: absolute;
-  width: 100%;
-  height: 50px;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  margin-top: 50px;
+position: absolute;
+width: 100%;
+height: 50px;
+bottom: 0;
+left: 0;
+z-index: 2;
+margin-top: 50px;
 }
 
 .rolled{
-  height: 200px;
+height: 200px;
 }
 
 .rolled .roller-btn-container{
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,1.0) 70%);
+height: 100%;
+background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,1.0) 70%);
 }
 
 /*
 #################################
-              Contact
+            Contact
 #################################
 */
 .contact{
-  position: relative;
+position: relative;
 
 }
 .contact .container{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translate(-50%, -50%);
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translateY(-50%);
+transform: translate(-50%, -50%);
+align-items: center;
+display: flex;
+flex-direction: column;
 }
 
 .contact .text{
-  font-size: 20px;
-  display: block;
+font-size: 20px;
+display: block;
 }
 
 .contact .text b{
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
+user-select: none;
+-moz-user-select: none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+-o-user-select: none;
 }
 
 .contact .links{
-  margin-top: 50px;
-  display: block;
+margin-top: 50px;
+display: block;
 }
 .contact .links .btn-socialmedia{
-  height: 48px;
-  width: 48px;
+height: 48px;
+width: 48px;
 }
 /*
 #################################
-              Footer
+            Footer
 #################################
 */
 
 .footer{
-  width: 100%;
-  min-height: 50px;
+width: 100%;
+min-height: 50px;
 }
 
 /*
 #################################
-              Media queries
+            Media queries
 #################################
 */
 
 
 @media screen and (max-width: 1200px) {
-  .container{
-    justify-content: center;
-  }
-  header .container{
-    align-content: center;
-  }
-  header .title{
-    order: 2;
-  }
-  nav .links{
-    margin-right: 10px;
-  }
+.container{
+  justify-content: center;
+}
+header .container{
+  align-content: center;
+}
+header .title{
+  order: 2;
+}
+nav .links{
+  margin-right: 10px;
+}
 
-  .project{
-    align-content: center;
-    justify-content: center;
-    margin-bottom: 70px;
-  }
-  .project .img{
-    margin: 0;
-  }
-  .project .description{
-    margin: 0;
-    margin-top: 20px;
-  }
+.project{
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+.project .img{
+  margin: 0;
+}
+.project .description{
+  margin: 0;
+  margin-top: 20px;
+}
 
-  nav .wrapper{
-    width: 90%;
-  } 
-  
-  nav .logo{
-    left: 10px;
-  }
+nav .wrapper{
+  width: 90%;
+} 
 
-  .btn-burger{
-    right: 10px;
-  }
-  
+nav .logo{
+  left: 10px;
+}
+
+.btn-burger{
+  right: 10px;
+}
+
 }
 
 
 @media screen and (max-width: 768px) {
-  nav .tabs{
-    display: none;
-  }
-  .nav-open .tabs{
-    display: flex;
-  }
-  nav .links{
-    display: none;
-  }
-  .nav-open .links{
-    display: flex;
- 
-  }
+nav .tabs{
+  display: none;
+}
+.nav-open .tabs{
+  display: flex;
+}
+nav .links{
+  display: none;
+}
+.nav-open .links{
+  display: flex;
 
-  h1{
-    font-size: 70px;
-  }
-  h2{
-    font-size: 35px;
-  }
+}
 
-  .icon-wrapped{
-    height: 28px;
-    width: 28px;
-  }
+h1{
+  font-size: 70px;
+}
+h2{
+  font-size: 35px;
+}
+
+.icon-wrapped{
+  height: 28px;
+  width: 28px;
+}
 
 }
 
 @media screen and (min-width: 768px) {
-  .btn-burger {
-    display:none;
-  }
-  
+.btn-burger {
+  display:none;
+}
+
 }
 
 
 @media screen and (max-width: 420px) {
-  nav .tabs{
-    display: none;
-  }
-  .nav-open .tabs{
-    display: flex;
-  }
-  nav .links{
-    display: none;
-  }
-  .nav-open .links{
-    display: flex;
-  }
+nav .tabs{
+  display: none;
+}
+.nav-open .tabs{
+  display: flex;
+}
+nav .links{
+  display: none;
+}
+.nav-open .links{
+  display: flex;
+}
 
 
 
-  .project .image{
-    height: 50vw;
-  }
+.project .image{
+  height: 50vw;
+}
 
-  h1{
-    font-size: 40px;
-  }
-  h2{
-    font-size: 30px;
-  }
-  h3{
-    font-size: 25px;
-  }
-  h4{
-    font-size: 22px;
-  }
-  h6{
-    font-size: 18px;
-  }
+h1{
+  font-size: 40px;
+}
+h2{
+  font-size: 30px;
+}
+h3{
+  font-size: 25px;
+}
+h4{
+  font-size: 22px;
+}
+h6{
+  font-size: 18px;
+}
 
 
 

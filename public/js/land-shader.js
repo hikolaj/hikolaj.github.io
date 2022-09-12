@@ -139,7 +139,7 @@ void main(void)
     circleMask = (1.0 - circleMask);
     circleMask = clamp(0.0, 1.0, circleMask);
 
-    gl_FragColor.rgb = vec3(1.0, 1.0, 1.0) * 0.25;
+    gl_FragColor.rgb = vec3(1.0, 1.0, 1.0);
     gl_FragColor.a = min(1.0, edge) * circleMask;
 }
 `;

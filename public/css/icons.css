@@ -21,78 +21,78 @@
 }
 
 
-.icon-unity{
+.icon-unity--white{
   background-image: url(../img/icons/unity.png);
 }
 
-.icon-unity-inverse{
+.icon-unity--black{
   background-image: url(../img/icons/unity_inverse.png);
 }
 
-.icon-unreal{
+.icon-unreal--white{
   background-image: url(../img/icons/unreal.png);
 }
 
-.icon-unreal-inverse{
+.icon-unreal--black{
   background-image: url(../img/icons/unreal_inverse.png);
 }
 
-.icon-blender{
+.icon-blender--white{
   background-image: url(../img/icons/blender.png);
 }
 
-.icon-blender-inverse{
+.icon-blender--black{
   background-image: url(../img/icons/blender_inverse.png);
 }
 
-.icon-photoshop{
+.icon-photoshop--white{
   background-image: url(../img/icons/photoshop.png);
 }
 
-.icon-photoshop-inverse{
+.icon-photoshop--black{
   background-image: url(../img/icons/photoshop_inverse.png);
 }
 
-.icon-glsl{
+.icon-glsl--white{
   background-image: url(../img/icons/glsl.png);
 }
 
-.icon-glsl-inverse{
+.icon-glsl--black{
   background-image: url(../img/icons/glsl_inverse.png);
 }
 
-.icon-cplusplus{
+.icon-cplusplus--white{
   background-image: url(../img/icons/cplusplus.png);
 }
 
-.icon-cplusplus-inverse{
+.icon-cplusplus--black{
   background-image: url(../img/icons/cplusplus_inverse.png);
 }
 
-.icon-csharp{
+.icon-csharp--white{
   background-image: url(../img/icons/csharp.png);
 }
 
-.icon-csharp-inverse{
+.icon-csharp--black{
   background-image: url(../img/icons/csharp_inverse.png);
 }
 
-.icon-graduate{
+.icon-graduate--white{
   background-image: url(../img/icons/graduate.png);
 }
 
-.icon-mic{
+.icon-mic--white{
   background-image: url(../img/icons/mic.png);
 }
 
-.icon-twitchtv{
+.icon-twitchtv--white{
   background-image: url(../img/icons/twitchtv.png);
 }
 
-.icon-linkedin{
+.icon-linkedin--black{
   background: url(../img/icons/linkedin.png);
 }
 
-.icon-github{
+.icon-github--black{
   background: url(../img/icons/github.png);
 }
