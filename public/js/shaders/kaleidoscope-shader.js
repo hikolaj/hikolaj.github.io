@@ -64,6 +64,10 @@ void main(void)
     shine = max(0.0, shine);
     color.a += shine / 5.0;
 
+    ///////// left illumination
+    color += vec4(1.0) * distance(vPos.rg, vec2(0.2))/5.0;
+
+    //color.rg += vPos.rg;
 
     gl_FragColor = color;
 }   
@@ -117,7 +121,7 @@ const bodGeometry = new THREE.DodecahedronGeometry( 220, 0 );
 // Meshes
 ///////////////////////////////////////
 
-const kaleidoscope = new THREE.Mesh( boxGeometry, kaleidoscopeMat );
+const kaleidoscope = new THREE.Mesh( bodGeometry, kaleidoscopeMat );
 scene.add( kaleidoscope );
 
 
