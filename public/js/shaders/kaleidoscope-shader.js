@@ -155,10 +155,10 @@ const composer = new THREE.EffectComposer( renderer );
 composer.addPass( new THREE.RenderPass( scene, camera ) );
 
 const effectBloom = new THREE.BloomPass( 2.2, 15, 8, 256 );//( strength, kernelSize, sigma, resolution )
-composer.addPass( effectBloom );
+//composer.addPass( effectBloom );
 
 const effectCopy = new THREE.ShaderPass( THREE.CopyShader );
-composer.addPass( effectCopy );
+//composer.addPass( effectCopy );
 
 effectCopy.renderToScreen = true;
 
