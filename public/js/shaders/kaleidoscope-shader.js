@@ -65,9 +65,7 @@ void main(void)
     color.a += shine / 5.0;
 
     ///////// left illumination
-    color += vec4(1.0) * distance(vPos.rg, vec2(0.2))/5.0;
-
-    //color.rg += vPos.rg;
+    color += vec4(1.0) * distance(vPos.rg, vec2(0.3))/5.0;
 
     gl_FragColor = color;
 }   
