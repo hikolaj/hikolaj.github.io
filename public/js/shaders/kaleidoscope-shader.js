@@ -60,12 +60,12 @@ void main(void)
     color.a = max(0.6f, color.a);
 
     ////////// glass shine effect
-    float shine = dot(vNormal, normalize(vec3(-1.0, 0.0, 1.0)));
+    float shine = dot(vNormal, normalize(vec3(-0.5, -2.0, 1.0)));
     shine = max(0.0, shine);
-    color.a += shine / 5.0;
+    color.a += shine / 1.0;
 
     ///////// left illumination
-    color += vec4(1.0) * distance(vPos.rg, vec2(0.3))/5.0;
+    color += vec4(1.0) * distance(vPos.rg, vec2(1.0, 0.3))/5.0;
 
     gl_FragColor = color;
 }   
