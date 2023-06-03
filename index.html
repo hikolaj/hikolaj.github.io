@@ -8,431 +8,235 @@
     <!--CSS-->
     <link rel="stylesheet" href="./public/css/main.css" type="text/css">
     <link rel="stylesheet" href="./public/css/icons.css" type="text/css">
-    <link rel="stylesheet" href="./public/css/galleries.css" type="text/css">
-    <!--SCRIPTS-->
-    <script type="module" src="./public/js/hider-nav-menu.js"></script>
+    <!--SCRIPTS
+    <script type="module" src="./public/js/hider-nav-menu.js"></script>-->
     <script type="module" src="./public/js/galleries.js"></script>
     <script type="module" src="./public/js/icons-wrapper.js"></script>
     <!--THREE-->
     <script src="https://cdn.jsdelivr.net/npm/three@0.138.3/build/three.min.js"></script>
     <!--SHADERS-->
-    <script type="module" src="./public/js/shaders/land-shader.js"></script>
+    <script type="module" src="./public/js/shaders/header-bg-shader.js"></script>
   </head>
 
   <body>
 
-    <nav id="navigation">
+
+    <nav>
       <div class="nav-wrapper">
-        <div class="logo nav-link-btn">
-          MH
+        <div class="logo">
+          Mikołaj Hanslik
         </div>
         <div class="tabs">
-          <button class="btn-nav nav-link-btn">O mnie</button>
-          <button class="btn-nav nav-link-btn">Projekty</button>
-          <button class="btn-nav nav-link-btn">Kontakt</button>
-        </div>
-        <div class="links">
-          <button class="btn-socialmedia" onclick="window.open('https://www.linkedin.com/in/mikolaj-hanslik/')"><img class="icon-linkedin--black"/></button>
-          <button class="btn-socialmedia" onclick="window.open('https://github.com/hikolaj')"><img class="icon-github--black"/></button>
+          <button>O mnie</button>
+          <button>Projekty</button>
+          <button>Kontakt</button>
         </div>
         <button class="btn-burger"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></button>
       </div>
     </nav>
 
-    <header id="header" class="nav-link">
-      <canvas id="land-shader" class="land-shader" width="500" height="500"></canvas>
+    <div class="header-bg">
+      <canvas id="header-bg-shader" class="header-bg-shader"></canvas>
+    </div>
+
+    <header>
       <div class="wrapper">
         <div class="container">
           <div class="title">
-            <h1 class="">Mikołaj Hanslik</h1>
-            <h3>Programista / Artysta techniczny</h3>
+            <h1>Game Dev Portfolio</h1>
+            <p>Games, tools, shaders, effects, little bit of bit magic </p>
           </div>
           <div class="logo">
- 
+            <img src="./public/img/Logo-M.png" alt="">
+            <img src="./public/img/Logo-H.png" alt="">
           </div>
         </div>
       </div>
+      <div class="scroll-indicator"></div>
+      <!--<div class="icons-carousel">
+        <div class="icon icon-wrapped icon-unity--white"></div>
+        <div class="icon icon-wrapped icon-unreal--white"></div>
+        <div class="icon icon-wrapped icon-blender--white"></div>
+        <div class="icon icon-wrapped icon-photoshop--white"></div>
+        <div class="icon icon-wrapped icon-csharp--white"></div>
+        <div class="icon icon-wrapped icon-cplusplus--white"></div>
+        <div class="icon icon-wrapped icon-glsl--white"></div>
+      </div>-->
     </header>
 
     <main>
-      <!--######## ABOUT -->
-      <div class="tab wrapper about nav-link">
-        <div class="container">
+      <!--<div class="main-bg"></div>-->
 
-          <h2>Cześć!</h2>
-          <div class="about-box">
+      <!-- ################## About -->
+      <div class="wrapper about">
+        <div class="container">
+          <h1>O mnie</h1>   
+          <div class="bar">
+            <h3><image src="./public/img/icons/hihand.png"/>Cześć!</h3>
             <p>
-              Nazywam się <b>Mikołaj Hanslik</b>. Zajmuję się programowaniem aplikacji i gier, ale głównie interesuje mnie proceduralna generacja oraz shadery.
+              Nazywam się <b>Mikołaj Hanslik</b>. Pasjonuję się programowaniem gier, ale również interesują mnie aspekty techniczne grafiki komputerowej i efektów specjalnych.
             </p>
           </div>
-
-          <h2>Umiejętności</h2>
-          <div class="about-box skills-list">
-            <ul>
-              <li>
-                <b>Unity </b><br>
-              </li>
-              <li>
-                <b>Unreal Engine </b><br>
-              </li>
-              <li>
-                <b>Blender </b><br>
-              </li>
-              <li>
-                <b>C# </b><br>
-              </li>
-              <li>
-                <b>C++ </b><br>
-              </li>
-              <li>
-                <b>GLSL/Shader Graph </b><br>
-              </li>
-              <li>
-                <b>Js </b><br>
-              </li>
-              <li>
-                <b>Python </b><br>
-              </li>
-              <li>
-                <b>Git </b><br>
-              </li>
-              <li>
-                <b>Hack'n'Plan </b><br>
-              </li>
-            </ul>
+          <div class="bar">
+            <h3><image src="./public/img/icons/graduition.png"/>Edukacja</h3> 
+            <p>
+              Ukończyłem uczelnie wyższą <b>Collegium Da Vinci</b> w Poznaniu z tytułem <b>inżyniera</b> w dziedzinie <b>informatyki</b> ze specjalizacjią <b>Game Development</b>.
+            </p>
           </div>
-
-          <h2>Doświadczenie</h2>
-          <div class="about-box">
-            <!--marching bits-->
-            <div class="job-title  job-title--active">
-              <h4>Marching Bits</h2>
-                <h5>2019-2020</h5>
+          <div class="bar">
+            <h3><image src="./public/img/icons/skills.png"/>Umiejętności</h3>
+            <div class="skills-list">
+              <ul>
+                <li class="title">JĘZYKI</li>
+                <li>C#</li>
+                <li>C++</li>
+                <li>Blueprints</li>
+                <li>webGL/GLSL</li>
+                <li>Python</li>
+                <li>Js</li>
+              </ul>
+              <ul>
+                <li class="title">SILNIKI/FRAMEWORKI</li>
+                <li>Unity</li>
+                <li>Unreal 4/5</li>
+                <li>ECS</li>
+                <li>Three.js</li>
+                <li>winForms</li>
+              </ul>
+              <ul>
+                <li class="title">NARZĘDZIA</li>
+                <li>Hack'n'Plan/trello</li>
+                <li>Git/Github</li>
+                <li>ShaderGraph</li>
+                <li>MaterialEditor</li>
+                <li>Blender</li>
+                <li>Photoshop</li>
+                <li>SubstancePainter</li>
+              </ul>
+              <ul>
+                <li class="title">DZIEDZINY</li>
+                <li>Gameplay</li>
+                <li>Optymalizacja</li>
+                <li>Game Design</li>
+                <li>Shadery</li>
+                <li>Narzędzia</li>
+                <li>UI</li>
+                <li>Animacje</li>
+              </ul>
             </div>
-            <div class="job">
-              <div class="job-project">
-                <h6>World Tree</h6>
-                <p>
-                  Trójwymiarowa strategia czasu rzeczywistego w świecie fantasy.
-                  Projekt tworzony był na silniku <b>Unity</b> w systemie <b>ECS</b>.
-                  Pracowałem nad tą grą w małym, niezależnym zespole, w którym miałem spory zakres obowiązków.
-                  Głównie zajmowałem się programowaniem różnych systemów, ale pisaniem również shadery i pomagałem przy łączeniu wszystkich elementów w całość.
-                </p>
-                <br>
-                <p>Co zrobiłem:</p>
-                <ul>
-                  <li>System znoszenia surowców do magazynu, na place budowy i do miejsc pracy.</li>
-                  <li>System przydzielania prac osadnikom.</li>
-                  <li>System stawiania budynków/placów konstrukcji na siatce mapy ze sprawdzaniem wolnych komórek.</li>
-                  <li>System rozwoju budynków i dostawiania do nich rozszerzeń.</li>
-                  <li>System grupowania jednostek i przypisywania do nich skrótu klawisza.</li>
-                  <li>Shader siatki konstrukcji budynków z możliwością wyświetlania miejsc zajętych.</li>
-                  <li>Shader minimapy.</li>
-                  <li>Shader oznaczenia jednostek, budynków i przeciwników.</li>
-                  <li>Shader i animacja strzałki akcji.</li>
-                  <li>I wiele więcej.</li>
-                </ul>
-              </div>
-            </div>
-            <!--da vinci-->
-            <div class="job-title">
-              <h4>Uczelnia Collegium Da Vinci w Poznaniu</h4>
-              <h5>2015-2019</h5>
-            </div>
-            <div class="job">
-              <div class="job-project">
-                <h6>Informatyka ze specjalizacją "Game Dev"</h6>
-                <p>
-                  Ukończenie uczelni wyższej z tytułem Inżynier.
-                </p>
-              </div>
-              <div class="job-project">
-                <h6></h6>
-                <p>
-                  Wynajmowałem na uczelni przez rok pomieszczenie, gdzie w spólnie ze znajomymi z roku uczyliśmy się i tworzyliśmy projekt gry.
-                </p>
-              </div>
-            </div>
-            <!--poczatki-->
-            <div class="job-title">
-              <h4>Początki</h4>
-              <h5>2008-2015</h5>
-            </div>
-            <div class="job">
-              <div class="job-project">
-                <h6>Wydanie swojej pierwszej gry Cubye</h6>
-                <p>
-                  Stworzyłem i wydałem grę na platformie Google Play.
-                </p>
-              </div>
-              <div class="job-project">
-                <h6>Twitch.tv</h6>
-                <p>
-                  Pomagałem za darmo jak i za małe dotacje różnym twórcom gier, których znajdywałem na platformie Twitch.tv w dziale "Creative".
-                </p>
-              </div>
-              <div class="job-project">
-                <h6>Prototypowanie</h6>
-                <p>
-                  Nabywałem wiedzę programistyczną poprzez prototypowanie swoich pomysłów na silniku Unity.
-                </p>
-              </div>
-              <div class="job-project">
-                <h6>Start</h6>
-                <p>
-                  Zacząłem swoją przygodę z tworzeniem gier pod koniec podstawówki. Tworzyłem modele i prostą logikę w programie Blender, bawiłem się różnymi silnikami jak na przykład RPG maker oraz tworzyłem mody do gry Postal.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <br>
-          <br>
-
-          <div class="icons-wrapper">
-            <div class="icon icon-wrapped icon-unity--black"></div>
-            <div class="icon icon-wrapped icon-unreal--black"></div>
-            <div class="icon icon-wrapped icon-blender--black"></div>
-            <div class="icon icon-wrapped icon-photoshop--black"></div>
-            <div class="icon icon-wrapped icon-csharp--black"></div>
-            <div class="icon icon-wrapped icon-cplusplus--black"></div>
-            <div class="icon icon-wrapped icon-glsl--black"></div>
-          </div>
-
+          </div>      
         </div>
       </div>
 
-      <!--######## PROJECTS -->
-      <div class="tab wrapper projects nav-link">
+      <!-- ################## PROJECTS -->
+      <div class="wrapper projects">
         <div class="container">
 
-           <!--           INTERACTIVE SNOW              -->
-          <div class="project">
+          <h1>Moje projekty</h1>
+
+          <!--           Auto Road          -->
+          <div class="project" style="background-image: url('./public/img/projects/autoroad/autoroad.jpg')" onclick="location.href='AutoRoad.html'">
+
+            <div class="description">
+              <p>
+                /////////////////////
+              </p>
+            </div>
+          </div>
+          
+          <!--           Auto Road          -->
+          <div class="project" onclick="location.href='AutoRoad.html'">
             <div class="image">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/zOLS8w1JqL4" title="INTERACTIVE SNOW" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <img src="./public/img/projects/autoroad/autoroad.jpg" alt="">
+              <div class="icons">
+                <div class="icon icon--medium icon-unity--white"></div>
+              </div>
+              <div class="title">
+                <h2>Auto Road</h2>
+              </div>
             </div>
             <div class="description">
-              <h2>
-                Interaktywny śnieg
-                <div class="icon icon--medium icon-unity--black"></div>
-              </h2>
               <p>
-                Shader imitujący śnieg oraz compute shader głębi wychwytywanej przez kamerę umieszczoną pod fragmentem mapy.
-                Śnieg oddziałuje na dowolny kształt wchowdzący z nim w interakcję i z czasem regeneruje się do pierwotnego stanu.
+                Zoptymalizowany algorytm generujący drogę do gry typu endless runner.
+                trzy zdania zeby tu byly tak dla testu mokosie. 
               </p>
-              <button class="btn" onclick="window.open('https://github.com/mihanslik/Unity-Interactable-Snow')">GitHub</button>
             </div>
           </div>
 
-           <!--           Combustion Chamber Shader             -->
-           <div class="project">
+          <!--           Auto Road          -->
+          <div class="project">
             <div class="image">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/jFnIoEpzCo8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <img src="./public/img/projects/autoroad/autoroad.jpg" alt="">
+              <div class="icons">
+                <div class="icon icon--medium icon-csharp--white"></div>
+                <div class="icon icon--medium icon-unity--white"></div>
+              </div>
+              <div class="title">
+                <h2>Auto Road</h2>
+              </div>
             </div>
             <div class="description">
-              <h2>
-                Combustion Chamber
-                <div class="icon icon--medium icon-unity--black"></div>
-                <div class="icon icon--medium icon-glsl--black"></div>
-              </h2>
               <p>
-                Shader gazów w cylindrze silnika obrazujący 4 etapy pracy tłoka. Tłok animowany jest skryptem.
+                Zoptymalizowany algorytm generujący drogę do gry typu endless runner.
+                trzy zdania zeby tu byly tak dla testu mokosie. 
+              </p>
+            </div>
+          </div>
+          
+          <!--           Auto Road          -->
+          <div class="project">
+            <div class="image">
+              <img src="./public/img/projects/autoroad/autoroad.jpg" alt="">
+              <div class="icons">
+                <div class="icon icon--medium icon-csharp--white"></div>
+                <div class="icon icon--medium icon-unity--white"></div>
+              </div>
+              <div class="title">
+                <h2>Auto Road</h2>
+              </div>
+            </div>
+            <div class="description">
+              <p>
+                Zoptymalizowany algorytm generujący drogę do gry typu endless runner.
+                trzy zdania zeby tu byly tak dla testu mokosie. 
               </p>
             </div>
           </div>
           <!--           Auto Road          -->
           <div class="project">
             <div class="image">
-              <img src="./public/img/projects/autoroad/autoroad.png" alt="">
+              <img src="./public/img/projects/autoroad/autoroad.jpg" alt="">
+              <div class="icons">
+                <div class="icon icon--medium icon-csharp--white"></div>
+                <div class="icon icon--medium icon-unity--white"></div>
+              </div>
+              <div class="title">
+                <h2>Auto Road</h2>
+              </div>
             </div>
             <div class="description">
-              <h2>
-                Auto Road
-                <div class="icon icon--medium icon-csharp--black"></div>
-                <div class="icon icon--medium icon-unity--black"></div>
-              </h2>
               <p>
                 Zoptymalizowany algorytm generujący drogę do gry typu endless runner.
+                trzy zdania zeby tu byly tak dla testu mokosie. 
               </p>
-              <button class="btn" onclick="window.open('https://github.com/mihanslik/Fast-AutoRoad-Generator')">Zobacz kod</button>
-            </div>
-          </div>
-
-          <!--           Bad Call           -->
-          <div class="project">
-            <div class="image gallery">
-              <img src="./public/img/projects/badcall/badcall_0.png" alt="">
-              <img src="./public/img/projects/badcall/badcall_1.png" alt="">
-              <img src="./public/img/projects/badcall/badcall_2.png" alt="">
-              <img src="./public/img/projects/badcall/badcall_3.png" alt="">
-              <img src="./public/img/projects/badcall/badcall_4.png" alt="">
-              <img src="./public/img/projects/badcall/badcall_5.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Bad Call
-                <div class="icon icon--medium icon-unity--black"></div>
-              </h2>
-              <p>
-                Córka detektywa zostaje porwana i na stół powróciło stare zlecenie.
-                Wciel się w skórę głównego bohatera, rozwiązuj zagadki i uratuj córkę.
-                <br><br>
-                Projekt uczelniany stworzony w ograniczonym czasie w spółpracy z grafikiem oraz aktorem głosowym.
-                <br><br>
-                Co zrobiłem: Fabuła, wszystkie skrypty (np. ekwipunek, interakcje, wyświetlanie ikon interakcji itp.), pomoc przy modelach, głos złoczyńcy, poskładanie wszystkiego w całość.
-              </p>
-              <button class="btn" onclick="window.open('https://drive.google.com/drive/u/1/folders/1qqa38xWnx_-1TWgKOK7bVt2XsB5VROn1')">Pobierz Demo.exe</button>
-            </div>
-          </div>
-
-          <!--           MAIL-MAN             -->
-          <div class="project">
-            <div class="image gallery">
-              <img src="./public/img/projects/mailman/mailman_1.png" alt="">
-              <img src="./public/img/projects/mailman/mailman_2.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Mail-Man
-                <div class="icon icon--medium icon-unreal--black"></div>
-              </h2>
-              <p>
-                Trójwymiarowa gra zręcznościowa typu arcade.
-                <br>
-                Miasto potrzebuje Super-Listonosza, który za zadanie ma roznieść jak najwięcej
-                paczek zanim skończy się jego zmiana.
-                Do dyspozycji ma specialny pistolet,
-                którego super mocą są dwie elektromagnetyczne sprężyny,
-                pozwalające na przyciągnięcie do siebie paczki oraz pozwalające na podróżowanie przez miasto niczym spider-man.
-                <br>
-                <br>
-                Projekt ten został stworzony z przyjacielem w 48h na GMTK Game-Jam.
-              </p>
-              <button class="btn" onclick="window.open('https://atezai.itch.io/mail-man')">itch.io</button>
-              <button class="btn" onclick="window.open('https://drive.google.com/drive/u/1/folders/1NUIiRUHVdXUavuZ3gruT8KeqNdcpUbqc')">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--           Bunny          -->
-          <div class="project">
-            <div class="image">
-              <img src="./public/img/projects/bunny/bunny_1.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Bunny
-                <div class="icon icon--medium icon-unity--black"></div>
-              </h2>
-              <p>
-                Prototyp prostej gry logiczno-przygodowej, w której prowadzimy ciekawskiego królika przez zaczarowany las. Gracz do dyspozycji ma jedynie kursor (świetlik), za którym królik stara się podążać.
-              </p>
-              <button class="btn" onclick="window.open('https://drive.google.com/drive/u/1/folders/1_whoaj6cyRejsSNspDTI_szvQvqxnN2_')">Pobierz Demo.exe</button>
-            </div>
-          </div>
-
-          <!--           GALACTIC WAR             -->
-          <div class="project">
-            <div class="image gallery">
-              <img src="./public/img/projects/galaxywars/galaxywars_1.png" alt="">
-              <img src="./public/img/projects/galaxywars/galaxywars_2.png" alt="">
-              <img src="./public/img/projects/galaxywars/galaxywars_3.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Galactic War
-                <div class="icon icon--medium icon-cplusplus--black"></div>
-              </h2>
-              <p>
-                Gra działająca w konsoli systemu Windows.
-                <br><br>
-                Dostosuj swój statek, przemierzaj proceturalnie generowany kosmos i walcz z wrogimi statkami.
-                Na swojej drodze napotkasz sklepy, wrogie bazy oraz planety, których to mieszkańców możesz bronić przed najazdami.
-                Walka polega na zużywaniu co turę punktów energii,
-                które przeznaczyć możesz na zasilenie jednej z trzech tarcz, naprawę, bądź też doładowanie jednej z trzech broni.
-                <br><br>
-                Sterowanie:
-                <b>WASD:</b> poruszanie się/zmiana opcji.
-                <b>ENTER:</b> akceptacja wyboru.
-              </p>
-              <button class="btn" onclick="window.open('https://drive.google.com/file/d/1jVrgS5mOj6msqZdDKOGZUGjmRa-q8TDE/view')">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--           Cubye           -->
-          <div class="project">
-            <div class="image">
-              <img src="./public/img/projects/cubye/cubye_1.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Cubye
-                <div class="icon icon--medium icon-unity--black"></div>
-              </h2>
-              <p>
-                Prosta gra na urządzenia mobilne służąca do trenowania pamięci krótkotrwałej.
-                Na początku rozgrywki wyświetlany jest losowo generowany wzór, który później trzeba odnaleźć na kostce, którą użytkownik może dowolnie obracać ruchem palca. Z każdym znalezionym wzorem użytkownik jest nagradzany i zwiększny jest poziom trudności.
-              </p>
-              <button class="btn" onclick="window.open('https://drive.google.com/file/d/0B3zQx8bnsLzRZ0dyZGF1bTNOMFE/view?resourcekey=0-r4IhjOdrEmu9aD2TSBYBSw')">Pobierz .apk</button>
-            </div>
-          </div>
-
-          <!--           Noise Editor           -->
-          <div class="project">
-            <div class="image">
-                <img src="./public/img/projects/perlinnoisegenerator/perlinnoisegenerator_1.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Edytor Szumu Perlina
-                <div class="icon icon--medium icon-csharp--black"></div>
-              </h2>
-              <p>
-                Wielowarstwowy edytor i generator szumu Perlina.
-              </p>
-              <button class="btn" onclick="window.open('https://drive.google.com/drive/u/1/folders/1iED6s5W5pzHvd_W3k_I4natXvAXiLww7')">Pobierz .exe</button>
-            </div>
-          </div>
-
-          <!--          Zwięrzęta dla Frinlet          -->
-          <div class="project">
-            <div class="image">
-              <img src="./public/img/projects/frinlet/frinlet_1.png" alt="">
-            </div>
-            <div class="description">
-              <h2>
-                Zwięrzęta dla Frinlet
-                <div class="icon icon--medium icon-blender--black"></div>
-              </h2>
-              <p>
-                Tworzyłem swojego czasu modele zwierząt w stylu low-poly do projektu gry przeglądarkowej "Frinlet".
-                <br>
-                <br>
-                Gra sama w sobie jest inspirowana Animal Crossing oraz Minecraft-
-                Proceduralnie generowany świat z bogatymi w faunę i florę biomami oraz miasta pełne sklepów i NPC.
-                Głównym celem gry jest zwiedzanie świata i odkrywanie nowych gatunków zwierząt oraz roślinności.
-                Przez pewien okres aplikacja działała jako narzędzie dla dzieci do nauki języka angielskiego.
-              </p>
-              <button class="btn" onclick="window.open('https://frinlet.com/')">Zagraj Online</button>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!--######## CONTACT -->
-      <div class="tab wrapper contact nav-link">
+      <!-- ################## Contact -->
+      <div class="wrapper contact">
         <div class="container">
-          <div class="text">
-            <p><b>e-mail: </b>mikolaj.hanslik@gmail.com</p>
-          </div>
-          <div class="links">
-            <button class="btn-socialmedia" onclick="window.open('https://www.linkedin.com/in/mikolaj-hanslik/')"><img class="icon-linkedin--black"/></button>
-            <button class="btn-socialmedia" onclick="window.open('https://github.com/mihanslik')"><img class="icon-github--black"/></button>
-          </div>
+          <h1>Kontakt</h1>    
         </div>
       </div>
 
+      
     </main>
 
+    <footer>
+        
+    </footer>
   </body>
 </html>

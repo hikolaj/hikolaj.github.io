@@ -1,8 +1,3 @@
-//import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
-//import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
-//import { EffectComposer } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/postprocessing/EffectComposer.js';
-//import { CopyShader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/shaders/CopyShader.js';
-
 
 const _kaleidoscopeVS = `
 varying vec2 vUv;
@@ -53,7 +48,7 @@ void main(void)
       uv -= 0.25;
       uv = uv * c + s * uv.yx * vec2(1.0, -1.0);
     }
-    
+
     vec4 color =  0.5 + 0.5 * sin(Time + vec4(13.0, 17.0, 23.0, 1.0) * texture2D(Texture, uv * vec2(1.0, -1) + 0.5, -1.0 ));
     color.a = color.r * color.g * color.b;
     color.a = round(color.a);
@@ -62,10 +57,12 @@ void main(void)
     ////////// glass shine effect
     float shine = dot(vNormal, normalize(vec3(-0.5, -2.0, 1.0)));
     shine = max(0.0, shine);
-    color.a += shine / 1.0;
+    //color.a += shine / 1.0;
 
     ///////// left illumination
     color += vec4(1.0) * distance(vPos.rg, vec2(1.0, 0.3))/5.0;
+
+    color.a = 1.0;
 
     gl_FragColor = color;
 }   
@@ -114,7 +111,7 @@ kaleidoscopeMat.transparent = true;
 // Geometries
 ///////////////////////////////////////
 const boxGeometry = new THREE.BoxGeometry( 300, 300, 300 );
-const bodGeometry = new THREE.DodecahedronGeometry( 220, 0 );
+const bodGeometry = new THREE.DodecahedronGeometry( 100, 0 );
 
 // Meshes
 ///////////////////////////////////////
@@ -168,7 +165,7 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
 
-    if(!header.classList.contains(headerClosedName))//update if in view
+    if(window.scrollY <= window.innerHeight)//update if in view
     {
       // Time
       const elapsedTime = clock.getElapsedTime();
@@ -177,8 +174,8 @@ const tick = () =>
       kaleidoscope.material.uniforms.Time.value = elapsedTime;
 
       //Animate
-      kaleidoscope.rotation.y = elapsedTime/ 2;
-      kaleidoscope.rotation.x = elapsedTime/ 4;
+      kaleidoscope.rotation.y = elapsedTime;
+      kaleidoscope.rotation.x = elapsedTime/2;
 
       // Render
       //renderer.render(scene, camera);

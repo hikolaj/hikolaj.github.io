@@ -1,0 +1,22 @@
+
+
+header .banner{
+  height: 300px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background: rgb(50,20,20);
+  margin: auto;
+}
+
+
+.project-site{
+  min-height: 100vh;
+  background: rgb(20, 20, 20);
+}
+
+.wrapper{
+  margin: auto;
+  width: 100%;
+  margin-top: 60px;
+}

@@ -10,6 +10,8 @@ const tabClosedName = "tab-closed";
 const headerOpenName = "header-open";
 const headerClosedName = "header-closed";
 
+const activeButtonName = "btn-nav--active";
+
 var lastActiveTab = 0;
 
 var menuIsOpen = false;
@@ -24,7 +26,7 @@ function initializeNavButtons()
   {
     var btn = tabButtons[i];
     btn.addEventListener("click", navButtonAction.bind(null, i));
-    btn.classList.remove("active");
+    btn.classList.remove(activeButtonName);
   }
 
   header.classList.add(headerOpenName);
@@ -124,11 +126,11 @@ function activateNavButton(id)
   if(lastActiveTab != id)
   {
     //deactivate last button
-    lastActiveTabBtn.classList.remove("active");
+    lastActiveTabBtn.classList.remove(activeButtonName);
 
     //activate new active
     if(id > 0){
-      btnToActivate.classList.add("active");
+      btnToActivate.classList.add(activeButtonName);
     }
   }
 }
