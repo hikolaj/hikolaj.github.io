@@ -816,38 +816,60 @@ footer{
 
 
 .project{
+  position: relative;
   margin: auto;
   margin: 20px;
   
-  width: 80%;
-  height: 30%;
+  width: 80vw;
+  height: 30vw;
 
-  background-size: cover;
-  background-position: center;
-  
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  
   cursor: pointer;
+  color: white;
 
   transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
 }
 
-.project .image{
-  position: relative;
-
-  width: 100%;
-  aspect-ratio: 16/6;
+.project h2{
+  position: absolute;
+  left: 10px;
+  font-size: 40px;
+  text-shadow: 
+    1px 0px black,
+    -1px 0px black,
+    0px -1px black,
+    1px 3px black,
+    -1px 3px black,
+    0px 3px black;
+  z-index: 3;
 }
 
-.project .image img{
+.project .description{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: rgba(0,0,0,1);
+  z-index: 3;
+}
+
+.project .description p{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-shadow: 0px 2px black;
+}
+
+.project .image{
+  position: absolute;
   height: 100%;
   width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: absolute;
+}
+
+.project img{
+  height: 100%;
+  width: 100%;
+
+  object-fit: cover;
 }
 
 .project .image::after{
@@ -878,103 +900,26 @@ footer{
   margin-bottom: 30px;
 }
 
-.project .image iframe{
-  width: 100%;
-  height: 100%;
-}
 
 .project .icons{
   position: absolute;
   width: 100%;
   float: right;
+  z-index: 3;
 }
+
 .project .icon{ 
   float: right;
-  filter: drop-shadow(0px 0px 5px black);
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.4));
   z-index: 2;
-  width: 64px;
-  height: 64px;
-}
-
-.project .title{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  vertical-align: bottom;
-  font-size: 30px;
-  text-shadow: 0px 0px 10px black, 0px 0px 3px black;
-}
-
-.project .title h2{
-  position: absolute;
-  padding-left: 5px;
-  padding-bottom: 2px;
-  bottom: 0;
-  vertical-align: bottom;
-  z-index: 2;
-  color: white;
-}
-
-.project .description{
-  width: 100%;
- 
-  position: relative;
-  background: rgba(0,0,0,0.5);
-}
-
-.project .description p{
-  margin-top: 5px;
-  color: white;
-}
-
-
-
-.project .description button{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-}
-
-
-
-
-.roller{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 2;
-  margin-bottom: 80px;
-}
-
-.roller-btn-container{
-  position: absolute;
-  width: 100%;
-  height: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0));
-}
-
-.roller-btn{
-  position: absolute;
-  width: 100%;
+  width: 50px;
   height: 50px;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  margin-top: 50px;
 }
 
-.rolled{
-  height: 200px;
-}
 
-.rolled .roller-btn-container{
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,1.0) 70%);
-}
+
+
+
 
 /*
 #################################
