@@ -124,7 +124,7 @@ void main(void)
     float noise = max(0.0, waves1 + waves2);
 
 
-    gl_FragColor.rgb = vec3(noise2, noise1, waves2*2.0)*noise/baseNoise/50.0;
+    gl_FragColor.rgb = vec3(noise1, noise2, waves2*2.0)*noise/baseNoise/50.0;
     gl_FragColor.a = 1.0;
 }
 `;
